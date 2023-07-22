@@ -1,0 +1,13 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '9.0'
+
+target 'OneTenDemo' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for OneTenDemo
+pod 'KSAdSDK', '3.3.29'
+pod 'SigmobAd-iOS', '4.7.0'
+pod 'GDTMobSDK'
+
+end

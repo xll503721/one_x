@@ -1,0 +1,871 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4B0418232A637B0300342798 /* OTGDTSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0418222A637B0300342798 /* OTGDTSource.m */; };
+		4B04185A2A63B53D00342798 /* OTGroMoreSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0418592A63B53D00342798 /* OTGroMoreSource.m */; };
+		4B0418712A640EA100342798 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BD730522A35E20800FA2CEE /* libsqlite3.tbd */; };
+		4B0E03E529A248E600392BEE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0E03E429A248E600392BEE /* AppDelegate.m */; };
+		4B0E03E829A248E600392BEE /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0E03E729A248E600392BEE /* SceneDelegate.m */; };
+		4B0E03EB29A248E600392BEE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0E03EA29A248E600392BEE /* ViewController.m */; };
+		4B0E03EE29A248E600392BEE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B0E03EC29A248E600392BEE /* Main.storyboard */; };
+		4B0E03F029A248E800392BEE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B0E03EF29A248E800392BEE /* Assets.xcassets */; };
+		4B0E03F329A248E800392BEE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B0E03F129A248E800392BEE /* LaunchScreen.storyboard */; };
+		4B0E03F629A248E800392BEE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0E03F529A248E800392BEE /* main.m */; };
+		4B1552D029D1533B0068842B /* OTSigmobSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1552CF29D1533B0068842B /* OTSigmobSource.m */; };
+		4BA0DB872A6B7AB300F970B8 /* OTAdTypeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA0DB862A6B7AB300F970B8 /* OTAdTypeTableViewCell.m */; };
+		4BA0DB8A2A6B802200F970B8 /* OTAdTypeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA0DB892A6B802200F970B8 /* OTAdTypeDetailViewController.m */; };
+		4BA0DB8D2A6B86D700F970B8 /* OTAdTypeDetailCellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA0DB8C2A6B86D700F970B8 /* OTAdTypeDetailCellCell.m */; };
+		4BB47CCD29AB017600BA2B27 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BB47CCC29AB016B00BA2B27 /* libc++.tbd */; };
+		4BD72FCF2A1E4C8500FA2CEE /* Base.framework/Base in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B2CA11829F3D409009C66B3 /* Base.framework/Base */; };
+		4BD72FD02A1E4C8500FA2CEE /* Base.framework/Base in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B2CA11829F3D409009C66B3 /* Base.framework/Base */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4BD72FD22A1E4C9200FA2CEE /* OneTenSDK.framework/OneTenSDK in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B0E040429A254DA00392BEE /* OneTenSDK.framework/OneTenSDK */; };
+		4BD72FD32A1E4C9200FA2CEE /* OneTenSDK.framework/OneTenSDK in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B0E040429A254DA00392BEE /* OneTenSDK.framework/OneTenSDK */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FDFCB5069C6B11D53C677722 /* Pods_OneTenDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFA66410979C7A440551F35D /* Pods_OneTenDemo.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4B04183A2A637B0300342798 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3245848E6C84485992B8CCBA;
+			remoteInfo = base_analytics;
+		};
+		4B04183C2A637B0300342798 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DA0F06CCB8AB4A3A86200679;
+			remoteInfo = base_https;
+		};
+		4B04183E2A637B0300342798 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5E138A49161D4821BB662BE6;
+			remoteInfo = oneten_util;
+		};
+		4B0E040329A254DA00392BEE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 04CC997112804557B3BFE797;
+			remoteInfo = OneTenSDK;
+		};
+		4B0E040529A254DA00392BEE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A98669AD29BD4D90B5A60A04;
+			remoteInfo = oneten_ad;
+		};
+		4B11314D29C3017900214261 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8FDF4F2291C144A1ACD24CAC;
+			remoteInfo = oneten_ad_loader;
+		};
+		4B11314F29C3017900214261 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 17A45D93D18C44A18C00864E;
+			remoteInfo = oneten_ad_model;
+		};
+		4B2CA11729F3D409009C66B3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7AC4196575914C7D8E22BFAC;
+			remoteInfo = Base;
+		};
+		4B2CA11929F3D409009C66B3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C3EB84EF1A4A41A48704D0B7;
+			remoteInfo = base_string;
+		};
+		4B2CA11B29F3D409009C66B3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A0D14B6672B7420E87062748;
+			remoteInfo = oneten_ad_entity;
+		};
+		4BBE4C652A15F24B0063B715 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 990D9A6BB1B049BC99261608;
+			remoteInfo = base_json;
+		};
+		4BBE4C672A15F24B0063B715 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1BFA263E1E144C30B1E5ED03;
+			remoteInfo = base_mmap;
+		};
+		4BBE4C692A15F24B0063B715 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 726F267FCB8B4C31823F257C;
+			remoteInfo = base_storage_memory;
+		};
+		4BBE4C6B2A15F24B0063B715 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8777F1814632479C807A9658;
+			remoteInfo = base_thread;
+		};
+		4BBE4C6D2A15F24B0063B715 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 93DBAD6C3FDE4D8886DC604F;
+			remoteInfo = jansson;
+		};
+		4BC9C3B729AB5AFE00B6AEC5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B6D9A92E19B4416ABA14290;
+			remoteInfo = OneTenSDK;
+		};
+		4BD72FC92A1E4C4B00FA2CEE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6C0B910290BD40449A5B3417;
+			remoteInfo = base_device;
+		};
+		4BD72FCB2A1E4C4B00FA2CEE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A03EDFA01B844BA18F176CD0;
+			remoteInfo = base_log;
+		};
+		4BD72FCD2A1E4C4B00FA2CEE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F71E3811471C4360B8C54CF0;
+			remoteInfo = base_platform;
+		};
+		4BD730662A35E20800FA2CEE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7ACF9E3F5E614E1BA89A2079;
+			remoteInfo = base_storage_database;
+		};
+		4BD933E629D03C7E00E4AA07 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EA4F28E176F24B77BFF47879;
+			remoteInfo = oneten_ad_service;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4BD72FD12A1E4C8500FA2CEE /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4BD72FD32A1E4C9200FA2CEE /* OneTenSDK.framework/OneTenSDK in Embed Frameworks */,
+				4BD72FD02A1E4C8500FA2CEE /* Base.framework/Base in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		11E79EC1881684D69CF66811 /* Pods-OneTenDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneTenDemo.debug.xcconfig"; path = "Target Support Files/Pods-OneTenDemo/Pods-OneTenDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		4B0418212A637B0300342798 /* OTGDTSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTGDTSource.h; sourceTree = "<group>"; };
+		4B0418222A637B0300342798 /* OTGDTSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTGDTSource.m; sourceTree = "<group>"; };
+		4B0418582A63B53D00342798 /* OTGroMoreSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTGroMoreSource.h; sourceTree = "<group>"; };
+		4B0418592A63B53D00342798 /* OTGroMoreSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTGroMoreSource.m; sourceTree = "<group>"; };
+		4B0E03E029A248E600392BEE /* OneTenDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OneTenDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B0E03E329A248E600392BEE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		4B0E03E429A248E600392BEE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		4B0E03E629A248E600392BEE /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		4B0E03E729A248E600392BEE /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		4B0E03E929A248E600392BEE /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		4B0E03EA29A248E600392BEE /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		4B0E03ED29A248E600392BEE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4B0E03EF29A248E800392BEE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4B0E03F229A248E800392BEE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4B0E03F429A248E800392BEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4B0E03F529A248E800392BEE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SDKCommon.xcodeproj; path = ../../../common/cmake_project/SDKCommon.xcodeproj; sourceTree = "<group>"; };
+		4B1552C829D1533B0068842B /* OTSigmobSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSigmobSource.h; sourceTree = "<group>"; };
+		4B1552CF29D1533B0068842B /* OTSigmobSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSigmobSource.m; sourceTree = "<group>"; };
+		4BA0DB852A6B7AB300F970B8 /* OTAdTypeTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAdTypeTableViewCell.h; sourceTree = "<group>"; };
+		4BA0DB862A6B7AB300F970B8 /* OTAdTypeTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAdTypeTableViewCell.m; sourceTree = "<group>"; };
+		4BA0DB882A6B802200F970B8 /* OTAdTypeDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAdTypeDetailViewController.h; sourceTree = "<group>"; };
+		4BA0DB892A6B802200F970B8 /* OTAdTypeDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAdTypeDetailViewController.m; sourceTree = "<group>"; };
+		4BA0DB8B2A6B86D700F970B8 /* OTAdTypeDetailCellCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAdTypeDetailCellCell.h; sourceTree = "<group>"; };
+		4BA0DB8C2A6B86D700F970B8 /* OTAdTypeDetailCellCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAdTypeDetailCellCell.m; sourceTree = "<group>"; };
+		4BB47CC829AAFC9D00BA2B27 /* OneTenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OneTenSDK.framework; path = ../../../common/output/iOS/Debug/OneTenSDK.framework; sourceTree = "<group>"; };
+		4BB47CCC29AB016B00BA2B27 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		4BD730522A35E20800FA2CEE /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		B62798A6E1BECA697224CD39 /* Pods-OneTenDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneTenDemo.release.xcconfig"; path = "Target Support Files/Pods-OneTenDemo/Pods-OneTenDemo.release.xcconfig"; sourceTree = "<group>"; };
+		FFA66410979C7A440551F35D /* Pods_OneTenDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OneTenDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4B0E03DD29A248E600392BEE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4B0418712A640EA100342798 /* libsqlite3.tbd in Frameworks */,
+				4BD72FCF2A1E4C8500FA2CEE /* Base.framework/Base in Frameworks */,
+				4BB47CCD29AB017600BA2B27 /* libc++.tbd in Frameworks */,
+				4BD72FD22A1E4C9200FA2CEE /* OneTenSDK.framework/OneTenSDK in Frameworks */,
+				FDFCB5069C6B11D53C677722 /* Pods_OneTenDemo.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4B0E03D729A248E600392BEE = {
+			isa = PBXGroup;
+			children = (
+				4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */,
+				4B0E03E229A248E600392BEE /* OneTenDemo */,
+				4B0E03E129A248E600392BEE /* Products */,
+				4B0E041229A26FBC00392BEE /* Frameworks */,
+				7AF149AE3256C9D31A72B10A /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		4B0E03E129A248E600392BEE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4B0E03E029A248E600392BEE /* OneTenDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4B0E03E229A248E600392BEE /* OneTenDemo */ = {
+			isa = PBXGroup;
+			children = (
+				4BA0DB6E2A6B7A5A00F970B8 /* AdSource */,
+				4B0E03E329A248E600392BEE /* AppDelegate.h */,
+				4B0E03E429A248E600392BEE /* AppDelegate.m */,
+				4B0E03EF29A248E800392BEE /* Assets.xcassets */,
+				4B0E03F429A248E800392BEE /* Info.plist */,
+				4B0E03F129A248E800392BEE /* LaunchScreen.storyboard */,
+				4B0E03F529A248E800392BEE /* main.m */,
+				4B0E03EC29A248E600392BEE /* Main.storyboard */,
+				4B0E03E629A248E600392BEE /* SceneDelegate.h */,
+				4B0E03E729A248E600392BEE /* SceneDelegate.m */,
+				4B0E03E929A248E600392BEE /* ViewController.h */,
+				4B0E03EA29A248E600392BEE /* ViewController.m */,
+				4BA0DB852A6B7AB300F970B8 /* OTAdTypeTableViewCell.h */,
+				4BA0DB862A6B7AB300F970B8 /* OTAdTypeTableViewCell.m */,
+				4BA0DB882A6B802200F970B8 /* OTAdTypeDetailViewController.h */,
+				4BA0DB892A6B802200F970B8 /* OTAdTypeDetailViewController.m */,
+				4BA0DB8B2A6B86D700F970B8 /* OTAdTypeDetailCellCell.h */,
+				4BA0DB8C2A6B86D700F970B8 /* OTAdTypeDetailCellCell.m */,
+			);
+			path = OneTenDemo;
+			sourceTree = "<group>";
+		};
+		4B0E03FD29A254DA00392BEE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4B2CA11829F3D409009C66B3 /* Base.framework/Base */,
+				4B0E040429A254DA00392BEE /* OneTenSDK.framework/OneTenSDK */,
+				4B04183B2A637B0300342798 /* libbase_analytics.a */,
+				4BD72FCA2A1E4C4B00FA2CEE /* libbase_device.a */,
+				4B04183D2A637B0300342798 /* libbase_https.a */,
+				4BBE4C662A15F24B0063B715 /* libbase_json.a */,
+				4BD72FCC2A1E4C4B00FA2CEE /* libbase_log.a */,
+				4BBE4C682A15F24B0063B715 /* libbase_mmap.a */,
+				4BD72FCE2A1E4C4B00FA2CEE /* libbase_platform.a */,
+				4BD730672A35E20800FA2CEE /* libbase_storage_database.a */,
+				4BBE4C6A2A15F24B0063B715 /* libbase_storage_memory.a */,
+				4B2CA11A29F3D409009C66B3 /* libbase_string.a */,
+				4BBE4C6C2A15F24B0063B715 /* libbase_thread.a */,
+				4BBE4C6E2A15F24B0063B715 /* libjansson.a */,
+				4B0E040629A254DA00392BEE /* liboneten_ad.a */,
+				4B2CA11C29F3D409009C66B3 /* liboneten_ad_entity.a */,
+				4B11314E29C3017900214261 /* liboneten_ad_loader.a */,
+				4B11315029C3017900214261 /* liboneten_ad_model.a */,
+				4BD933E729D03C7E00E4AA07 /* liboneten_ad_service.a */,
+				4B04183F2A637B0300342798 /* liboneten_util.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4B0E041229A26FBC00392BEE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4BD730522A35E20800FA2CEE /* libsqlite3.tbd */,
+				4BB47CCC29AB016B00BA2B27 /* libc++.tbd */,
+				4BB47CC829AAFC9D00BA2B27 /* OneTenSDK.framework */,
+				FFA66410979C7A440551F35D /* Pods_OneTenDemo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4BA0DB6E2A6B7A5A00F970B8 /* AdSource */ = {
+			isa = PBXGroup;
+			children = (
+				4B1552C829D1533B0068842B /* OTSigmobSource.h */,
+				4B1552CF29D1533B0068842B /* OTSigmobSource.m */,
+				4B0418212A637B0300342798 /* OTGDTSource.h */,
+				4B0418222A637B0300342798 /* OTGDTSource.m */,
+				4B0418582A63B53D00342798 /* OTGroMoreSource.h */,
+				4B0418592A63B53D00342798 /* OTGroMoreSource.m */,
+			);
+			path = AdSource;
+			sourceTree = "<group>";
+		};
+		7AF149AE3256C9D31A72B10A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				11E79EC1881684D69CF66811 /* Pods-OneTenDemo.debug.xcconfig */,
+				B62798A6E1BECA697224CD39 /* Pods-OneTenDemo.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4B0E03DF29A248E600392BEE /* OneTenDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4B0E03F929A248E800392BEE /* Build configuration list for PBXNativeTarget "OneTenDemo" */;
+			buildPhases = (
+				C960C833EE1408C65EE7571D /* [CP] Check Pods Manifest.lock */,
+				4B0E03DC29A248E600392BEE /* Sources */,
+				4B0E03DD29A248E600392BEE /* Frameworks */,
+				4B0E03DE29A248E600392BEE /* Resources */,
+				4BD72FD12A1E4C8500FA2CEE /* Embed Frameworks */,
+				AEA7A82AE06A79DBE7D4EB12 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4BC9C3B829AB5AFE00B6AEC5 /* PBXTargetDependency */,
+			);
+			name = OneTenDemo;
+			productName = OneTenDemo;
+			productReference = 4B0E03E029A248E600392BEE /* OneTenDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4B0E03D829A248E600392BEE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1340;
+				TargetAttributes = {
+					4B0E03DF29A248E600392BEE = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
+				};
+			};
+			buildConfigurationList = 4B0E03DB29A248E600392BEE /* Build configuration list for PBXProject "OneTenDemo" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4B0E03D729A248E600392BEE;
+			productRefGroup = 4B0E03E129A248E600392BEE /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 4B0E03FD29A254DA00392BEE /* Products */;
+					ProjectRef = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				4B0E03DF29A248E600392BEE /* OneTenDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		4B04183B2A637B0300342798 /* libbase_analytics.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libbase_analytics.a;
+			remoteRef = 4B04183A2A637B0300342798 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4B04183D2A637B0300342798 /* libbase_https.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libbase_https.a;
+			remoteRef = 4B04183C2A637B0300342798 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4B04183F2A637B0300342798 /* liboneten_util.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = liboneten_util.a;
+			remoteRef = 4B04183E2A637B0300342798 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4B0E040429A254DA00392BEE /* OneTenSDK.framework/OneTenSDK */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			name = OneTenSDK.framework/OneTenSDK;
+			path = OneTenSDK.framework;
+			remoteRef = 4B0E040329A254DA00392BEE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4B0E040629A254DA00392BEE /* liboneten_ad.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = liboneten_ad.a;
+			remoteRef = 4B0E040529A254DA00392BEE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4B11314E29C3017900214261 /* liboneten_ad_loader.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = liboneten_ad_loader.a;
+			remoteRef = 4B11314D29C3017900214261 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4B11315029C3017900214261 /* liboneten_ad_model.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = liboneten_ad_model.a;
+			remoteRef = 4B11314F29C3017900214261 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4B2CA11829F3D409009C66B3 /* Base.framework/Base */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			name = Base.framework/Base;
+			path = Base.framework;
+			remoteRef = 4B2CA11729F3D409009C66B3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4B2CA11A29F3D409009C66B3 /* libbase_string.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libbase_string.a;
+			remoteRef = 4B2CA11929F3D409009C66B3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4B2CA11C29F3D409009C66B3 /* liboneten_ad_entity.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = liboneten_ad_entity.a;
+			remoteRef = 4B2CA11B29F3D409009C66B3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4BBE4C662A15F24B0063B715 /* libbase_json.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libbase_json.a;
+			remoteRef = 4BBE4C652A15F24B0063B715 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4BBE4C682A15F24B0063B715 /* libbase_mmap.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libbase_mmap.a;
+			remoteRef = 4BBE4C672A15F24B0063B715 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4BBE4C6A2A15F24B0063B715 /* libbase_storage_memory.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libbase_storage_memory.a;
+			remoteRef = 4BBE4C692A15F24B0063B715 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4BBE4C6C2A15F24B0063B715 /* libbase_thread.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libbase_thread.a;
+			remoteRef = 4BBE4C6B2A15F24B0063B715 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4BBE4C6E2A15F24B0063B715 /* libjansson.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libjansson.a;
+			remoteRef = 4BBE4C6D2A15F24B0063B715 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4BD72FCA2A1E4C4B00FA2CEE /* libbase_device.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libbase_device.a;
+			remoteRef = 4BD72FC92A1E4C4B00FA2CEE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4BD72FCC2A1E4C4B00FA2CEE /* libbase_log.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libbase_log.a;
+			remoteRef = 4BD72FCB2A1E4C4B00FA2CEE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4BD72FCE2A1E4C4B00FA2CEE /* libbase_platform.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libbase_platform.a;
+			remoteRef = 4BD72FCD2A1E4C4B00FA2CEE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4BD730672A35E20800FA2CEE /* libbase_storage_database.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libbase_storage_database.a;
+			remoteRef = 4BD730662A35E20800FA2CEE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4BD933E729D03C7E00E4AA07 /* liboneten_ad_service.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = liboneten_ad_service.a;
+			remoteRef = 4BD933E629D03C7E00E4AA07 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4B0E03DE29A248E600392BEE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4B0E03F329A248E800392BEE /* LaunchScreen.storyboard in Resources */,
+				4B0E03F029A248E800392BEE /* Assets.xcassets in Resources */,
+				4B0E03EE29A248E600392BEE /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		AEA7A82AE06A79DBE7D4EB12 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OneTenDemo/Pods-OneTenDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OneTenDemo/Pods-OneTenDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OneTenDemo/Pods-OneTenDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C960C833EE1408C65EE7571D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OneTenDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4B0E03DC29A248E600392BEE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4BA0DB8D2A6B86D700F970B8 /* OTAdTypeDetailCellCell.m in Sources */,
+				4B0E03EB29A248E600392BEE /* ViewController.m in Sources */,
+				4B1552D029D1533B0068842B /* OTSigmobSource.m in Sources */,
+				4B04185A2A63B53D00342798 /* OTGroMoreSource.m in Sources */,
+				4B0E03E529A248E600392BEE /* AppDelegate.m in Sources */,
+				4BA0DB8A2A6B802200F970B8 /* OTAdTypeDetailViewController.m in Sources */,
+				4B0418232A637B0300342798 /* OTGDTSource.m in Sources */,
+				4B0E03F629A248E800392BEE /* main.m in Sources */,
+				4B0E03E829A248E600392BEE /* SceneDelegate.m in Sources */,
+				4BA0DB872A6B7AB300F970B8 /* OTAdTypeTableViewCell.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4BC9C3B829AB5AFE00B6AEC5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = OneTenSDK;
+			targetProxy = 4BC9C3B729AB5AFE00B6AEC5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		4B0E03EC29A248E600392BEE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4B0E03ED29A248E600392BEE /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		4B0E03F129A248E800392BEE /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4B0E03F229A248E800392BEE /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4B0E03F729A248E800392BEE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		4B0E03F829A248E800392BEE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4B0E03FA29A248E800392BEE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 11E79EC1881684D69CF66811 /* Pods-OneTenDemo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6YXYV74FF7;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$SRCROOT/../../../common/output/iOS/${CONFIGURATION}/",
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$SRCROOT/../../../common/output/iOS/${CONFIGURATION}/OneTenSDK.framework/Headers",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = OneTenDemo/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.gz.ch.onetendemo.OneTenDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4B0E03FB29A248E800392BEE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B62798A6E1BECA697224CD39 /* Pods-OneTenDemo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6YXYV74FF7;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$SRCROOT/../../../common/output/iOS/${CONFIGURATION}/",
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$SRCROOT/../../../common/output/iOS/${CONFIGURATION}/OneTenSDK.framework/Headers",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = OneTenDemo/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.gz.ch.onetendemo.OneTenDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4B0E03DB29A248E600392BEE /* Build configuration list for PBXProject "OneTenDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4B0E03F729A248E800392BEE /* Debug */,
+				4B0E03F829A248E800392BEE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4B0E03F929A248E800392BEE /* Build configuration list for PBXNativeTarget "OneTenDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4B0E03FA29A248E800392BEE /* Debug */,
+				4B0E03FB29A248E800392BEE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4B0E03D829A248E600392BEE /* Project object */;
+}
