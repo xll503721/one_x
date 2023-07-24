@@ -34,7 +34,32 @@
 				</array>
 			</dict>
 			<key>C2S</key>
-			<dict/>
+            <dict>
+                <key>GDT</key>
+                <array>
+                    <string>111111</string>
+                </array>
+                <key>BAIDU</key>
+                <array>
+                    <string>111111</string>
+                </array>
+                <key>GM</key>
+                <array>
+                    <string>111111</string>
+                </array>
+                <key>KS</key>
+                <array>
+                    <string>111111</string>
+                </array>
+                <key>CSJ</key>
+                <array>
+                    <string>111111</string>
+                </array>
+                <key>SIGMOB</key>
+                <array>
+                    <string>123456789</string>
+                </array>
+            </dict>
 			<key>S2S</key>
 			<dict/>
 		</dict>

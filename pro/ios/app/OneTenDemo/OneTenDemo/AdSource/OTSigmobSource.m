@@ -146,7 +146,7 @@
 
 - (void)intersititialAdWillVisible:(WindIntersititialAd *)intersititialAd {
     if (self.delegate && [self.delegate respondsToSelector:@selector(adDidShowWithStyleType:error:)]) {
-        [self.delegate adDidShowWithStyleType:OTAdSourceStyleTypeInterstitial error:nil];
+        [self.delegate adWillShowWithStyleType:OTAdSourceStyleTypeInterstitial error:nil];
     }
 }
 

@@ -20,6 +20,9 @@
 		4BA0DB872A6B7AB300F970B8 /* OTAdTypeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA0DB862A6B7AB300F970B8 /* OTAdTypeTableViewCell.m */; };
 		4BA0DB8A2A6B802200F970B8 /* OTAdTypeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA0DB892A6B802200F970B8 /* OTAdTypeDetailViewController.m */; };
 		4BA0DB8D2A6B86D700F970B8 /* OTAdTypeDetailCellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA0DB8C2A6B86D700F970B8 /* OTAdTypeDetailCellCell.m */; };
+		4BA0DBA82A6E09DC00F970B8 /* OTDebugView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA0DBA72A6E09DC00F970B8 /* OTDebugView.m */; };
+		4BA0DBC12A6E0FE400F970B8 /* OTDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA0DBC02A6E0FE400F970B8 /* OTDebugViewController.m */; };
+		4BA0DBC42A6E106500F970B8 /* OTDebugCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA0DBC32A6E106500F970B8 /* OTDebugCell.m */; };
 		4BB47CCD29AB017600BA2B27 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BB47CCC29AB016B00BA2B27 /* libc++.tbd */; };
 		4BD72FCF2A1E4C8500FA2CEE /* Base.framework/Base in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B2CA11829F3D409009C66B3 /* Base.framework/Base */; };
 		4BD72FD02A1E4C8500FA2CEE /* Base.framework/Base in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B2CA11829F3D409009C66B3 /* Base.framework/Base */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -218,6 +221,12 @@
 		4BA0DB892A6B802200F970B8 /* OTAdTypeDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAdTypeDetailViewController.m; sourceTree = "<group>"; };
 		4BA0DB8B2A6B86D700F970B8 /* OTAdTypeDetailCellCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAdTypeDetailCellCell.h; sourceTree = "<group>"; };
 		4BA0DB8C2A6B86D700F970B8 /* OTAdTypeDetailCellCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAdTypeDetailCellCell.m; sourceTree = "<group>"; };
+		4BA0DBA62A6E09DC00F970B8 /* OTDebugView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTDebugView.h; sourceTree = "<group>"; };
+		4BA0DBA72A6E09DC00F970B8 /* OTDebugView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTDebugView.m; sourceTree = "<group>"; };
+		4BA0DBBF2A6E0FE400F970B8 /* OTDebugViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTDebugViewController.h; sourceTree = "<group>"; };
+		4BA0DBC02A6E0FE400F970B8 /* OTDebugViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTDebugViewController.m; sourceTree = "<group>"; };
+		4BA0DBC22A6E106500F970B8 /* OTDebugCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTDebugCell.h; sourceTree = "<group>"; };
+		4BA0DBC32A6E106500F970B8 /* OTDebugCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTDebugCell.m; sourceTree = "<group>"; };
 		4BB47CC829AAFC9D00BA2B27 /* OneTenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OneTenSDK.framework; path = ../../../common/output/iOS/Debug/OneTenSDK.framework; sourceTree = "<group>"; };
 		4BB47CCC29AB016B00BA2B27 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		4BD730522A35E20800FA2CEE /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
@@ -263,6 +272,7 @@
 		4B0E03E229A248E600392BEE /* OneTenDemo */ = {
 			isa = PBXGroup;
 			children = (
+				4BA0DBC52A6E106D00F970B8 /* Debug */,
 				4BA0DB6E2A6B7A5A00F970B8 /* AdSource */,
 				4B0E03E329A248E600392BEE /* AppDelegate.h */,
 				4B0E03E429A248E600392BEE /* AppDelegate.m */,
@@ -332,6 +342,19 @@
 				4B0418222A637B0300342798 /* OTGDTSource.m */,
 			);
 			path = AdSource;
+			sourceTree = "<group>";
+		};
+		4BA0DBC52A6E106D00F970B8 /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				4BA0DBA62A6E09DC00F970B8 /* OTDebugView.h */,
+				4BA0DBA72A6E09DC00F970B8 /* OTDebugView.m */,
+				4BA0DBBF2A6E0FE400F970B8 /* OTDebugViewController.h */,
+				4BA0DBC02A6E0FE400F970B8 /* OTDebugViewController.m */,
+				4BA0DBC22A6E106500F970B8 /* OTDebugCell.h */,
+				4BA0DBC32A6E106500F970B8 /* OTDebugCell.m */,
+			);
+			path = Debug;
 			sourceTree = "<group>";
 		};
 		7AF149AE3256C9D31A72B10A /* Pods */ = {
@@ -617,7 +640,10 @@
 				4BA0DB8A2A6B802200F970B8 /* OTAdTypeDetailViewController.m in Sources */,
 				4B0418232A637B0300342798 /* OTGDTSource.m in Sources */,
 				4B0E03F629A248E800392BEE /* main.m in Sources */,
+				4BA0DBA82A6E09DC00F970B8 /* OTDebugView.m in Sources */,
 				4B0E03E829A248E600392BEE /* SceneDelegate.m in Sources */,
+				4BA0DBC12A6E0FE400F970B8 /* OTDebugViewController.m in Sources */,
+				4BA0DBC42A6E106500F970B8 /* OTDebugCell.m in Sources */,
 				4BA0DB872A6B7AB300F970B8 /* OTAdTypeTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

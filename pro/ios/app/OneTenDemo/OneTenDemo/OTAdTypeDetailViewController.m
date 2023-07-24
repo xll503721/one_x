@@ -7,6 +7,7 @@
 
 #import "OTAdTypeDetailViewController.h"
 #import "OTAdTypeDetailCellCell.h"
+#import "OTDebugViewController.h"
 
 #import <OTOnetenSDK.h>
 
@@ -31,6 +32,8 @@ static const NSInteger kOTAdTypeDetailViewControllerTableViewAdnSection = 1;
 @property (nonatomic, strong) NSString *selectedRequestTypeName;
 @property (nonatomic, strong) NSString *selectedPlacementId;
 
+@property (nonatomic, strong) OTDebugViewController *debugViewController;
+
 @end
 
 @implementation OTAdTypeDetailViewController
@@ -41,15 +44,34 @@ static const NSInteger kOTAdTypeDetailViewControllerTableViewAdnSection = 1;
     [self readPlistAdnInfo];
     [self setupTableViewSource];
     
+    UIButton *customButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [customButton setTitle:@"Show Debug" forState:UIControlStateNormal];
+    [customButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [customButton addTarget:self action:@selector(rightAction:) forControlEvents:UIControlEventTouchUpInside];
+
+    UIBarButtonItem *customBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:customButton];
+    self.navigationItem.rightBarButtonItem = customBarButtonItem;
+
+    
     self.selectedTypes = @[].mutableCopy;
     
     [[OTOnetenSDK defalutSDK].adSDK setStageCallBack:^(OTOnetenAdSDKStageType stageType, NSString * _Nonnull placementId, NSError * _Nullable error, NSDictionary<NSString *,id> * _Nullable userInfo) {
+        if (stageType == OTOnetenAdSDKStageTypeLoaded) {
+            [self.debugViewController refreshWithPrint:@"Loaded"];
+        }
+        if (stageType == OTOnetenAdSDKStageTypeShow) {
+            [self.debugViewController refreshWithPrint:@"Show"];
+        }
+        
         if (stageType == OTOnetenAdSDKStageTypeDismiss) {
             [self.adViewController.view removeFromSuperview];
             [self.adViewController removeFromParentViewController];
             [self.adViewController dismissViewControllerAnimated:NO completion:nil];
         }
     }];
+    
+    [self addChildViewController:self.debugViewController];
+    [self.view addSubview:self.debugViewController.view];
 }
 
 - (void)readPlistAdnInfo {
@@ -77,6 +99,14 @@ static const NSInteger kOTAdTypeDetailViewControllerTableViewAdnSection = 1;
     }
     
     [self.sectionTitles addObject:@{@"Ad": allRowAdTitles}];
+}
+
+#pragma mark - Action
+
+- (void)rightAction:(UIButton *)button {
+    self.debugViewController.view.hidden = !self.debugViewController.view.hidden;
+    
+    [button setTitle:self.debugViewController.view.hidden ? @"Show Debug" : @"Hide Debug" forState:UIControlStateNormal];
 }
 
 - (IBAction)loadAd:(id)sender {
@@ -126,8 +156,8 @@ static const NSInteger kOTAdTypeDetailViewControllerTableViewAdnSection = 1;
         [button addTarget:self action:@selector(selectItem:) forControlEvents:UIControlEventTouchUpInside];
         
         if (items.count > idx) {
-            [button setTitle:items[idx] forState:UIControlStateNormal];
             button.name = items[idx];
+            [button setTitle:button.name forState:UIControlStateNormal];
             button.section = indexPath.section;
             button.row = indexPath.row;
             button.column = idx;
@@ -175,6 +205,14 @@ static const NSInteger kOTAdTypeDetailViewControllerTableViewAdnSection = 1;
 
 - (NSString *)selectedPlacementId {
     return [self.allAdTypeDict[self.selectedRequestTypeName][self.selectedAdnName] firstObject];
+}
+
+- (OTDebugViewController *)debugViewController {
+    if (!_debugViewController) {
+        _debugViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"OTDebugViewController"];
+        _debugViewController.view.hidden = YES;
+    }
+    return _debugViewController;
 }
 
 @end

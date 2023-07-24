@@ -9,8 +9,8 @@
 
 BEGIN_NAMESPACE_ONETEN_AD
 
-static const std::string& host = "http://www.wenku8.net";
-static const std::string& path = "/";
+static const std::string& host = "http://192.168.0.105:8088";
+static const std::string& path = "/adn/queryId";
 
 PlacementService::PlacementService(): https_client_(BASE_HTTPS::HTTPsClient::DefaultClient(host)) {
     
