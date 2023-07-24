@@ -21,7 +21,7 @@ WaterfallLoader::WaterfallLoader(std::shared_ptr<LoaderInterface> loader):MainLo
 
 void WaterfallLoader::Classify(std::shared_ptr<PlacementModel> placement) {
     super_class::Classify(placement);
-    otlog_info << "";
+    otlog_info << "prepare for flow";
     
     placement_ = placement;
     
@@ -30,7 +30,6 @@ void WaterfallLoader::Classify(std::shared_ptr<PlacementModel> placement) {
 
 void WaterfallLoader::StartFlow(int32_t level, std::shared_ptr<PlacementModel> placement) {
     super_class::StartFlow(level, placement);
-    otlog_info << "";
     
     InternalStartFlow(level, placement);
 }
@@ -44,6 +43,7 @@ void WaterfallLoader::InternalStartFlow(int32_t level, std::shared_ptr<Placement
     }
     
     if (ad_sources_model.size() > level) {
+        otlog_info << "flow level:" << level;
         std::shared_ptr<AdSourceModel> ad_source_model = ad_sources_model[level];
         ONETEN_AD::OnetenAdSDK::GetInstance().GetRequestLoader()->Flow(ad_source_model, placement_model);
     }

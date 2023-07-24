@@ -23,10 +23,13 @@ public:
     
     static std::shared_ptr<AdSourceCache> Convert(std::shared_ptr<AdSource> ad_source);
     
-    AdSource::Style GetStyle();
     bool IsReady();
     
     std::string Identifier() override;
+    
+    READONLY_PROPERTY(std::string, ClassName, class_name)
+    READONLY_PROPERTY(AdSource::Style, Style, style)
+    READONLY_PROPERTY(AdSource::RequestType, RequestType, request_type)
     
 private:
     void Parse();
@@ -35,7 +38,6 @@ private:
     PLATFORM_GENERATE()
     std::shared_ptr<BASE_JSON::Json> json_;
     
-    AdSource::Style style_;
     std::weak_ptr<AdSourceDelegate> delegate_;
 };
 

@@ -66,6 +66,7 @@
     
     auto ad_source_model = ONETEN_AD::OnetenAdSDK::GetInstance().ShowAd(placementId.UTF8String, _sdk_delegate);
     if (!ad_source_model) {
+        *error = [NSError errorWithDomain:@"ad show" code:1000 userInfo:@{}];
         return nil;
     }
     void* platformObj = ad_source_model->GetPlatformObj();
@@ -86,6 +87,7 @@ void AdSDKDelegate::LoadSucceed() {
     if (oc_prt_) {
         OTOnetenAdSDK *ad_sdk = (__bridge OTOnetenAdSDK *)oc_prt_;
         if (ad_sdk.stageCallBack) {
+            otlog_info << "call back to developer";
             dispatch_async(dispatch_get_main_queue(), ^{
                 ad_sdk.stageCallBack(OTOnetenAdSDKStageTypeLoaded, @"", nil, nil);
             });
@@ -98,6 +100,7 @@ void AdSDKDelegate::ShowSucceed() {
     if (oc_prt_) {
         OTOnetenAdSDK *ad_sdk = (__bridge OTOnetenAdSDK *)oc_prt_;
         if (ad_sdk.stageCallBack) {
+            otlog_info << "call back to developer";
             dispatch_async(dispatch_get_main_queue(), ^{
                 ad_sdk.stageCallBack(OTOnetenAdSDKStageTypeShow, @"", nil, nil);
             });
@@ -110,6 +113,7 @@ void AdSDKDelegate::CloseSucceed() {
     if (oc_prt_) {
         OTOnetenAdSDK *ad_sdk = (__bridge OTOnetenAdSDK *)oc_prt_;
         if (ad_sdk.stageCallBack) {
+            otlog_info << "call back to developer";
             dispatch_async(dispatch_get_main_queue(), ^{
                 ad_sdk.stageCallBack(OTOnetenAdSDKStageTypeDismiss, @"", nil, nil);
             });
@@ -122,6 +126,7 @@ void AdSDKDelegate::ClickSucceed() {
     if (oc_prt_) {
         OTOnetenAdSDK *ad_sdk = (__bridge OTOnetenAdSDK *)oc_prt_;
         if (ad_sdk.stageCallBack) {
+            otlog_info << "call back to developer";
             dispatch_async(dispatch_get_main_queue(), ^{
                 ad_sdk.stageCallBack(OTOnetenAdSDKStageTypeClick, @"", nil, nil);
             });

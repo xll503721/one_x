@@ -24,9 +24,9 @@ NormalLoader::NormalLoader(std::shared_ptr<LoaderInterface> loader): MainLoader(
 
 void NormalLoader::Flow(std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<PlacementModel> placement_model) {
     super_class::Flow(ad_source_model, placement_model);
-    otlog_info << "";
     
     if (ad_source_model->GetRequestType() == AdSource::RequestType::kNormal) {
+        otlog_info << "flow normal";
         
         std::weak_ptr<PlacementModel> w_placement_model = placement_model;
         std::weak_ptr<AdSourceModel> w_ad_source_model = ad_source_model;

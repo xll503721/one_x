@@ -61,8 +61,8 @@ public:
 
     std::string Identifier() override;
     
-    SET_READONLY_PROPERTY(RequestType, type);
-    SET_READONLY_PROPERTY(Style, style);
+    READONLY_PROPERTY(RequestType, RequestType, request_type);
+    READONLY_PROPERTY(Style, Style, style);
     
 private:
     int32_t level_;

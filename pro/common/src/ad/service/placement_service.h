@@ -9,15 +9,20 @@
 #define ONETEN_AD_SDK_PLACEMENT_SERVICE_H
 
 #include <ad/model/placement_model.h>
+#include <network/http:s/http_s_client.h>
 
 BEGIN_NAMESPACE_ONETEN_AD
 
 class PlacementService {
     
 public:
-    PlacementService(const std::string placement_id, void* delegate);
+    PlacementService();
     
-    std::shared_ptr<PlacementModel> GetPlacementMode(const std::string& json_str);
+    using PlacementModelCallBack = std::function<void (std::shared_ptr<PlacementModel> placement_model)>;
+    void GetPlacementMode(const std::string& placement_id, PlacementModelCallBack callBack);
+    
+private:
+    BASE_HTTPS::HTTPsClient& https_client_;
 };
 
 END_NAMESPACE_ONETEN_AD

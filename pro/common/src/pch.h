@@ -33,9 +33,9 @@ ModelFactory::GetInstance().SetModel(ModelFactory::ModelType::kModelType##NAME, 
 #define BEGIN_NAMESPACE(ns) namespace ns {
 #define END_NAMESPACE() }
 
-#define SET_READONLY_PROPERTY(TYPE, VAR_NAME) \
+#define READONLY_PROPERTY(TYPE, METHOD, VAR_NAME) \
 public:\
-    TYPE Get##TYPE() {\
+    TYPE Get##METHOD() {\
         return VAR_NAME##_;\
     }\
 private:\

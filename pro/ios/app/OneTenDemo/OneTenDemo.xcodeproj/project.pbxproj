@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4B0418232A637B0300342798 /* OTGDTSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0418222A637B0300342798 /* OTGDTSource.m */; };
-		4B04185A2A63B53D00342798 /* OTGroMoreSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0418592A63B53D00342798 /* OTGroMoreSource.m */; };
 		4B0418712A640EA100342798 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BD730522A35E20800FA2CEE /* libsqlite3.tbd */; };
 		4B0E03E529A248E600392BEE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0E03E429A248E600392BEE /* AppDelegate.m */; };
 		4B0E03E829A248E600392BEE /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0E03E729A248E600392BEE /* SceneDelegate.m */; };
@@ -139,7 +138,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 9B6D9A92E19B4416ABA14290;
+			remoteGlobalIDString = B7051AE097B241E19ABF1DED;
 			remoteInfo = OneTenSDK;
 		};
 		4BD72FC92A1E4C4B00FA2CEE /* PBXContainerItemProxy */ = {
@@ -198,8 +197,6 @@
 		11E79EC1881684D69CF66811 /* Pods-OneTenDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneTenDemo.debug.xcconfig"; path = "Target Support Files/Pods-OneTenDemo/Pods-OneTenDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		4B0418212A637B0300342798 /* OTGDTSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTGDTSource.h; sourceTree = "<group>"; };
 		4B0418222A637B0300342798 /* OTGDTSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTGDTSource.m; sourceTree = "<group>"; };
-		4B0418582A63B53D00342798 /* OTGroMoreSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTGroMoreSource.h; sourceTree = "<group>"; };
-		4B0418592A63B53D00342798 /* OTGroMoreSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTGroMoreSource.m; sourceTree = "<group>"; };
 		4B0E03E029A248E600392BEE /* OneTenDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OneTenDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B0E03E329A248E600392BEE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4B0E03E429A248E600392BEE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -333,8 +330,6 @@
 				4B1552CF29D1533B0068842B /* OTSigmobSource.m */,
 				4B0418212A637B0300342798 /* OTGDTSource.h */,
 				4B0418222A637B0300342798 /* OTGDTSource.m */,
-				4B0418582A63B53D00342798 /* OTGroMoreSource.h */,
-				4B0418592A63B53D00342798 /* OTGroMoreSource.m */,
 			);
 			path = AdSource;
 			sourceTree = "<group>";
@@ -618,7 +613,6 @@
 				4BA0DB8D2A6B86D700F970B8 /* OTAdTypeDetailCellCell.m in Sources */,
 				4B0E03EB29A248E600392BEE /* ViewController.m in Sources */,
 				4B1552D029D1533B0068842B /* OTSigmobSource.m in Sources */,
-				4B04185A2A63B53D00342798 /* OTGroMoreSource.m in Sources */,
 				4B0E03E529A248E600392BEE /* AppDelegate.m in Sources */,
 				4BA0DB8A2A6B802200F970B8 /* OTAdTypeDetailViewController.m in Sources */,
 				4B0418232A637B0300342798 /* OTGDTSource.m in Sources */,

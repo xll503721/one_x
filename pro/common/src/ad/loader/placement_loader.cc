@@ -19,17 +19,15 @@ PlacementLoader::~PlacementLoader() {
 PlacementLoader::PlacementLoader(std::shared_ptr<LoaderInterface> loader): MainLoader(loader) {
     otlog_info << "";
     
-    placement_service_ = std::shared_ptr<PlacementService>();
+    placement_service_ = std::make_shared<PlacementService>();
 }
 
 void PlacementLoader::Start(const std::string& placement_id) {
     super_class::Start(placement_id);
-    otlog_info << "placement request";
     
-    std::string placement_json_string = "{\"id\": \"123456789\", \"ad_sources\": [{\"clazz_name\": \"OTSigmobSource\", \"style\": 1, \"request_type\": 2, \"id\": \"123456789\"}]}";
-    std::shared_ptr<PlacementModel> placement_model = placement_service_->GetPlacementMode(placement_json_string);
-    
-    ONETEN_AD::OnetenAdSDK::GetInstance().GetWaterfallLoader()->Classify(placement_model);
+    placement_service_->GetPlacementMode("", [](std::shared_ptr<PlacementModel> placement_model) {
+        ONETEN_AD::OnetenAdSDK::GetInstance().GetWaterfallLoader()->Classify(placement_model);
+    });
 }
 
 void PlacementLoader::RequestPlacement(const std::string& placement_id) {

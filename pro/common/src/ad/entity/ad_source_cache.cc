@@ -29,10 +29,6 @@ std::shared_ptr<AdSourceCache> AdSourceCache::Convert(std::shared_ptr<AdSource> 
     return ad_source_cache;
 }
 
-AdSource::Style AdSourceCache::GetStyle() {
-    return style_;
-}
-
 void AdSourceCache::Parse() {
     BASE_JSON::Json id = json_->operator[]("id");
     if (id.IsString()) {

@@ -60,7 +60,7 @@ void AdSource::Parse() {
     
     BASE_JSON::Json request_type = json_->operator[]("request_type");
     if (request_type.IsInteger()) {
-        type_ = static_cast<RequestType>(request_type.AsInteger());
+        request_type_ = static_cast<RequestType>(request_type.AsInteger());
     }
 }
 

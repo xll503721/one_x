@@ -82,22 +82,30 @@ void OnetenAdSDK::Register(const std::string& app_id) {
 }
 
 std::shared_ptr<LoaderInterface> OnetenAdSDK::GetMainLoader() {
-    otlog_info << "start loader:" << start_loader_;
+    if (start_loader_) {    
+        otlog_info << "start loader:" << start_loader_;
+    }
     return start_loader_;
 }
 
 std::shared_ptr<LoaderInterface> OnetenAdSDK::GetWaterfallLoader() {
-    otlog_info << "waterfall loader:" << waterfall_loader_;
+    if (!waterfall_loader_) {
+        otlog_fault << "waterfall loader:" << waterfall_loader_;
+    }
     return waterfall_loader_;
 }
 
 std::shared_ptr<LoaderInterface> OnetenAdSDK::GetCacheLoader() {
-    otlog_info << "cache loader:" << cache_loader_;
+    if (!cache_loader_) {
+        otlog_fault << "cache loader:" << cache_loader_;
+    }
     return cache_loader_;
 }
 
 std::shared_ptr<LoaderInterface> OnetenAdSDK::GetRequestLoader() {
-    otlog_info << "request loader:" << request_loader_;
+    if (!request_loader_) {
+        otlog_info << "request loader:" << request_loader_;
+    }
     return request_loader_;
 }
 
@@ -125,6 +133,7 @@ void OnetenAdSDK::StartAdLoad(const std::string& placement_id, std::map<std::str
         request_loader_ = normal_loader;
         cache_loader_ = cache_loader;
         
+        otlog_info << "========start load placement id: "<< placement_id << "========";
         start_loader_->Start(placement_id);
     });
 }
@@ -140,6 +149,7 @@ void OnetenAdSDK::EndAdLoad(const std::string& placement_id) {
     request_loader_.reset();
     cache_loader_.reset();
     
+    otlog_info << "========end load placement id: "<< placement_id << "========";
     if (delegate_) {
         delegate_->LoadSucceed();
     }
