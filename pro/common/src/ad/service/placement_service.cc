@@ -20,6 +20,7 @@ void PlacementService::GetPlacementMode(const std::string& placement_id, Placeme
     otlog_info << "placement request";
     https_client_.Get(path, [=](BASE_HTTPS::HTTPsClient* client, BASE_HTTPS::HTTPsClient::Status status, const std::string& body) {
         if (status != BASE_HTTPS::HTTPsClient::Status::kStatus200) {
+            otlog_error << "placement request error:" << static_cast<int32_t>(status) << ", msg:" << body.c_str();
             return;
         }
         if (callBack) {

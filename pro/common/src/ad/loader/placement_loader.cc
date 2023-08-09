@@ -26,7 +26,9 @@ void PlacementLoader::Start(const std::string& placement_id) {
     super_class::Start(placement_id);
     
     placement_service_->GetPlacementMode("", [](std::shared_ptr<PlacementModel> placement_model) {
-        ONETEN_AD::OnetenAdSDK::GetInstance().GetWaterfallLoader()->Classify(placement_model);
+        if (placement_model) {        
+            ONETEN_AD::OnetenAdSDK::GetInstance().GetWaterfallLoader()->Classify(placement_model);
+        }
     });
 }
 

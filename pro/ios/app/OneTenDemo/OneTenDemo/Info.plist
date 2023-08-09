@@ -9,59 +9,40 @@
 			<key>Common</key>
 			<dict>
 				<key>GDT</key>
-				<array>
-					<string>111111</string>
-				</array>
+				<string></string>
 				<key>BAIDU</key>
-				<array>
-					<string>111111</string>
-				</array>
+				<string></string>
 				<key>GM</key>
-				<array>
-					<string>111111</string>
-				</array>
+				<string></string>
 				<key>KS</key>
-				<array>
-					<string>111111</string>
-				</array>
+				<string></string>
 				<key>CSJ</key>
-				<array>
-					<string>111111</string>
-				</array>
+				<string></string>
 				<key>SIGMOB</key>
-				<array>
-					<string>123456789</string>
-				</array>
+				<string>123456789</string>
 			</dict>
 			<key>C2S</key>
-            <dict>
-                <key>GDT</key>
-                <array>
-                    <string>111111</string>
-                </array>
-                <key>BAIDU</key>
-                <array>
-                    <string>111111</string>
-                </array>
-                <key>GM</key>
-                <array>
-                    <string>111111</string>
-                </array>
-                <key>KS</key>
-                <array>
-                    <string>111111</string>
-                </array>
-                <key>CSJ</key>
-                <array>
-                    <string>111111</string>
-                </array>
-                <key>SIGMOB</key>
-                <array>
-                    <string>123456789</string>
-                </array>
-            </dict>
+			<dict>
+				<key>GDT</key>
+				<string></string>
+				<key>BAIDU</key>
+				<string></string>
+				<key>GM</key>
+				<string></string>
+				<key>KS</key>
+				<string></string>
+				<key>CSJ</key>
+				<string></string>
+				<key>SIGMOB</key>
+				<string>123456789</string>
+			</dict>
 			<key>S2S</key>
-			<dict/>
+			<dict>
+				<key>GDT</key>
+				<string>123456789</string>
+				<key>SIGMOB</key>
+				<string>123456789</string>
+			</dict>
 		</dict>
 		<key>Native</key>
 		<dict>

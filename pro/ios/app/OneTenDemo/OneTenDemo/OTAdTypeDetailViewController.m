@@ -22,17 +22,19 @@ static const NSInteger kOTAdTypeDetailViewControllerTableViewAdnSection = 1;
 
 @interface OTAdTypeDetailViewController () <UITableViewDelegate, UITableViewDataSource>
 
+@property (weak, nonatomic) IBOutlet UIButton *loadButton;
+@property (weak, nonatomic) IBOutlet UIButton *showButton;
+@property (weak, nonatomic) IBOutlet UIButton *isReadyButton;
+@property (weak, nonatomic) IBOutlet UITextView *logTextView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 @property (nonatomic, strong) NSMutableArray<NSDictionary *> *sectionTitles;
 @property (nonatomic, strong) OTAdViewController *adViewController;
 @property (nonatomic, strong) NSDictionary<NSString *, NSDictionary *> *allAdTypeDict;
-
-@property (nonatomic, strong) NSMutableArray<NSString *> *selectedTypes;
-@property (nonatomic, strong) NSString *selectedAdnName;
-@property (nonatomic, strong) NSString *selectedRequestTypeName;
-@property (nonatomic, strong) NSString *selectedPlacementId;
-
 @property (nonatomic, strong) OTDebugViewController *debugViewController;
+
+@property (nonatomic, strong) NSString *selectedPlacementId;
+@property (nonatomic, strong) OTButton *selectedButton;
 
 @end
 
@@ -51,16 +53,20 @@ static const NSInteger kOTAdTypeDetailViewControllerTableViewAdnSection = 1;
 
     UIBarButtonItem *customBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:customButton];
     self.navigationItem.rightBarButtonItem = customBarButtonItem;
-
     
-    self.selectedTypes = @[].mutableCopy;
+    [self addChildViewController:self.debugViewController];
+    [self.view addSubview:self.debugViewController.view];
     
     [[OTOnetenSDK defalutSDK].adSDK setStageCallBack:^(OTOnetenAdSDKStageType stageType, NSString * _Nonnull placementId, NSError * _Nullable error, NSDictionary<NSString *,id> * _Nullable userInfo) {
+        NSString *text = self.logTextView.text;
+        
         if (stageType == OTOnetenAdSDKStageTypeLoaded) {
-            [self.debugViewController refreshWithPrint:@"Loaded"];
+            NSString *text = self.logTextView.text;
+            self.logTextView.text = [text stringByAppendingFormat:@"\n%@ %@ %@ has Show", placementId, self.selectedButton.name, self.selectedButton.adType];
         }
+        
         if (stageType == OTOnetenAdSDKStageTypeShow) {
-            [self.debugViewController refreshWithPrint:@"Show"];
+            self.logTextView.text = [text stringByAppendingFormat:@"\n%@ %@ %@ has Show", placementId, self.selectedButton.name, self.selectedButton.adType];
         }
         
         if (stageType == OTOnetenAdSDKStageTypeDismiss) {
@@ -69,9 +75,6 @@ static const NSInteger kOTAdTypeDetailViewControllerTableViewAdnSection = 1;
             [self.adViewController dismissViewControllerAnimated:NO completion:nil];
         }
     }];
-    
-    [self addChildViewController:self.debugViewController];
-    [self.view addSubview:self.debugViewController.view];
 }
 
 - (void)readPlistAdnInfo {
@@ -82,7 +85,7 @@ static const NSInteger kOTAdTypeDetailViewControllerTableViewAdnSection = 1;
 }
 
 - (void)setupTableViewSource {
-    self.sectionTitles = @[@{@"Type": @[@[@"Common", @"C2S", @"S2S", @"All"]]}].mutableCopy;
+    self.sectionTitles = @[].mutableCopy;
     
     NSMutableSet<NSString *> *section = [NSMutableSet set];
     [self.allAdTypeDict enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSDictionary<NSString *, NSArray *> * _Nonnull obj, BOOL * _Nonnull stop) {
@@ -109,7 +112,10 @@ static const NSInteger kOTAdTypeDetailViewControllerTableViewAdnSection = 1;
     [button setTitle:self.debugViewController.view.hidden ? @"Show Debug" : @"Hide Debug" forState:UIControlStateNormal];
 }
 
-- (IBAction)loadAd:(id)sender {
+- (IBAction)loadAd:(UIButton *)sender {
+    NSString *title = sender.titleLabel.text;
+    title = [title stringByReplacingOccurrencesOfString:@"Load(" withString:@""];
+    title = [title stringByReplacingOccurrencesOfString:@")" withString:@""];
     [[OTOnetenSDK defalutSDK].adSDK loadWithPlacementId:self.selectedPlacementId];
 }
 
@@ -133,17 +139,19 @@ static const NSInteger kOTAdTypeDetailViewControllerTableViewAdnSection = 1;
 }
 
 - (IBAction)isReadyAd:(id)sender {
+    NSString *text = self.logTextView.text;
+    
+    NSError *error;
+    self.adViewController = [[OTOnetenSDK defalutSDK].adSDK showWithPlacementId:self.selectedPlacementId error:&error];
+    if (error) {
+        text = [text stringByAppendingFormat:@"\n%@ %@ %@ is not ready", self.selectedPlacementId, self.selectedButton.name, self.selectedButton.adType];
+    } else {
+        text = [text stringByAppendingFormat:@"\n%@ %@ %@ is ready", self.selectedPlacementId, self.selectedButton.name, self.selectedButton.adType];
+    }
+    self.logTextView.text = text;
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.sectionTitles.count;
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return self.sectionTitles[section].allKeys.firstObject;
-}
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     OTAdTypeDetailCellCell *cell = [tableView dequeueReusableCellWithIdentifier:@"OTAdTypeDetailCellCell"];
@@ -161,51 +169,45 @@ static const NSInteger kOTAdTypeDetailViewControllerTableViewAdnSection = 1;
             button.section = indexPath.section;
             button.row = indexPath.row;
             button.column = idx;
-            button.selected = NO;
-            if (button.section == kOTAdTypeDetailViewControllerTableViewAdnSection) {
-                if ([button.name isEqualToString:self.selectedAdnName]) {
-                    button.selected = YES;
-                }
-            } else if (button.section == kOTAdTypeDetailViewControllerTableViewRequestTypeSection) {
-                id item = self.allAdTypeDict[button.name][self.selectedAdnName];
-                if (item) {
-                    button.selected = YES;
-                    self.selectedRequestTypeName = button.name;
-                }
-            }
         }
     }];
     
     return cell;
 }
 
+
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
-        return adTypeCellCount;
-    } else {
-        NSDictionary *sectionItemDict = self.sectionTitles[section];
-        NSArray<NSString *> *items = sectionItemDict[sectionItemDict.allKeys.firstObject];
-        return items.count;
-    }
-    return 0;
+    NSDictionary *sectionItemDict = self.sectionTitles[section];
+    NSArray<NSString *> *items = sectionItemDict[sectionItemDict.allKeys.firstObject];
+    return items.count;
 }
 
 #pragma mark - Action
 
 - (void)selectItem:(OTButton *)button {
-    if (button.section == kOTAdTypeDetailViewControllerTableViewAdnSection) {
-        self.selectedAdnName = button.name;
-    } else if (button.section == kOTAdTypeDetailViewControllerTableViewRequestTypeSection) {
-        self.selectedRequestTypeName = button.name;
-    }
-    [self.tableView reloadData];
+    self.selectedButton.selected = !self.selectedButton.selected;
+    self.selectedButton = button;
+    self.selectedButton.selected = !self.selectedButton.selected;
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Adn Type" message:@"select adn type, and start load" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [self.allAdTypeDict enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSDictionary * _Nonnull obj, BOOL * _Nonnull stop) {
+        NSString *placementId = obj[button.name];
+        if (placementId && ![placementId isEqualToString:@""]) {
+            [alert addAction:[UIAlertAction actionWithTitle:key style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                self.selectedPlacementId = placementId;
+                self.selectedButton.name = button.name;
+                self.selectedButton.adType = key;
+                
+                NSString *loadString = [NSString stringWithFormat:@"Load(%@ %@)", button.name, key];
+                [self.loadButton setTitle:loadString forState:UIControlStateNormal];
+            }]];
+        }
+    }];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - getter
-
-- (NSString *)selectedPlacementId {
-    return [self.allAdTypeDict[self.selectedRequestTypeName][self.selectedAdnName] firstObject];
-}
 
 - (OTDebugViewController *)debugViewController {
     if (!_debugViewController) {

@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface OTButton : UIButton
 
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *adType;
 @property (nonatomic, assign) NSInteger section;
 @property (nonatomic, assign) NSInteger row;
 @property (nonatomic, assign) NSInteger column;
