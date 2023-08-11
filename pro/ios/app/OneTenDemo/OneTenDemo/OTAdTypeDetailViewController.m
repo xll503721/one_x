@@ -62,17 +62,19 @@ static const NSInteger kOTAdTypeDetailViewControllerTableViewAdnSection = 1;
         
         if (stageType == OTOnetenAdSDKStageTypeLoaded) {
             NSString *text = self.logTextView.text;
-            self.logTextView.text = [text stringByAppendingFormat:@"\n%@ %@ %@ has Show", placementId, self.selectedButton.name, self.selectedButton.adType];
+            self.logTextView.text = [text stringByAppendingFormat:@"\n%@ %@: %@ have been loaded", self.selectedButton.name, self.selectedButton.adType, placementId];
         }
         
         if (stageType == OTOnetenAdSDKStageTypeShow) {
-            self.logTextView.text = [text stringByAppendingFormat:@"\n%@ %@ %@ has Show", placementId, self.selectedButton.name, self.selectedButton.adType];
+            self.logTextView.text = [text stringByAppendingFormat:@"\n%@ %@: %@ have shown", self.selectedButton.name, self.selectedButton.adType, placementId];
         }
         
         if (stageType == OTOnetenAdSDKStageTypeDismiss) {
             [self.adViewController.view removeFromSuperview];
             [self.adViewController removeFromParentViewController];
             [self.adViewController dismissViewControllerAnimated:NO completion:nil];
+            
+            self.logTextView.text = [text stringByAppendingFormat:@"\n%@ %@: %@ have closed", self.selectedButton.name, self.selectedButton.adType, placementId];
         }
     }];
 }
@@ -113,9 +115,6 @@ static const NSInteger kOTAdTypeDetailViewControllerTableViewAdnSection = 1;
 }
 
 - (IBAction)loadAd:(UIButton *)sender {
-    NSString *title = sender.titleLabel.text;
-    title = [title stringByReplacingOccurrencesOfString:@"Load(" withString:@""];
-    title = [title stringByReplacingOccurrencesOfString:@")" withString:@""];
     [[OTOnetenSDK defalutSDK].adSDK loadWithPlacementId:self.selectedPlacementId];
 }
 
@@ -204,6 +203,10 @@ static const NSInteger kOTAdTypeDetailViewControllerTableViewAdnSection = 1;
             }]];
         }
     }];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    }]];
+    
     [self presentViewController:alert animated:YES completion:nil];
 }
 
