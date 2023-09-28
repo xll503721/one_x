@@ -25,9 +25,11 @@ PlacementLoader::PlacementLoader(std::shared_ptr<LoaderInterface> loader): MainL
 void PlacementLoader::Start(const std::string& placement_id) {
     super_class::Start(placement_id);
     
-    placement_service_->GetPlacementMode("", [](std::shared_ptr<PlacementModel> placement_model) {
-        if (placement_model) {        
-            ONETEN_AD::OnetenAdSDK::GetInstance().GetWaterfallLoader()->Classify(placement_model);
+    placement_service_->GetPlacementModel("", [=](std::shared_ptr<PlacementModel> placement_model) {
+        if (placement_model) {
+            std::map<std::string, std::shared_ptr<void>> map;
+            map["placement_model"] = std::static_pointer_cast<void>(placement_model);
+            NextLoader(map);
         }
     });
 }

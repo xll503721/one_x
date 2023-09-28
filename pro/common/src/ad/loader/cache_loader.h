@@ -18,7 +18,7 @@ class CacheLoader: public MainLoader {
     
 public:
     CacheLoader(std::shared_ptr<LoaderInterface> loader);
-    void Save(std::shared_ptr<AdSourceModel> ad_source, std::shared_ptr<PlacementModel> placement);
+    void Save(std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<PlacementModel> placement_model);
     void Remove(std::shared_ptr<AdSourceModel> ad_source, std::shared_ptr<PlacementModel> placement);
     void End();
     

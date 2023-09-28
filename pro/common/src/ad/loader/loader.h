@@ -32,7 +32,7 @@ public:
 
 class CacheLoaderInterface {
 public:
-    virtual void Save(std::shared_ptr<AdSourceModel> ad_source, std::shared_ptr<PlacementModel> placement) {};
+    virtual void Save(std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<PlacementModel> placement_model) {};
 };
 
 class LoaderInterface:  public PlacementLoaderInterface,
@@ -40,10 +40,13 @@ class LoaderInterface:  public PlacementLoaderInterface,
                         public AdSourceLoaderInterface,
                         public CacheLoaderInterface {
 public:
+    using NextLoaderCallBack = std::function<void (std::map<std::string, std::shared_ptr<void>> parmas)>;
+
     virtual void Start(const std::string& placement_id) = 0;
     virtual void End() = 0;
     virtual bool GetIsEndInvoke() {};
     virtual bool SetIsEndInvoke(bool is_end_invoke) {};
+    virtual void NextLoader(NextLoaderCallBack callBack) = 0;
 };
 
 END_NAMESPACE_ONETEN_AD

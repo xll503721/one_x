@@ -19,7 +19,7 @@ public:
     PlacementService();
     
     using PlacementModelCallBack = std::function<void (std::shared_ptr<PlacementModel> placement_model)>;
-    void GetPlacementMode(const std::string& placement_id, PlacementModelCallBack callBack);
+    void GetPlacementModel(const std::string& placement_id, PlacementModelCallBack callBack);
     
 private:
     BASE_HTTPS::HTTPsClient& https_client_;

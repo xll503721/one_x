@@ -48,6 +48,16 @@ void MainLoader::End() {
     }
 }
 
+void MainLoader::NextLoader(std::map<std::string, std::shared_ptr<void>> parmas) {
+    if (next_loader_call_back_) {
+        next_loader_call_back_(parmas);
+    }
+}
+
+void MainLoader::NextLoader(NextLoaderCallBack callBack) {
+    next_loader_call_back_ = callBack;
+}
+
 bool MainLoader::GetIsEndInvoke() {
     return is_end_invoke_;
 }

@@ -133,6 +133,53 @@ void OnetenAdSDK::StartAdLoad(const std::string& placement_id, std::map<std::str
         request_loader_ = normal_loader;
         cache_loader_ = cache_loader;
         
+        placement_loader->Start(placement_id);
+        
+        placement_loader->NextLoader([=](std::map<std::string, std::shared_ptr<void>> parmas) {
+            auto placement_model = parmas["placement_model"];
+            std::shared_ptr<PlacementModel> placement_model_ptr = std::static_pointer_cast<PlacementModel>(placement_model);
+            waterfall_loader_->StartFlow(0, placement_model_ptr);
+        });
+        
+        waterfall_loader->NextLoader([=](std::map<std::string, std::shared_ptr<void>> parmas) {
+            auto placement_model = parmas["placement_model"];
+            int32_t level = *std::static_pointer_cast<int32_t>(parmas["level"]);
+            std::shared_ptr<PlacementModel> placement_model_ptr = std::static_pointer_cast<PlacementModel>(placement_model);
+            auto ad_source_models = placement_model_ptr->GetAdSourceModel();
+            if (!(ad_source_models.size() > level)) {
+                EndAdLoad(placement_id);
+                return;
+            }
+            
+            auto ad_source_model_ptr = ad_source_models[level];
+            request_loader_->Flow(ad_source_model_ptr, placement_model_ptr);
+        });
+        
+        request_loader_->NextLoader([=](std::map<std::string, std::shared_ptr<void>> parmas) {
+            auto placement_model = parmas["placement_model"];
+            auto ad_source_model = parmas["ad_source_model"];
+            bool is_load_succeed = *std::static_pointer_cast<bool>(parmas["load_succeed"]);
+            if (!is_load_succeed) {
+                EndAdLoad(placement_id);
+                return;
+            }
+            
+            std::shared_ptr<PlacementModel> placement_model_ptr = std::static_pointer_cast<PlacementModel>(placement_model);
+            std::shared_ptr<AdSourceModel> ad_source_model_ptr = std::static_pointer_cast<AdSourceModel>(ad_source_model);
+            cache_loader->Save(ad_source_model_ptr, placement_model_ptr);
+        });
+        
+        cache_loader->NextLoader([=](std::map<std::string, std::shared_ptr<void>> parmas) {
+            auto placement_model = parmas["placement_model"];
+            auto ad_source_model = parmas["ad_source_model"];
+            
+            std::shared_ptr<PlacementModel> placement_model_ptr = std::static_pointer_cast<PlacementModel>(placement_model);
+            std::shared_ptr<AdSourceModel> ad_source_model_ptr = std::static_pointer_cast<AdSourceModel>(ad_source_model);
+            
+            waterfall_loader_->StartFlow(ad_source_model_ptr->GetLevel() + 1, placement_model_ptr);
+        });
+        
+        
         otlog_info << "========start load placement id: "<< placement_id << "========";
         start_loader_->Start(placement_id);
     });

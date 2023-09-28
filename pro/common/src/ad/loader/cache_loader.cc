@@ -16,11 +16,16 @@ CacheLoader::CacheLoader(std::shared_ptr<LoaderInterface> loader): MainLoader(lo
     cache_service_ = std::make_shared<CacheService>();
 }
 
-void CacheLoader::Save(std::shared_ptr<AdSourceModel> ad_source, std::shared_ptr<PlacementModel> placement) {
-    super_class::Save(ad_source, placement);
+void CacheLoader::Save(std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<PlacementModel> placement_model) {
+    super_class::Save(ad_source_model, placement_model);
     otlog_info << "";
     
-    cache_service_->Save(ad_source, placement);
+    cache_service_->Save(ad_source_model, placement_model);
+    
+    std::map<std::string, std::shared_ptr<void>> map;
+    map["placement_model"] = placement_model;
+    map["ad_source_model"] = ad_source_model;
+    NextLoader(map);
 }
 
 void CacheLoader::Remove(std::shared_ptr<AdSourceModel> ad_source, std::shared_ptr<PlacementModel> placement) {

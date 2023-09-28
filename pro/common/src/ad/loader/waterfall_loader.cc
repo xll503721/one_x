@@ -23,9 +23,7 @@ void WaterfallLoader::Classify(std::shared_ptr<PlacementModel> placement) {
     super_class::Classify(placement);
     otlog_info << "prepare for flow";
     
-    placement_ = placement;
-    
-    StartFlow(0, placement_);
+    StartFlow(0, placement);
 }
 
 void WaterfallLoader::StartFlow(int32_t level, std::shared_ptr<PlacementModel> placement) {
@@ -35,18 +33,13 @@ void WaterfallLoader::StartFlow(int32_t level, std::shared_ptr<PlacementModel> p
 }
 
 void WaterfallLoader::InternalStartFlow(int32_t level, std::shared_ptr<PlacementModel> placement_model) {
-    std::vector<std::shared_ptr<AdSourceModel>> ad_sources_model = placement_model->GetAdSourceModel();
-    if (level == ad_sources_model.size()) {
-        std::string placement_id;
-        ONETEN_AD::OnetenAdSDK::GetInstance().EndAdLoad(placement_id);
-        return;
-    }
+    otlog_info << "flow level:" << level;
+    std::shared_ptr<void> level_ptr = std::make_shared<int32_t>(level);
     
-    if (ad_sources_model.size() > level) {
-        otlog_info << "flow level:" << level;
-        std::shared_ptr<AdSourceModel> ad_source_model = ad_sources_model[level];
-        ONETEN_AD::OnetenAdSDK::GetInstance().GetRequestLoader()->Flow(ad_source_model, placement_model);
-    }
+    std::map<std::string, std::shared_ptr<void>> map;
+    map["placement_model"] = std::static_pointer_cast<void>(placement_model);
+    map["level"] = level_ptr;
+    NextLoader(map);
 }
 
 void WaterfallLoader::End() {

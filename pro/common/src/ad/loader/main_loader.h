@@ -20,22 +20,24 @@ public:
     MainLoader() = default;
     virtual ~MainLoader();
     MainLoader(std::shared_ptr<LoaderInterface> loader);
-    void Start(const std::string& placement_id) override;
 
+    void Start(const std::string& placement_id) override;
     void Classify(std::shared_ptr<PlacementModel> placement_model) override;
-                        
     void StartFlow(int32_t level, std::shared_ptr<PlacementModel> placement_model) override;
     void Flow(std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<PlacementModel> placement_model) override;
-    
-    void NextLoader();
     void End() override;
 
     bool GetIsEndInvoke() override;
     bool SetIsEndInvoke(bool is_end_invoke) override;
+
+    void NextLoader(NextLoaderCallBack callBack) override;
+protected:
+    void NextLoader(std::map<std::string, std::shared_ptr<void>> parmas);
     
 private:
     std::shared_ptr<LoaderInterface> mainloader_;
     bool is_end_invoke_ = false;
+    NextLoaderCallBack next_loader_call_back_;
 };
 
 END_NAMESPACE_ONETEN_AD

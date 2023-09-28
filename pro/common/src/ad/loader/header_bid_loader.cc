@@ -18,20 +18,11 @@ HeaderBidLoader::HeaderBidLoader(std::shared_ptr<LoaderInterface> loader): MainL
 
 void HeaderBidLoader::Flow(std::shared_ptr<AdSourceModel> ad_source, std::shared_ptr<PlacementModel> placement) {
     super_class::Flow(ad_source, placement);
+    if (ad_source->GetRequestType() != AdSource::RequestType::kS2S &&
+        ad_source->GetRequestType() != AdSource::RequestType::kC2S) {
+        return;
+    }
     otlog_info << "";
-    
-//    if (ad_source->GetRequestType() == AdSource::RequestType::kS2S ||
-//        ad_source->GetRequestType() == AdSource::RequestType::kC2S) {
-        
-//        ad_source_service_->Load(ad_source, [=](int categroy_type, ONETEN::Error* error) {
-//            if (!error) {
-//                std::string placement_id;
-//                ONETEN_AD::OnetenAdSDK::GetInstance().EndAdLoad(placement_id);
-//                return;
-//            }
-//            ONETEN_AD::OnetenAdSDK::GetInstance().GetWaterfallLoader()->StartFlow(ad_source->GetLevel() + 1, placement);
-//        });
-//    }
 }
 
 void HeaderBidLoader::End() {
