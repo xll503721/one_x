@@ -28,7 +28,7 @@ public:
     void End();
     
 private:
-    
+    std::shared_ptr<PlacementModel> placement_;
 };
 
 END_NAMESPACE_ONETEN_AD

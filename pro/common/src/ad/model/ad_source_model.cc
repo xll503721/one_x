@@ -42,7 +42,7 @@ std::string AdSourceModel::Identifier() {
 void AdSourceModel::Load(std::shared_ptr<AdSourceDelegate> delegate) {
     delegate_ = delegate;
     
-    BASE_THREAD::ThreadPool::DefaultPool().ScheduleTransfer(BASE_THREAD::Thread::Type::kMain, [=] () {
+    BASE_THREAD::ThreadPool::DefaultPool().Schedule(BASE_THREAD::Thread::Type::kMain, [=](){
         SET_PLATFORM_GENERATE_NAME(ad_source_->GetClassName());
         
         auto style_type = PLATFORM_VAR_GENERATE(static_cast<unsigned long>(ad_source_->GetStyle()));
@@ -85,10 +85,10 @@ void AdSourceModel::LoadCompletion(int32_t categroy_type, ONETEN::Error* error) 
     std::map<std::string, std::string> event_properties;
     BASE_ANALYTICS::Tracker::DefaultTracker().Send("load", event_properties);
     
-    BASE_THREAD::ThreadPool::DefaultPool().ScheduleTransferBack([=] () {
+    oneten_ad::OnetenAdSDK::GetInstance().thread_pool_.Schedule(BASE_THREAD::Thread::Type::kOther, [=] () {
         if (auto s_delegate = delegate_.lock()) {
             s_delegate->LoadCompletion(categroy_type, error);
-        }
+        }   
     });
 }
 
@@ -100,7 +100,7 @@ void AdSourceModel::ShowCompletion(int32_t categroy_type, ONETEN::Error* error) 
     std::map<std::string, std::string> event_properties;
     BASE_ANALYTICS::Tracker::DefaultTracker().Send("show", event_properties);
     
-    BASE_THREAD::ThreadPool::DefaultPool().Schedule(BASE_THREAD::Thread::Type::kMain, [=](){
+    oneten_ad::OnetenAdSDK::GetInstance().thread_pool_.Schedule(BASE_THREAD::Thread::Type::kMain, [=](){
         ONETEN_AD::OnetenAdSDK::GetInstance().DidShowAd(Identifier());
     });
 }
@@ -116,7 +116,7 @@ void AdSourceModel::CloseCompletion(int32_t categroy_type, ONETEN::Error* error)
     std::map<std::string, std::string> event_properties;
     BASE_ANALYTICS::Tracker::DefaultTracker().Send("close", event_properties);
     
-    BASE_THREAD::ThreadPool::DefaultPool().Schedule(BASE_THREAD::Thread::Type::kMain, [=](){
+    oneten_ad::OnetenAdSDK::GetInstance().thread_pool_.Schedule(BASE_THREAD::Thread::Type::kMain, [=](){
         ONETEN_AD::OnetenAdSDK::GetInstance().DidCloseAd(Identifier());
     });
 }
@@ -128,7 +128,7 @@ void AdSourceModel::ClickCompletion(int32_t categroy_type, ONETEN::Error* error)
     std::map<std::string, std::string> event_properties;
     BASE_ANALYTICS::Tracker::DefaultTracker().Send("click", event_properties);
     
-    BASE_THREAD::ThreadPool::DefaultPool().Schedule(BASE_THREAD::Thread::Type::kMain, [=](){
+    oneten_ad::OnetenAdSDK::GetInstance().thread_pool_.Schedule(BASE_THREAD::Thread::Type::kMain, [=](){
         ONETEN_AD::OnetenAdSDK::GetInstance().DidClickAd(Identifier());
     });
 }

@@ -29,6 +29,7 @@ void WaterfallLoader::Classify(std::shared_ptr<PlacementModel> placement) {
 void WaterfallLoader::StartFlow(int32_t level, std::shared_ptr<PlacementModel> placement) {
     super_class::StartFlow(level, placement);
     
+    placement_ = placement;
     InternalStartFlow(level, placement);
 }
 

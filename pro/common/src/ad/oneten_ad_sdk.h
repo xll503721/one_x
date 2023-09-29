@@ -14,6 +14,7 @@
 #include <ad/service/cache_service.h>
 #include <storage/memory/storage_memory.h>
 #include <ad/entity/cache.h>
+#include <thread/thread_pool.h>
 
 BEGIN_NAMESPACE_ONETEN_AD
 
@@ -51,7 +52,9 @@ private:
     std::map<std::string, std::string> user_info_;
     
     std::shared_ptr<CacheService> cache_service_;
-//    BASE_STORAGE_MEMORY::StorageMemory<std::string, Model> memory_;
+    
+public:
+    BASE_THREAD::ThreadPool thread_pool_;
 };
 
 END_NAMESPACE_ONETEN_AD
