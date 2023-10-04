@@ -14,8 +14,9 @@ CacheModel::~CacheModel() {
     
 }
 
-CacheModel::CacheModel(std::shared_ptr<PlacementModel> placement_model):
-placement_model_(placement_model) {
+CacheModel::CacheModel(const std::string& loader_id, std::shared_ptr<PlacementModel> placement_model):
+placement_model_(placement_model),
+loader_id_(loader_id_) {
     
 }
 

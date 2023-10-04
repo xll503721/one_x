@@ -11,7 +11,11 @@
 
 BEGIN_NAMESPACE_ONETEN_AD
 
-HeaderBidLoader::HeaderBidLoader(std::shared_ptr<LoaderInterface> loader): MainLoader(loader) {
+HeaderBidLoader::~HeaderBidLoader() {
+    otlog_info<< "~HeaderBidLoader";
+}
+
+HeaderBidLoader::HeaderBidLoader(std::shared_ptr<LoaderInterface> loader, std::shared_ptr<void> run_loader): MainLoader(loader, run_loader) {
     otlog_info << "";
     ad_source_service_ = std::make_shared<AdSourceService>();
 }

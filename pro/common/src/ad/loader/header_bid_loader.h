@@ -17,11 +17,12 @@ class HeaderBidLoader: public MainLoader {
     
 private:
     using super_class = MainLoader;
+    virtual ~HeaderBidLoader();
     
     std::shared_ptr<AdSourceService> ad_source_service_;
     
 public:
-    HeaderBidLoader(std::shared_ptr<LoaderInterface> loader);
+    HeaderBidLoader(std::shared_ptr<LoaderInterface> loader, std::shared_ptr<void> run_loader);
     void Flow(std::shared_ptr<AdSourceModel> ad_source, std::shared_ptr<PlacementModel> placement);
     void End();
 };

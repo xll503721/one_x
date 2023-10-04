@@ -19,7 +19,7 @@ BEGIN_NAMESPACE_ONETEN_AD
 class CacheModel: public Model {
     
 public:
-    CacheModel(std::shared_ptr<PlacementModel> placement_model);
+    CacheModel(const std::string& loader_id, std::shared_ptr<PlacementModel> placement_model);
     
     virtual ~CacheModel();
     std::string Identifier() override;
@@ -30,8 +30,8 @@ public:
     std::vector<std::shared_ptr<AdSourceModel>> GetSortAdSourceModelCache();
     
 private:
-    
     std::shared_ptr<PlacementModel> placement_model_;
+    std::string loader_id_;
 };
 
 END_NAMESPACE_ONETEN_AD

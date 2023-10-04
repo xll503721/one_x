@@ -23,7 +23,7 @@ public:
     CacheService();
     virtual ~CacheService();
     
-    void Save(std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<PlacementModel> placement_model);
+    void Save(const std::string& runing_id, std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<PlacementModel> placement_model);
     void Remove(const std::string& ad_source_id);
     
     std::shared_ptr<CacheModel> GetAnyOne(const std::string& placement_id);

@@ -18,7 +18,7 @@ private:
     using super_class = MainLoader;
     
 public:
-    WaterfallLoader(std::shared_ptr<LoaderInterface> loader);
+    WaterfallLoader(std::shared_ptr<LoaderInterface> loader, std::shared_ptr<void> run_loader);
     virtual ~WaterfallLoader();
     
     void Classify(std::shared_ptr<PlacementModel> placement_model);

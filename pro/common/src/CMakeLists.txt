@@ -51,6 +51,7 @@ add_dependencies(${PROJECT_NAME} ${SDK_AD_LIB})
 add_dependencies(${PROJECT_NAME} ${SDK_AD_MODEL_LIB})
 add_dependencies(${PROJECT_NAME} ${SDK_AD_SERVICE_LIB})
 add_dependencies(${PROJECT_NAME} ${SDK_AD_LOADER_LIB})
+add_dependencies(${PROJECT_NAME} ${SDK_AD_REPOSITORY_LIB})
 add_dependencies(${PROJECT_NAME} ${SDK_AD_ENTITY_LIB})
 add_dependencies(${PROJECT_NAME} ${SDK_AD_UTIL})
 add_dependencies(${PROJECT_NAME} Base)
@@ -59,7 +60,8 @@ target_link_libraries(${PROJECT_NAME}
                         ${SDK_AD_LIB} 
                         ${SDK_AD_MODEL_LIB} 
                         ${SDK_AD_SERVICE_LIB} 
-                        ${SDK_AD_LOADER_LIB} 
+                        ${SDK_AD_LOADER_LIB}
+                        ${SDK_AD_REPOSITORY_LIB} 
                         ${SDK_AD_ENTITY_LIB}
                         ${SDK_AD_UTIL}
                         Base)
@@ -79,6 +81,7 @@ set_target_folder_if_exist(${SDK_AD_LIB} ${PROJECT_NAME})
 set_target_folder_if_exist(${SDK_AD_MODEL_LIB} ${PROJECT_NAME}/${SDK_AD_LIB})
 set_target_folder_if_exist(${SDK_AD_SERVICE_LIB} ${PROJECT_NAME}/${SDK_AD_LIB})
 set_target_folder_if_exist(${SDK_AD_LOADER_LIB} ${PROJECT_NAME}/${SDK_AD_LIB})
+set_target_folder_if_exist(${SDK_AD_REPOSITORY_LIB} ${PROJECT_NAME}/${SDK_AD_LIB})
 set_target_folder_if_exist(${SDK_AD_ENTITY_LIB} ${PROJECT_NAME}/${SDK_AD_LIB})
 set_target_folder_if_exist(${SDK_AD_ENTITY_LIB} ${PROJECT_NAME}/${SDK_AD_LIB})
 set_target_folder_if_exist(${SDK_AD_UTIL} ${PROJECT_NAME}/${SDK_AD_LIB})

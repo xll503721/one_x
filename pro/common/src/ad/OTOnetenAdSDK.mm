@@ -51,7 +51,7 @@
     }
     
     if (self.stageCallBack) {
-        self.stageCallBack(OTOnetenAdSDKStageTypeStart, placementId, nil, userInfo);
+        self.stageCallBack(OTOnetenAdSDKStageTypeLoad, placementId, nil, userInfo);
     }
     
     ONETEN_AD::OnetenAdSDK::GetInstance().StartAdLoad(placementId.UTF8String, user_info, _sdk_delegate);
@@ -92,7 +92,6 @@ void AdSDKDelegate::LoadSucceed() {
                 ad_sdk.stageCallBack(OTOnetenAdSDKStageTypeLoaded, @"", nil, nil);
             });
         }
-        
     }
 }
 
@@ -105,7 +104,6 @@ void AdSDKDelegate::ShowSucceed() {
                 ad_sdk.stageCallBack(OTOnetenAdSDKStageTypeShow, @"", nil, nil);
             });
         }
-        
     }
 }
 
@@ -118,7 +116,6 @@ void AdSDKDelegate::CloseSucceed() {
                 ad_sdk.stageCallBack(OTOnetenAdSDKStageTypeDismiss, @"", nil, nil);
             });
         }
-        
     }
 }
 
@@ -131,7 +128,6 @@ void AdSDKDelegate::ClickSucceed() {
                 ad_sdk.stageCallBack(OTOnetenAdSDKStageTypeClick, @"", nil, nil);
             });
         }
-        
     }
 }
 

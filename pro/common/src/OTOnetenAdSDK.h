@@ -14,14 +14,13 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, OTOnetenAdSDKStageType) {
-    OTOnetenAdSDKStageTypeStart,
+    OTOnetenAdSDKStageTypeLoad,
     OTOnetenAdSDKStageTypeLoaded,
     OTOnetenAdSDKStageTypeLoadFailed,
     
     OTOnetenAdSDKStageTypeShow,
-    OTOnetenAdSDKStageTypeDismiss,
-    
     OTOnetenAdSDKStageTypeClick,
+    OTOnetenAdSDKStageTypeDismiss,
 };
 
 typedef void (^StageCallBack) (OTOnetenAdSDKStageType stageType, NSString *placementId, NSError * _Nullable error, NSDictionary<NSString *, id> * _Nullable userInfo);

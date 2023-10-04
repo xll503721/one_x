@@ -69,6 +69,10 @@ static const NSInteger kOTAdTypeDetailViewControllerTableViewAdnSection = 1;
             self.logTextView.text = [text stringByAppendingFormat:@"\n%@ %@: %@ have shown", self.selectedButton.name, self.selectedButton.adType, placementId];
         }
         
+        if (stageType == OTOnetenAdSDKStageTypeClick) {
+            self.logTextView.text = [text stringByAppendingFormat:@"\n%@ %@: %@ have clicked", self.selectedButton.name, self.selectedButton.adType, placementId];
+        }
+        
         if (stageType == OTOnetenAdSDKStageTypeDismiss) {
             [self.adViewController.view removeFromSuperview];
             [self.adViewController removeFromParentViewController];

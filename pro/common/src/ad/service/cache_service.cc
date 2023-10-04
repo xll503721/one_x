@@ -19,11 +19,11 @@ CacheService::~CacheService() {
 CacheService::CacheService() {
 }
 
-void CacheService::Save(std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<PlacementModel> placement_model) {
+void CacheService::Save(const std::string& loader_id, std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<PlacementModel> placement_model) {
     auto cache_model = CacheModel::Read(placement_model->Identifier());
     if (!cache_model) {
         auto placement_model_copy = placement_model->ConvertToCacheObject();
-        cache_model = std::make_shared<CacheModel>(placement_model_copy);
+        cache_model = std::make_shared<CacheModel>(loader_id, placement_model_copy);
     }
     ad_source_model->ConvertToCacheObject();
     cache_model->Save(ad_source_model);

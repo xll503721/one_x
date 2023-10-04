@@ -9,6 +9,7 @@
 #define ONETEN_AD_SDK_NORMAL_LOADER_H
 
 #include "main_loader.h"
+#include "run_loader.h"
 #include <ad/service/ad_srouce_service.h>
 #include <ad/service/cache_service.h>
 
@@ -20,7 +21,7 @@ public:
     using super_class = MainLoader;
     
 public:
-    NormalLoader(std::shared_ptr<LoaderInterface> loader);
+    NormalLoader(std::shared_ptr<LoaderInterface> loader, std::shared_ptr<void> run_loader);
     virtual ~NormalLoader();
     void Flow(std::shared_ptr<AdSourceModel> ad_source, std::shared_ptr<PlacementModel> placement);
     void End();

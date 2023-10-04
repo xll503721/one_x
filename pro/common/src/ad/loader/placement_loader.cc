@@ -16,7 +16,7 @@ PlacementLoader::~PlacementLoader() {
     
 }
 
-PlacementLoader::PlacementLoader(std::shared_ptr<LoaderInterface> loader): MainLoader(loader) {
+PlacementLoader::PlacementLoader(std::shared_ptr<LoaderInterface> loader, std::shared_ptr<void> run_loader): MainLoader(loader, run_loader) {
     otlog_info << "";
     
     placement_service_ = std::make_shared<PlacementService>();

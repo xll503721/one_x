@@ -15,13 +15,12 @@ WaterfallLoader::~WaterfallLoader() {
     otlog_info << "~WaterfallLoader";
 }
 
-WaterfallLoader::WaterfallLoader(std::shared_ptr<LoaderInterface> loader):MainLoader(loader) {
+WaterfallLoader::WaterfallLoader(std::shared_ptr<LoaderInterface> loader, std::shared_ptr<void> run_loader):MainLoader(loader, run_loader) {
     otlog_info << "";
 }
 
 void WaterfallLoader::Classify(std::shared_ptr<PlacementModel> placement) {
     super_class::Classify(placement);
-    otlog_info << "prepare for flow";
     
     StartFlow(0, placement);
 }

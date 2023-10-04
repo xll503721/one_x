@@ -25,14 +25,14 @@ public:
     AdSourceModel(std::shared_ptr<AdSource> ad_source);
     AdSourceModel(std::shared_ptr<AdSourceCache> ad_source_cache);
     
-//    AdSourceModel(const AdSourceModel& ad_source_model);
-    
     virtual ~AdSourceModel();
     
     std::string Identifier() override;
     
-    void Load(std::shared_ptr<AdSourceDelegate> delegate);
+    void Load();
     bool IsReady();
+    
+    void SetDelegate(std::shared_ptr<AdSourceDelegate> delegate);
     
     void ConvertToCacheObject();
     
