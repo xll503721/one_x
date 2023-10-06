@@ -14,22 +14,18 @@
 
 BEGIN_NAMESPACE_ONETEN_AD
 
-thread_local std::shared_ptr<RunLoader> RunLoader::run_loader_ = nullptr;
+RunLoader::~RunLoader() {
+    otlog_info << "~RunLoader";
+}
 
 RunLoader::RunLoader(const std::string& placement_id, AdSDKDelegate& delegate, std::map<std::string, std::string> user_info):
     placement_id_(placement_id),
     thread_pool_(1),
     delegate_(&delegate),
     user_info_(user_info) {
-}
-
-std::shared_ptr<RunLoader> RunLoader::GetLoader() {
-    if (!run_loader_) {
-        otlog_fault << "check run loader";
-//        run_loader_ = std::make_shared<RunLoader>();
-        return run_loader_;
-    }
-    return run_loader_;
+        auto now = std::chrono::system_clock::now();
+        auto timestamp = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()).count();
+        loader_id_ = std::to_string(timestamp);
 }
 
 BASE_THREAD::ThreadPool& RunLoader::GetThreadPool() {
@@ -40,9 +36,9 @@ std::string RunLoader::GetId() {
     return loader_id_;
 }
 
-void RunLoader::Run() {
+void RunLoader::Run(RunCompletion run_completion) {
+    run_completion_ = run_completion;
     thread_pool_.Schedule(BASE_THREAD::Thread::Type::kOther, [=](){
-        run_loader_ = shared_from_this();
         
         otlog_info << "placement id:" << placement_id_;
         std::shared_ptr<MainLoader> start_main_loader = std::make_shared<MainLoader>(nullptr);
@@ -82,6 +78,9 @@ void RunLoader::Run() {
             auto ad_source_models = placement_model_ptr->GetAdSourceModel();
             if (!(ad_source_models.size() > level)) {
                 EndAdLoad(placement_id_);
+                if (run_completion) {
+                    run_completion();
+                }
                 return;
             }
             
@@ -101,7 +100,6 @@ void RunLoader::Run() {
                 std::shared_ptr<AdSourceModel> ad_source_model_ptr = std::static_pointer_cast<AdSourceModel>(ad_source_model);
                 otlog_info << "========cache loader save========";
                 cache_loader->Save(ad_source_model_ptr, placement_model_ptr);
-                EndAdLoad(placement_id_);
                 return;
             }
             
@@ -114,6 +112,10 @@ void RunLoader::Run() {
         
         cache_loader_->NextLoader([=](std::map<std::string, std::shared_ptr<void>> parmas) {
             otlog_info << "========cache loader save end========";
+            EndAdLoad(placement_id_);
+            if (run_completion_) {
+                run_completion_();
+            }
         });
         
         otlog_info << "************load placement id: "<< placement_id_ << "************";

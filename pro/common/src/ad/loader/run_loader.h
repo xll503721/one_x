@@ -26,24 +26,25 @@ public:
 class RunLoader: public ONETEN::Object<RunLoader> {
     
 public:
+    ~RunLoader();
     RunLoader(const std::string& placement_id, AdSDKDelegate& delegate, std::map<std::string, std::string> user_info);
-    
-    static std::shared_ptr<RunLoader> GetLoader();
     
     std::string GetId();
     BASE_THREAD::ThreadPool& GetThreadPool();
-    void Run();
+    
+    using RunCompletion = std::function<void()>;
+    void Run(RunCompletion run_completion);
     
 private:
     void EndAdLoad(const std::string& placement_id);
     
 private:
+    RunCompletion run_completion_;
+    
     std::shared_ptr<LoaderInterface> start_loader_;
     std::shared_ptr<LoaderInterface> waterfall_loader_;
     std::shared_ptr<LoaderInterface> request_loader_;
     std::shared_ptr<LoaderInterface> cache_loader_;
-    
-    thread_local static std::shared_ptr<RunLoader> run_loader_;
     
     BASE_THREAD::ThreadPool thread_pool_;
     

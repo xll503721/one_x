@@ -52,6 +52,8 @@ typedef NS_ENUM(NSUInteger, OTAdSourceCategroyLoadStatusType) {
 
 - (void)adDidClickWithStyleType:(OTAdSourceStyleType)styleType;
 
+- (void)adDidCallbackWithMethodName:(NSString *)methodName;
+
 @property (nonatomic, readonly) id adSourceObject;
 
 @end

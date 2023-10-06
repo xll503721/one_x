@@ -12,6 +12,10 @@
 
 BEGIN_NAMESPACE_ONETEN_AD
 
+CacheLoader::~CacheLoader() {
+    otlog_info << "~CacheLoader";
+}
+
 CacheLoader::CacheLoader(std::shared_ptr<LoaderInterface> loader, std::shared_ptr<void> run_loader): MainLoader(loader, run_loader) {
     otlog_info << "";
     cache_service_ = std::make_shared<CacheService>();

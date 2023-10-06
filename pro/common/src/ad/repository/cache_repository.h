@@ -20,7 +20,7 @@ public:
     CacheRepository(AdSDKDelegate& delegate);
     
     std::shared_ptr<AdSourceModel> GetHighestPrice(const std::string& placement_id);
-    std::shared_ptr<CacheModel> GetAnyOne(const std::string& placement_id);
+    std::shared_ptr<AdSourceModel> GetAnyOne(const std::string& placement_id);
     
 private:
     AdSDKDelegate* delegate_;

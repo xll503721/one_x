@@ -40,6 +40,13 @@
 }
 
 - (BOOL)loadWithPlacementId:(NSString *)placementId userInfo:(NSDictionary<NSString *, NSString *> *)userInfo {
+    if (!placementId) {
+        if (self.stageCallBack) {
+            NSError *error = [[NSError alloc] initWithDomain:@"placement id must be not nil" code:1000 userInfo:nil];
+            self.stageCallBack(OTOnetenAdSDKStageTypeLoadFailed, placementId, error, userInfo);
+        }
+        return NO;
+    }
     std::map<std::string, std::string> user_info;
     for (int i = 0; i < userInfo.allKeys.count; i++) {
         NSString *key = userInfo.allKeys[i];
@@ -55,6 +62,7 @@
     }
     
     ONETEN_AD::OnetenAdSDK::GetInstance().StartAdLoad(placementId.UTF8String, user_info, _sdk_delegate);
+    return YES;
 }
 
 - (OTAdViewController *)showWithPlacementId:(NSString *)placementId error:(NSError **)error {

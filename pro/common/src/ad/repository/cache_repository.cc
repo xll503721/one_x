@@ -23,22 +23,26 @@ std::shared_ptr<AdSourceModel> CacheRepository::GetHighestPrice(const std::strin
                 delegate_->ShowSucceed();
             }
         });
-        ad_source_service_->Close(ad_source_model, [=](int32_t categroy_type, ONETEN::Error* error) {
-            if (delegate_) {
-                delegate_->CloseSucceed();
-            }
-        });
         ad_source_service_->Click(ad_source_model, [=](int32_t categroy_type, ONETEN::Error* error) {
             if (delegate_) {
                 delegate_->ClickSucceed();
             }
         });
+        ad_source_service_->Close(ad_source_model, [=](int32_t categroy_type, ONETEN::Error* error) {
+            if (delegate_) {
+                delegate_->CloseSucceed();
+            }
+            cache_service_->Remove(ad_source_model->Identifier());
+        });
     }
     return ad_source_model;
 }
 
-std::shared_ptr<CacheModel> CacheRepository::GetAnyOne(const std::string& placement_id) {
-    return cache_service_->GetAnyOne(placement_id);
+std::shared_ptr<AdSourceModel> CacheRepository::GetAnyOne(const std::string& placement_id) {
+    if (!(cache_service_->GetAnyOne(placement_id)->GetSortAdSourceModelCache().size() > 0)) {
+        return nullptr;
+    }
+    return cache_service_->GetAnyOne(placement_id)->GetSortAdSourceModelCache()[0];
 }
 
 END_NAMESPACE_ONETEN_AD

@@ -9,7 +9,7 @@
 			<key>Common</key>
 			<dict>
 				<key>GDT</key>
-				<string></string>
+				<string>123456789</string>
 				<key>BAIDU</key>
 				<string></string>
 				<key>GM</key>
@@ -53,12 +53,15 @@
 			<key>S2S</key>
 			<dict/>
 		</dict>
-		<key>RewarededVideo</key>
+		<key>RewardedVideo</key>
 		<dict>
 			<key>C2S</key>
 			<dict/>
 			<key>Common</key>
-			<dict/>
+			<dict>
+				<key>GDT</key>
+				<string>123456789</string>
+			</dict>
 			<key>S2S</key>
 			<dict/>
 		</dict>
@@ -90,20 +93,6 @@
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
 		<false/>
-		<key>UISceneConfigurations</key>
-		<dict>
-			<key>UIWindowSceneSessionRoleApplication</key>
-			<array>
-				<dict>
-					<key>UISceneConfigurationName</key>
-					<string>Default Configuration</string>
-					<key>UISceneDelegateClassName</key>
-					<string>SceneDelegate</string>
-					<key>UISceneStoryboardFile</key>
-					<string>Main</string>
-				</dict>
-			</array>
-		</dict>
 	</dict>
 </dict>
 </plist>

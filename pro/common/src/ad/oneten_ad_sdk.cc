@@ -47,7 +47,9 @@ void OnetenAdSDK::StartAdLoad(const std::string& placement_id, std::map<std::str
     }
     
     auto run_loader = std::make_shared<RunLoader>(placement_id, delegate, user_info);
-    run_loader->Run();
+    run_loader->Run([=]() {
+        
+    });
     
     run_id_and_run_loader_map_[run_loader->GetId()] = run_loader;
 }

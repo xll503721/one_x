@@ -18,6 +18,7 @@ BEGIN_NAMESPACE_ONETEN_AD
 class CacheLoader: public MainLoader {
     
 public:
+    virtual ~CacheLoader();
     CacheLoader(std::shared_ptr<LoaderInterface> loader, std::shared_ptr<void> run_loader);
     void Save(std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<PlacementModel> placement_model);
     void Remove(std::shared_ptr<AdSourceModel> ad_source, std::shared_ptr<PlacementModel> placement);

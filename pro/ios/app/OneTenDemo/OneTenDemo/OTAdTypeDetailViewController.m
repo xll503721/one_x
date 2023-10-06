@@ -77,6 +77,7 @@ static const NSInteger kOTAdTypeDetailViewControllerTableViewAdnSection = 1;
             [self.adViewController.view removeFromSuperview];
             [self.adViewController removeFromParentViewController];
             [self.adViewController dismissViewControllerAnimated:NO completion:nil];
+            self.adViewController = nil;
             
             self.logTextView.text = [text stringByAppendingFormat:@"\n%@ %@: %@ have closed", self.selectedButton.name, self.selectedButton.adType, placementId];
         }

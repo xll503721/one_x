@@ -13,7 +13,7 @@
 BEGIN_NAMESPACE_ONETEN_AD
 
 NormalLoader::~NormalLoader() {
-    
+    otlog_info << "~NormalLoader";
 }
 
 NormalLoader::NormalLoader(std::shared_ptr<LoaderInterface> loader, std::shared_ptr<void> run_loader): MainLoader(loader, run_loader) {

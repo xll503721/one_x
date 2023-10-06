@@ -102,6 +102,13 @@
 			remoteGlobalIDString = A0D14B6672B7420E87062748;
 			remoteInfo = oneten_ad_entity;
 		};
+		4B4FC4E52ACF9D1C0060C369 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FE6C6BADBEF74A538C630D3F;
+			remoteInfo = oneten_ad_repository;
+		};
 		4BBE4C652A15F24B0063B715 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4B0E03FC29A254DA00392BEE /* SDKCommon.xcodeproj */;
@@ -316,6 +323,7 @@
 				4B2CA11C29F3D409009C66B3 /* liboneten_ad_entity.a */,
 				4B11314E29C3017900214261 /* liboneten_ad_loader.a */,
 				4B11315029C3017900214261 /* liboneten_ad_model.a */,
+				4B4FC4E62ACF9D1C0060C369 /* liboneten_ad_repository.a */,
 				4BD933E729D03C7E00E4AA07 /* liboneten_ad_service.a */,
 				4B04183F2A637B0300342798 /* liboneten_util.a */,
 			);
@@ -499,6 +507,13 @@
 			fileType = archive.ar;
 			path = liboneten_ad_entity.a;
 			remoteRef = 4B2CA11B29F3D409009C66B3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4B4FC4E62ACF9D1C0060C369 /* liboneten_ad_repository.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = liboneten_ad_repository.a;
+			remoteRef = 4B4FC4E52ACF9D1C0060C369 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		4BBE4C662A15F24B0063B715 /* libbase_json.a */ = {

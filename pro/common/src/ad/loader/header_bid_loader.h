@@ -15,9 +15,11 @@ BEGIN_NAMESPACE_ONETEN_AD
 
 class HeaderBidLoader: public MainLoader {
     
+public:
+    virtual ~HeaderBidLoader();
+    
 private:
     using super_class = MainLoader;
-    virtual ~HeaderBidLoader();
     
     std::shared_ptr<AdSourceService> ad_source_service_;
     

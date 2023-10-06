@@ -39,7 +39,8 @@ void AdSourceModel::Load() {
     if (!delegate_.lock()) {
         otlog_fault << "Set the delegate before load";
     }
-    RunLoader::GetLoader()->GetThreadPool().Schedule(BASE_THREAD::Thread::Type::kMain, [=](){
+    
+    BASE_THREAD::ThreadPool::DefaultPool().Schedule(BASE_THREAD::Thread::Type::kMain, [=](){
         SET_PLATFORM_GENERATE_NAME(ad_source_->GetClassName());
         
         auto style_type = PLATFORM_VAR_GENERATE(static_cast<unsigned long>(ad_source_->GetStyle()));
