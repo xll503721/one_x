@@ -17,7 +17,7 @@ AdSourceService::~AdSourceService() {
 void AdSourceService::Load(std::shared_ptr<AdSourceModel> ad_source_model, ActionCompletionInvoke load_complete) {
     load_complete_ = load_complete;
     ad_source_model->SetDelegate(shared_from_this());
-    ad_source_model->Load();
+    ad_source_model->AdnLoad();
 }
 
 void AdSourceService::Show(std::shared_ptr<AdSourceModel> ad_source_model,ActionCompletionInvoke show_complete) {

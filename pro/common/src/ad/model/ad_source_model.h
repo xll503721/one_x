@@ -29,13 +29,15 @@ public:
     
     std::string Identifier() override;
     
-    void Load();
+    void AdnLoad();
+    void Register();
     bool IsReady();
     
     void SetDelegate(std::shared_ptr<AdSourceDelegate> delegate);
     
     void ConvertToCacheObject();
     
+    void RegisterCompletion(std::map<std::string, std::string> user_info, ONETEN::Error* error = nullptr) override;
     void LoadCompletion(int32_t categroy_type, ONETEN::Error* error = nullptr) override;
     void ShowCompletion(int32_t categroy_type, ONETEN::Error* error = nullptr) override;
     void CloseCompletion(int32_t categroy_type, ONETEN::Error* error = nullptr) override;
@@ -53,6 +55,9 @@ public:
         }
         return AdSource::Style::kBanner;
     }
+    
+private:
+    void Load();
     
 private:
     std::shared_ptr<AdSource> ad_source_;

@@ -30,12 +30,24 @@
     return self;
 }
 
+- (void)registerWithUserInfo:(NSDictionary<id, id> *)userInfo error:(NSError *)error {
+    ONETEN_AD::AdSourceModel* ad_source_cache_model = static_cast<ONETEN_AD::AdSourceModel *>(self.cPlusPlusPrt);
+    if (ad_source_cache_model) {
+        std::map<std::string, std::string> user_info;
+        ONETEN::Error *c_error = nullptr;
+        if (error) {
+            ONETEN::Error cc_error(static_cast<int32_t>(error.code), error.localizedDescription.UTF8String, user_info);
+            c_error = &cc_error;
+        }
+        ad_source_cache_model->RegisterCompletion(user_info, c_error);
+    }
+}
+
 - (void)adWillLoadWithStyleType:(OTAdSourceStyleType)styleType adSourceObject:(id)adSourceObject {
     _adSourceObject = adSourceObject;
 }
 
 - (void)adDidLoadWithStyleType:(OTAdSourceStyleType)styleType error:(NSError *)error {
-    NSLog(@"adDidLoadWithstyleType");
     ONETEN_AD::AdSourceModel* ad_source_model = static_cast<ONETEN_AD::AdSourceModel *>(self.cPlusPlusPrt);
     if (ad_source_model) {
         std::map<std::string, std::string> user_info;

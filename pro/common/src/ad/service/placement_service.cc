@@ -24,7 +24,7 @@ void PlacementService::GetPlacementModel(const std::string& placement_id, Placem
             return;
         }
         if (callBack) {
-            std::string placement_json_string = "{\"id\": \"123456789\", \"ad_sources\": [{\"clazz_name\": \"OTGDTSource\", \"style\": 0, \"request_type\": 2, \"id\": \"123456789\"}]}";
+            std::string placement_json_string = "{\"id\": \"123456789\", \"ad_sources\": [{\"clazz_name\": \"OTCSJSource\", \"style\": 3, \"request_type\": 2, \"id\": \"123456789\"}]}";
             std::shared_ptr<PlacementModel> placement_model = std::make_shared<PlacementModel>(placement_json_string);
             callBack(placement_model);
         }

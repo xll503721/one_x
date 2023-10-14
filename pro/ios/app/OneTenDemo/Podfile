@@ -9,5 +9,6 @@ target 'OneTenDemo' do
 pod 'KSAdSDK', '3.3.29'
 pod 'SigmobAd-iOS', '4.7.0'
 pod 'GDTMobSDK'
+pod 'Ads-CN'
 
 end

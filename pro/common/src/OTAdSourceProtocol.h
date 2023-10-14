@@ -37,6 +37,9 @@ typedef NS_ENUM(NSUInteger, OTAdSourceCategroyLoadStatusType) {
 @protocol OTAdSourceDelegate <NSObject>
 
 @required
+
+- (void)registerWithUserInfo:(NSDictionary<id, id> *)userInfo error:(NSError *)error;
+
 - (void)adWillLoadWithStyleType:(OTAdSourceStyleType)styleType adSourceObject:(id)adSourceObject;
 - (void)adDidLoadWithStyleType:(OTAdSourceStyleType)styleType error:(NSError *)error;
 - (void)nativeStyleDidLoadWithAds:(NSArray<id> *)ads;
@@ -65,6 +68,8 @@ typedef NS_ENUM(NSUInteger, OTAdSourceCategroyLoadStatusType) {
 @required
 
 @property (nonatomic, strong) id<OTAdSourceDelegate> delegate;
+
+- (void)registerWithUserInfo:(NSDictionary<id, id> *)userInfo;
 
 - (BOOL)isReadyWithStyle:(OTAdSourceStyleType)styleType;
 - (void)showWithStyleType:(OTAdSourceStyleType)styleType rootViewController:(UIViewController *)viewController;
@@ -96,7 +101,7 @@ typedef NS_ENUM(NSUInteger, OTAdSourceCategroyLoadStatusType) {
 /// start load navite ad
 /// @param type c2s s2s
 /// @param userInfo info
-- (void)loadNaviteWithType:(OTAdSourceType)type userInfo:(NSDictionary<id, id> *)userInfo;
+- (void)loadNatvieWithType:(OTAdSourceType)type userInfo:(NSDictionary<id, id> *)userInfo;
 
 - (void)sendWinNotificationWithType:(OTAdSourceStyleType)styleType userInfo:(NSDictionary *)userInfo;
 - (void)sendLossNotificationWithType:(OTAdSourceStyleType)styleType userInfo:(NSDictionary *)userInfo;

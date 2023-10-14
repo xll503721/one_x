@@ -41,6 +41,10 @@ static NSString *kGDTMobSDKAppId = @"1105344611";
     return self;
 }
 
+- (void)registerWithUserInfo:(NSDictionary<id, id> *)userInfo {
+    
+}
+
 - (BOOL)isReadyWithStyle:(OTAdSourceStyleType)styleType {
     switch (styleType) {
         case OTAdSourceStyleTypeNative: {

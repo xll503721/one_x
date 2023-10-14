@@ -37,6 +37,10 @@
     return self;
 }
 
+- (void)registerWithUserInfo:(NSDictionary<id, id> *)userInfo {
+    
+}
+
 - (BOOL)isReadyWithStyle:(OTAdSourceStyleType)styleType {
     switch (styleType) {
         case OTAdSourceStyleTypeInterstitial: {

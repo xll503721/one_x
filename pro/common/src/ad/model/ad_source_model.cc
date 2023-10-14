@@ -35,28 +35,42 @@ std::string AdSourceModel::Identifier() {
     return identifier;
 }
 
+void AdSourceModel::AdnLoad() {
+    BASE_THREAD::ThreadPool::DefaultPool().Schedule(BASE_THREAD::Thread::Type::kMain, [=](){
+        SET_PLATFORM_GENERATE_NAME(ad_source_->GetClassName());
+        Register();
+        Load();
+    });
+}
+
 void AdSourceModel::Load() {
     if (!delegate_.lock()) {
         otlog_fault << "Set the delegate before load";
     }
     
-    BASE_THREAD::ThreadPool::DefaultPool().Schedule(BASE_THREAD::Thread::Type::kMain, [=](){
-        SET_PLATFORM_GENERATE_NAME(ad_source_->GetClassName());
-        
-        auto style_type = PLATFORM_VAR_GENERATE(static_cast<unsigned long>(ad_source_->GetStyle()));
-        auto ad_source_type = PLATFORM_VAR_GENERATE(2);
-        
-        std::map<std::string, BASE_PLATFORM::Platform::Var> map;
-        map["1"] = PLATFORM_VAR_GENERATE(1);
-        
-        std::vector<BASE_PLATFORM::Platform::Var> vector;
-        BASE_PLATFORM::Platform::Var user_info = &map;
-        
-        otlog_info << "ad source load class name:" << ad_source_->GetClassName().c_str() << ", type:"
-        << static_cast<int32_t>(ad_source_->GetStyle()) << ", request type:" << 2;
-        
-        PLATFORM_INVOKE(&style_type, &ad_source_type, &user_info)
-    });
+    auto style_type = PLATFORM_VAR_GENERATE(static_cast<unsigned long>(ad_source_->GetStyle()));
+    auto ad_source_type = PLATFORM_VAR_GENERATE(2);
+    
+    std::map<std::string, BASE_PLATFORM::Platform::Var> map;
+    map["1"] = PLATFORM_VAR_GENERATE(1);
+    
+    std::vector<BASE_PLATFORM::Platform::Var> vector;
+    BASE_PLATFORM::Platform::Var user_info = &map;
+    
+    otlog_info << "ad source load class name:" << ad_source_->GetClassName().c_str() << ", type:"
+    << static_cast<int32_t>(ad_source_->GetStyle()) << ", request type:" << 2;
+    
+    PLATFORM_INVOKE(&style_type, &ad_source_type, &user_info)
+}
+
+void AdSourceModel::Register() {
+    std::map<std::string, BASE_PLATFORM::Platform::Var> map;
+    map["1"] = PLATFORM_VAR_GENERATE(1);
+    
+    std::vector<BASE_PLATFORM::Platform::Var> vector;
+    BASE_PLATFORM::Platform::Var user_info = &map;
+    
+    PLATFORM_INVOKE(&user_info)
 }
 
 void AdSourceModel::ConvertToCacheObject() {
@@ -76,6 +90,11 @@ void AdSourceModel::SetDelegate(std::shared_ptr<AdSourceDelegate> delegate) {
 }
 
 #pragma mark - AdSourceDelegate
+
+void AdSourceModel::RegisterCompletion(std::map<std::string, std::string> user_info, ONETEN::Error* error) {
+    Load();
+}
+
 void AdSourceModel::LoadCompletion(int32_t categroy_type, ONETEN::Error* error) {
     otlog_info << "success class name:" << ad_source_->GetClassName().c_str() << ", type:"
     << static_cast<int32_t>(ad_source_->GetStyle()) << ", request type:" << 2;
