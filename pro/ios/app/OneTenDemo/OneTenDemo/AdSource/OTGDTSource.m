@@ -31,18 +31,23 @@ static NSString *kGDTMobSDKAppId = @"1105344611";
 {
     self = [super init];
     if (self) {
-        static dispatch_once_t onceToken ;
-        dispatch_once(&onceToken, ^{
-            BOOL result = [GDTSDKConfig registerAppId:kGDTMobSDKAppId];
-        });
-        
         _unifiedNativeAdDataObjects = @[].mutableCopy;
     }
     return self;
 }
 
 - (void)registerWithUserInfo:(NSDictionary<id, id> *)userInfo {
-    
+    static dispatch_once_t onceToken ;
+    dispatch_once(&onceToken, ^{
+        BOOL result = [GDTSDKConfig registerAppId:kGDTMobSDKAppId];
+        NSError *error = nil;
+        if (!result) {
+            error = [NSError errorWithDomain:@"" code:1 userInfo:nil];
+        }
+        if (self.delegate && [self.delegate respondsToSelector:@selector(registerWithUserInfo:error:)]) {
+            [self.delegate registerWithUserInfo:userInfo error:error];
+        }
+    });
 }
 
 - (BOOL)isReadyWithStyle:(OTAdSourceStyleType)styleType {
@@ -194,8 +199,8 @@ static NSString *kGDTMobSDKAppId = @"1105344611";
  *  开屏广告点击回调
  */
 - (void)splashAdClicked:(GDTSplashAd *)splashAd {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidClickWithStyleType:)]) {
-        [self.delegate adDidClickWithStyleType:OTAdSourceStyleTypeSplash];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidClickWithStyleType:error:)]) {
+        [self.delegate adDidClickWithStyleType:OTAdSourceStyleTypeSplash error:nil];
     }
 }
 
@@ -203,8 +208,8 @@ static NSString *kGDTMobSDKAppId = @"1105344611";
  *  开屏广告将要关闭回调
  */
 - (void)splashAdWillClosed:(GDTSplashAd *)splashAd {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(adWillCloseWithStyleType:)]) {
-        [self.delegate adWillCloseWithStyleType:OTAdSourceStyleTypeSplash];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adWillCloseWithStyleType:error:)]) {
+        [self.delegate adWillCloseWithStyleType:OTAdSourceStyleTypeSplash error:nil];
     }
 }
 
@@ -212,9 +217,6 @@ static NSString *kGDTMobSDKAppId = @"1105344611";
  *  开屏广告关闭回调
  */
 - (void)splashAdClosed:(GDTSplashAd *)splashAd {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidCloseWithStyleType:)]) {
-        [self.delegate adDidCloseWithStyleType:OTAdSourceStyleTypeSplash];
-    }
     if (self.delegate && [self.delegate respondsToSelector:@selector(adDidDismissWithStyleType:error:)]) {
         [self.delegate adDidDismissWithStyleType:OTAdSourceStyleTypeSplash error:nil];
     }
@@ -331,9 +333,6 @@ static NSString *kGDTMobSDKAppId = @"1105344611";
  @param rewardedVideoAd GDTRewardVideoAd 实例
  */
 - (void)gdt_rewardVideoAdDidClose:(GDTRewardVideoAd *)rewardedVideoAd {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidCloseWithStyleType:)]) {
-        [self.delegate adDidCloseWithStyleType:OTAdSourceStyleTypeRewardedVideo];
-    }
     if (self.delegate && [self.delegate respondsToSelector:@selector(adDidDismissWithStyleType:error:)]) {
         [self.delegate adDidDismissWithStyleType:OTAdSourceStyleTypeRewardedVideo error:nil];
     }
@@ -345,8 +344,8 @@ static NSString *kGDTMobSDKAppId = @"1105344611";
  @param rewardedVideoAd GDTRewardVideoAd 实例
  */
 - (void)gdt_rewardVideoAdDidClicked:(GDTRewardVideoAd *)rewardedVideoAd {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidClickWithStyleType:)]) {
-        [self.delegate adDidClickWithStyleType:OTAdSourceStyleTypeRewardedVideo];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidClickWithStyleType:error:)]) {
+        [self.delegate adDidClickWithStyleType:OTAdSourceStyleTypeRewardedVideo error:nil];
     }
 }
 

@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface OTCSJSource : NSObject
+@interface OTCSJSource : NSObject<OTAdSourceProtocol>
 
 @property (nonatomic, strong) id<OTAdSourceDelegate> delegate;
 

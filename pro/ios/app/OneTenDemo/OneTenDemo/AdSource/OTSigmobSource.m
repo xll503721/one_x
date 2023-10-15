@@ -27,18 +27,21 @@
 {
     self = [super init];
     if (self) {
-        static dispatch_once_t onceToken ;
-        dispatch_once(&onceToken, ^{
-            WindAdOptions *option = [[WindAdOptions alloc] initWithAppId:AppId appKey:AppKey];
-            [WindAds startWithOptions:option];
-            [WindAds setDebugEnable:NO];
-        });
     }
     return self;
 }
 
 - (void)registerWithUserInfo:(NSDictionary<id, id> *)userInfo {
-    
+    static dispatch_once_t onceToken ;
+    dispatch_once(&onceToken, ^{
+        WindAdOptions *option = [[WindAdOptions alloc] initWithAppId:AppId appKey:AppKey];
+        [WindAds startWithOptions:option];
+        [WindAds setDebugEnable:NO];
+        
+        if (self.delegate && [self.delegate respondsToSelector:@selector(registerWithUserInfo:error:)]) {
+            [self.delegate registerWithUserInfo:userInfo error:nil];
+        }
+    });
 }
 
 - (BOOL)isReadyWithStyle:(OTAdSourceStyleType)styleType {
@@ -161,8 +164,8 @@
 }
 
 - (void)intersititialAdDidClick:(WindIntersititialAd *)intersititialAd {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidClickWithStyleType:)]) {
-        [self.delegate adDidClickWithStyleType:OTAdSourceStyleTypeInterstitial];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidClickWithStyleType:error:)]) {
+        [self.delegate adDidClickWithStyleType:OTAdSourceStyleTypeInterstitial error:nil];
     }
 }
 
@@ -224,14 +227,14 @@
 }
 
 - (void)onSplashAdClicked:(WindSplashAdView *)splashAdView {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidClickWithStyleType:)]) {
-        [self.delegate adDidClickWithStyleType:OTAdSourceStyleTypeSplash];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidClickWithStyleType:error:)]) {
+        [self.delegate adDidClickWithStyleType:OTAdSourceStyleTypeSplash error:nil];
     }
 }
 
 - (void)onSplashAdSkiped:(WindSplashAdView *)splashAdView {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidCloseWithStyleType:)]) {
-        [self.delegate adDidCloseWithStyleType:OTAdSourceStyleTypeSplash];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidCloseWithStyleType:error:)]) {
+        [self.delegate adDidCloseWithStyleType:OTAdSourceStyleTypeSplash error:nil];
     }
 }
 

@@ -7,7 +7,7 @@
 
 #import "OTCSJSource.h"
 
-@interface OTCSJSource () <BUSplashAdDelegate, BUNativeExpressRewardedVideoAdDelegate, OTAdSourceProtocol>
+@interface OTCSJSource () <BUSplashAdDelegate, BUNativeExpressRewardedVideoAdDelegate>
 
 @end
 
@@ -17,12 +17,6 @@
 {
     self = [super init];
     if (self) {
-        BUAdSDKConfiguration *configuration = [BUAdSDKConfiguration configuration];
-        configuration.appID = @"5000546";
-        [BUAdSDKManager startWithAsyncCompletionHandler:^(BOOL success, NSError *error) {
-            if (success) {
-            }
-        }];
     }
     return self;
 }
@@ -31,10 +25,8 @@
     BUAdSDKConfiguration *configuration = [BUAdSDKConfiguration configuration];
     configuration.appID = @"5000546";
     [BUAdSDKManager startWithAsyncCompletionHandler:^(BOOL success, NSError *error) {
-        if (success) {
-            if (self.delegate && [self.delegate respondsToSelector:@selector(registerWithUserInfo:error:)]) {
-                [self.delegate registerWithUserInfo:userInfo error:error];
-            }
+        if (self.delegate && [self.delegate respondsToSelector:@selector(registerWithUserInfo:error:)]) {
+            [self.delegate registerWithUserInfo:userInfo error:error];
         }
     }];
 }
@@ -197,15 +189,15 @@
 
 /// This method is called when splash view is clicked.
 - (void)splashAdDidClick:(BUSplashAd *)splashAd {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidClickWithStyleType:)]) {
-        [self.delegate adDidClickWithStyleType:OTAdSourceStyleTypeSplash];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidClickWithStyleType:error:)]) {
+        [self.delegate adDidClickWithStyleType:OTAdSourceStyleTypeSplash error:nil];
     }
 }
 
 /// This method is called when splash view is closed.
 - (void)splashAdDidClose:(BUSplashAd *)splashAd closeType:(BUSplashAdCloseType)closeType {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidCloseWithStyleType:)]) {
-        [self.delegate adDidCloseWithStyleType:OTAdSourceStyleTypeSplash];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidCloseWithStyleType:error:)]) {
+        [self.delegate adDidCloseWithStyleType:OTAdSourceStyleTypeSplash error:nil];
     }
 }
 
@@ -303,9 +295,6 @@
  This method is called when video ad is about to close.
  */
 - (void)nativeExpressRewardedVideoAdWillClose:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(adWillCloseWithStyleType:)]) {
-        [self.delegate adWillCloseWithStyleType:OTAdSourceStyleTypeRewardedVideo];
-    }
     if (self.delegate && [self.delegate respondsToSelector:@selector(adWillDismissWithStyleType:error:)]) {
         [self.delegate adWillDismissWithStyleType:OTAdSourceStyleTypeRewardedVideo error:nil];
     }
@@ -315,9 +304,6 @@
  This method is called when video ad is closed.
  */
 - (void)nativeExpressRewardedVideoAdDidClose:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidCloseWithStyleType:)]) {
-        [self.delegate adDidCloseWithStyleType:OTAdSourceStyleTypeRewardedVideo];
-    }
     if (self.delegate && [self.delegate respondsToSelector:@selector(adDidDismissWithStyleType:error:)]) {
         [self.delegate adDidDismissWithStyleType:OTAdSourceStyleTypeRewardedVideo error:nil];
     }
@@ -327,8 +313,8 @@
  This method is called when video ad is clicked.
  */
 - (void)nativeExpressRewardedVideoAdDidClick:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidClickWithStyleType:)]) {
-        [self.delegate adDidClickWithStyleType:OTAdSourceStyleTypeRewardedVideo];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidClickWithStyleType:error:)]) {
+        [self.delegate adDidClickWithStyleType:OTAdSourceStyleTypeRewardedVideo error:nil];
     }
 }
 

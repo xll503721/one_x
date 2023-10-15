@@ -42,7 +42,7 @@ typedef NS_ENUM(NSUInteger, OTAdSourceCategroyLoadStatusType) {
 
 - (void)adWillLoadWithStyleType:(OTAdSourceStyleType)styleType adSourceObject:(id)adSourceObject;
 - (void)adDidLoadWithStyleType:(OTAdSourceStyleType)styleType error:(NSError *)error;
-- (void)nativeStyleDidLoadWithAds:(NSArray<id> *)ads;
+- (void)nativeStyleDidLoadWithAds:(NSArray<id> *)ads error:(NSError *)error;;
 
 - (void)adWillShowWithStyleType:(OTAdSourceStyleType)styleType error:(NSError *)error;
 - (void)adDidShowWithStyleType:(OTAdSourceStyleType)styleType error:(NSError *)error;
@@ -50,12 +50,12 @@ typedef NS_ENUM(NSUInteger, OTAdSourceCategroyLoadStatusType) {
 - (void)adWillDismissWithStyleType:(OTAdSourceStyleType)styleType error:(NSError *)error;
 - (void)adDidDismissWithStyleType:(OTAdSourceStyleType)styleType error:(NSError *)error;
 
-- (void)adWillCloseWithStyleType:(OTAdSourceStyleType)styleType;
-- (void)adDidCloseWithStyleType:(OTAdSourceStyleType)styleType;
+- (void)adWillCloseWithStyleType:(OTAdSourceStyleType)styleType error:(NSError *)error;;
+- (void)adDidCloseWithStyleType:(OTAdSourceStyleType)styleType error:(NSError *)error;;
 
-- (void)adDidClickWithStyleType:(OTAdSourceStyleType)styleType;
+- (void)adDidClickWithStyleType:(OTAdSourceStyleType)styleType error:(NSError *)error;;
 
-- (void)adDidCallbackWithMethodName:(NSString *)methodName;
+- (void)adDidCallbackWithMethodName:(NSString *)methodName error:(NSError *)error;;
 
 @property (nonatomic, readonly) id adSourceObject;
 
@@ -71,10 +71,9 @@ typedef NS_ENUM(NSUInteger, OTAdSourceCategroyLoadStatusType) {
 
 - (void)registerWithUserInfo:(NSDictionary<id, id> *)userInfo;
 
+- (void)loadWithStyleType:(OTAdSourceStyleType)styleType adSourceType:(OTAdSourceType)type userInfo:(NSDictionary<id, id> *)userInfo;
 - (BOOL)isReadyWithStyle:(OTAdSourceStyleType)styleType;
 - (void)showWithStyleType:(OTAdSourceStyleType)styleType rootViewController:(UIViewController *)viewController;
-
-- (void)loadWithStyleType:(OTAdSourceStyleType)styleType adSourceType:(OTAdSourceType)type userInfo:(NSDictionary<id, id> *)userInfo;
 
 @optional
 
