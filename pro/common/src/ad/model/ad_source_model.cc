@@ -39,7 +39,6 @@ void AdSourceModel::AdnLoad() {
     BASE_THREAD::ThreadPool::DefaultPool().Schedule(BASE_THREAD::Thread::Type::kMain, [=](){
         SET_PLATFORM_GENERATE_NAME(ad_source_->GetClassName());
         Register();
-        Load();
     });
 }
 
@@ -92,6 +91,12 @@ void AdSourceModel::SetDelegate(std::shared_ptr<AdSourceDelegate> delegate) {
 #pragma mark - AdSourceDelegate
 
 void AdSourceModel::RegisterCompletion(std::map<std::string, std::string> user_info, ONETEN::Error* error) {
+    if (error) {
+        if (auto s_delegate = delegate_.lock()) {
+            s_delegate->LoadCompletion(static_cast<int32_t>(GetStyle()), error);
+        }
+        return;
+    }
     Load();
 }
 

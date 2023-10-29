@@ -38,9 +38,14 @@
         @{@"title": @"Interstitial"},
         @{@"title": @"RewardedVideo"},
     ];
-    self.tableView.rowHeight = self.view.bounds.size.height / self.adTypeItems.count;
     
     [[OTOnetenSDK defalutSDK] initAppId:@"111" type:OTOneTenSDKTypeAd];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    self.tableView.rowHeight = (self.view.bounds.size.height - self.view.safeAreaInsets.top - self.view.safeAreaInsets.bottom) / self.adTypeItems.count;
 }
 
 - (void)showAdViewController {

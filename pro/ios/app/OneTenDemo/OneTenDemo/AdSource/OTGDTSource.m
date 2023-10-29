@@ -37,17 +37,21 @@ static NSString *kGDTMobSDKAppId = @"1105344611";
 }
 
 - (void)registerWithUserInfo:(NSDictionary<id, id> *)userInfo {
+    __block BOOL result = NO;
+    
     static dispatch_once_t onceToken ;
     dispatch_once(&onceToken, ^{
-        BOOL result = [GDTSDKConfig registerAppId:kGDTMobSDKAppId];
-        NSError *error = nil;
-        if (!result) {
-            error = [NSError errorWithDomain:@"" code:1 userInfo:nil];
-        }
-        if (self.delegate && [self.delegate respondsToSelector:@selector(registerWithUserInfo:error:)]) {
-            [self.delegate registerWithUserInfo:userInfo error:error];
-        }
+        result = [GDTSDKConfig registerAppId:kGDTMobSDKAppId];
     });
+    
+    NSError *error = nil;
+    if (!result) {
+        error = [NSError errorWithDomain:@"" code:1 userInfo:nil];
+    }
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(registerWithUserInfo:error:)]) {
+        [self.delegate registerWithUserInfo:userInfo error:error];
+    }
 }
 
 - (BOOL)isReadyWithStyle:(OTAdSourceStyleType)styleType {

@@ -20,6 +20,7 @@ typedef NS_ENUM(NSUInteger, OTOnetenAdSDKStageType) {
     
     OTOnetenAdSDKStageTypeShow,
     OTOnetenAdSDKStageTypeClick,
+    OTOnetenAdSDKStageTypeClose,
     OTOnetenAdSDKStageTypeDismiss,
 };
 

@@ -15,7 +15,7 @@
 				<key>GM</key>
 				<string></string>
 				<key>KS</key>
-				<string></string>
+				<string>123456789</string>
 				<key>CSJ</key>
 				<string>123456789</string>
 				<key>SIGMOB</key>
@@ -59,6 +59,8 @@
 			<dict/>
 			<key>Common</key>
 			<dict>
+				<key>KS</key>
+				<string>123456789</string>
 				<key>CSJ</key>
 				<string>123456789</string>
 				<key>GDT</key>
@@ -81,7 +83,10 @@
 			<key>C2S</key>
 			<dict/>
 			<key>Common</key>
-			<dict/>
+			<dict>
+				<key>KS</key>
+				<string>123456789</string>
+			</dict>
 			<key>S2S</key>
 			<dict/>
 		</dict>

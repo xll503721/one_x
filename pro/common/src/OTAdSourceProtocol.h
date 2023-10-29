@@ -26,6 +26,23 @@ typedef NS_ENUM(NSUInteger, OTAdSourceCategroyLoadStatusType) {
     OTAdSourceCategroyLoadStatusTypeFailed,
 };
 
+typedef NS_ENUM(NSUInteger, OTAdSourceCallbackType) {
+    OTAdSourceCallbackTypeWillLoad,
+    OTAdSourceCallbackTypeDidLoad,
+    
+    OTAdSourceCallbackTypeWillShow,
+    OTAdSourceCallbackTypeDidShow,
+    
+    OTAdSourceCallbackTypeWillClick,
+    OTAdSourceCallbackTypeDidClick,
+    
+    OTAdSourceCallbackTypeWillClose,
+    OTAdSourceCallbackTypeDidClose,
+    
+    OTAdSourceCallbackTypeRegister,
+    OTAdSourceCallbackTypeCallback,
+};
+
 @protocol OTPlatformProtocol <NSObject>
 
 @property void* rawPrt;
@@ -50,12 +67,12 @@ typedef NS_ENUM(NSUInteger, OTAdSourceCategroyLoadStatusType) {
 - (void)adWillDismissWithStyleType:(OTAdSourceStyleType)styleType error:(NSError *)error;
 - (void)adDidDismissWithStyleType:(OTAdSourceStyleType)styleType error:(NSError *)error;
 
-- (void)adWillCloseWithStyleType:(OTAdSourceStyleType)styleType error:(NSError *)error;;
-- (void)adDidCloseWithStyleType:(OTAdSourceStyleType)styleType error:(NSError *)error;;
+- (void)adWillCloseWithStyleType:(OTAdSourceStyleType)styleType error:(NSError *)error;
+- (void)adDidCloseWithStyleType:(OTAdSourceStyleType)styleType error:(NSError *)error;
 
-- (void)adDidClickWithStyleType:(OTAdSourceStyleType)styleType error:(NSError *)error;;
+- (void)adDidClickWithStyleType:(OTAdSourceStyleType)styleType error:(NSError *)error;
 
-- (void)adDidCallbackWithMethodName:(NSString *)methodName error:(NSError *)error;;
+- (void)adDidCallbackWithMethodName:(NSString *)methodName error:(NSError *)error;
 
 @property (nonatomic, readonly) id adSourceObject;
 
@@ -100,7 +117,7 @@ typedef NS_ENUM(NSUInteger, OTAdSourceCategroyLoadStatusType) {
 /// start load navite ad
 /// @param type c2s s2s
 /// @param userInfo info
-- (void)loadNatvieWithType:(OTAdSourceType)type userInfo:(NSDictionary<id, id> *)userInfo;
+- (void)loadNativeWithType:(OTAdSourceType)type userInfo:(NSDictionary<id, id> *)userInfo;
 
 - (void)sendWinNotificationWithType:(OTAdSourceStyleType)styleType userInfo:(NSDictionary *)userInfo;
 - (void)sendLossNotificationWithType:(OTAdSourceStyleType)styleType userInfo:(NSDictionary *)userInfo;

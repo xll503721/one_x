@@ -6,9 +6,10 @@ target 'OneTenDemo' do
   use_frameworks!
 
   # Pods for OneTenDemo
-pod 'KSAdSDK', '3.3.29'
 pod 'SigmobAd-iOS', '4.7.0'
 pod 'GDTMobSDK'
 pod 'Ads-CN'
+#pod 'BaiduMobAdSDK'
+pod 'KSAdSDK'
 
 end

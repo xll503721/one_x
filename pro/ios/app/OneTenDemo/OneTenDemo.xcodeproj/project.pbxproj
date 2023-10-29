@@ -25,6 +25,7 @@
 		4BA0DBC12A6E0FE400F970B8 /* OTDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA0DBC02A6E0FE400F970B8 /* OTDebugViewController.m */; };
 		4BA0DBC42A6E106500F970B8 /* OTDebugCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA0DBC32A6E106500F970B8 /* OTDebugCell.m */; };
 		4BB47CCD29AB017600BA2B27 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BB47CCC29AB016B00BA2B27 /* libc++.tbd */; };
+		4BC9648A2ADB98FD0019DCDD /* OTKSSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC964892ADB98FD0019DCDD /* OTKSSource.m */; };
 		4BD72FCF2A1E4C8500FA2CEE /* Base.framework/Base in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B2CA11829F3D409009C66B3 /* Base.framework/Base */; };
 		4BD72FD02A1E4C8500FA2CEE /* Base.framework/Base in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B2CA11829F3D409009C66B3 /* Base.framework/Base */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4BD72FD22A1E4C9200FA2CEE /* OneTenSDK.framework/OneTenSDK in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B0E040429A254DA00392BEE /* OneTenSDK.framework/OneTenSDK */; };
@@ -239,6 +240,8 @@
 		4BA0DBC32A6E106500F970B8 /* OTDebugCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTDebugCell.m; sourceTree = "<group>"; };
 		4BB47CC829AAFC9D00BA2B27 /* OneTenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OneTenSDK.framework; path = ../../../common/output/iOS/Debug/OneTenSDK.framework; sourceTree = "<group>"; };
 		4BB47CCC29AB016B00BA2B27 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		4BC964882ADB98FD0019DCDD /* OTKSSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTKSSource.h; sourceTree = "<group>"; };
+		4BC964892ADB98FD0019DCDD /* OTKSSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTKSSource.m; sourceTree = "<group>"; };
 		4BD730522A35E20800FA2CEE /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		B62798A6E1BECA697224CD39 /* Pods-OneTenDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneTenDemo.release.xcconfig"; path = "Target Support Files/Pods-OneTenDemo/Pods-OneTenDemo.release.xcconfig"; sourceTree = "<group>"; };
 		FFA66410979C7A440551F35D /* Pods_OneTenDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OneTenDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -353,6 +356,8 @@
 				4B0418222A637B0300342798 /* OTGDTSource.m */,
 				4B4FC4E92ACFABE40060C369 /* OTCSJSource.h */,
 				4B4FC4EA2ACFABE40060C369 /* OTCSJSource.m */,
+				4BC964882ADB98FD0019DCDD /* OTKSSource.h */,
+				4BC964892ADB98FD0019DCDD /* OTKSSource.m */,
 			);
 			path = AdSource;
 			sourceTree = "<group>";
@@ -674,6 +679,7 @@
 				4BA0DB8D2A6B86D700F970B8 /* OTAdTypeDetailCellCell.m in Sources */,
 				4B0E03EB29A248E600392BEE /* ViewController.m in Sources */,
 				4B1552D029D1533B0068842B /* OTSigmobSource.m in Sources */,
+				4BC9648A2ADB98FD0019DCDD /* OTKSSource.m in Sources */,
 				4B0E03E529A248E600392BEE /* AppDelegate.m in Sources */,
 				4B4FC4EB2ACFABE40060C369 /* OTCSJSource.m in Sources */,
 				4BA0DB8A2A6B802200F970B8 /* OTAdTypeDetailViewController.m in Sources */,

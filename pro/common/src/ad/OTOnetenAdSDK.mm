@@ -121,7 +121,7 @@ void AdSDKDelegate::CloseSucceed() {
         if (ad_sdk.stageCallBack) {
             otlog_info << "call back to developer";
             dispatch_async(dispatch_get_main_queue(), ^{
-                ad_sdk.stageCallBack(OTOnetenAdSDKStageTypeDismiss, @"", nil, nil);
+                ad_sdk.stageCallBack(OTOnetenAdSDKStageTypeClose, @"", nil, nil);
             });
         }
     }

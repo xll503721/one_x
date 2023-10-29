@@ -73,7 +73,7 @@ static const NSInteger kOTAdTypeDetailViewControllerTableViewAdnSection = 1;
             self.logTextView.text = [text stringByAppendingFormat:@"\n%@ %@: %@ have clicked", self.selectedButton.name, self.selectedButton.adType, placementId];
         }
         
-        if (stageType == OTOnetenAdSDKStageTypeDismiss) {
+        if (stageType == OTOnetenAdSDKStageTypeClose) {
             [self.adViewController.view removeFromSuperview];
             [self.adViewController removeFromParentViewController];
             [self.adViewController dismissViewControllerAnimated:NO completion:nil];
