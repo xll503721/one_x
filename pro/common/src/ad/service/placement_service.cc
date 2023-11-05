@@ -19,13 +19,19 @@ PlacementService::PlacementService(): https_client_(BASE_HTTPS::HTTPsClient::Def
 void PlacementService::GetPlacementModel(const std::string& placement_id, PlacementModelCallBack callBack) {
     otlog_info << "placement request";
     https_client_.Get(path, [=](BASE_HTTPS::HTTPsClient* client, BASE_HTTPS::HTTPsClient::Status status, const std::string& body) {
-        if (status != BASE_HTTPS::HTTPsClient::Status::kStatus200) {
-            otlog_error << "placement request error:" << static_cast<int32_t>(status) << ", msg:" << body.c_str();
-            return;
-        }
+        std::shared_ptr<PlacementModel> placement_model = nullptr;
+        do {
+            if (status != BASE_HTTPS::HTTPsClient::Status::kStatus200) {
+                otlog_error << "placement request error:" << static_cast<int32_t>(status) << ", msg:" << body.c_str();
+                break;
+            }
+            
+            std::string placement_json_string = "{\"id\": \"123456789\", \"ad_sources\": [{\"clazz_name\": \"OTCSJSource\", \"style\": 3, \"request_type\": 2, \"id\": \"123456789\"}]}";
+            placement_model = std::make_shared<PlacementModel>(placement_json_string);
+            
+        } while (false);
+        
         if (callBack) {
-            std::string placement_json_string = "{\"id\": \"123456789\", \"ad_sources\": [{\"clazz_name\": \"OTKSSource\", \"style\": 1, \"request_type\": 2, \"id\": \"123456789\"}]}";
-            std::shared_ptr<PlacementModel> placement_model = std::make_shared<PlacementModel>(placement_json_string);
             callBack(placement_model);
         }
     });

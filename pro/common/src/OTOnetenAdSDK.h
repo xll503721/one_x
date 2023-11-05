@@ -18,6 +18,10 @@ typedef NS_ENUM(NSUInteger, OTOnetenAdSDKStageType) {
     OTOnetenAdSDKStageTypeLoaded,
     OTOnetenAdSDKStageTypeLoadFailed,
     
+    OTOnetenAdSDKStageTypeSourceLoad,
+    OTOnetenAdSDKStageTypeSourceLoaded,
+    OTOnetenAdSDKStageTypeSourceLoadFailed,
+    
     OTOnetenAdSDKStageTypeShow,
     OTOnetenAdSDKStageTypeClick,
     OTOnetenAdSDKStageTypeClose,

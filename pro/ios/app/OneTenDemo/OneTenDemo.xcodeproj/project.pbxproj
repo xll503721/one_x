@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B01D2192AF6801D00244210 /* OTStartSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B01D2182AF6801D00244210 /* OTStartSource.m */; };
+		4B01D2332AF7137E00244210 /* OTTopOnSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B01D2322AF7137E00244210 /* OTTopOnSource.m */; };
+		4B01D2362AF71DFC00244210 /* OTMyTargetSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B01D2352AF71DFC00244210 /* OTMyTargetSource.m */; };
 		4B0418232A637B0300342798 /* OTGDTSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0418222A637B0300342798 /* OTGDTSource.m */; };
 		4B0418712A640EA100342798 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BD730522A35E20800FA2CEE /* libsqlite3.tbd */; };
 		4B0E03E529A248E600392BEE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0E03E429A248E600392BEE /* AppDelegate.m */; };
@@ -25,11 +28,23 @@
 		4BA0DBC12A6E0FE400F970B8 /* OTDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA0DBC02A6E0FE400F970B8 /* OTDebugViewController.m */; };
 		4BA0DBC42A6E106500F970B8 /* OTDebugCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA0DBC32A6E106500F970B8 /* OTDebugCell.m */; };
 		4BB47CCD29AB017600BA2B27 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BB47CCC29AB016B00BA2B27 /* libc++.tbd */; };
+		4BC528362AF5F23600595FC7 /* OTAdmobSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC528352AF5F23600595FC7 /* OTAdmobSource.m */; };
+		4BC528512AF60A5600595FC7 /* OTIronSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC528502AF60A5600595FC7 /* OTIronSource.m */; };
+		4BC5286B2AF60A7800595FC7 /* OTApplovinSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC5286A2AF60A7800595FC7 /* OTApplovinSource.m */; };
+		4BC5286E2AF60AB200595FC7 /* OTYandexSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC5286D2AF60AB200595FC7 /* OTYandexSource.m */; };
+		4BC528712AF60ADF00595FC7 /* OTUnityAdsSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC528702AF60ADF00595FC7 /* OTUnityAdsSource.m */; };
+		4BC528742AF60B0B00595FC7 /* OTInmobiSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC528732AF60B0B00595FC7 /* OTInmobiSource.m */; };
+		4BC528772AF6671100595FC7 /* OTChartboostSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC528762AF6671100595FC7 /* OTChartboostSource.m */; };
+		4BC5287C2AF67CF200595FC7 /* OTDigitalTurbineSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC5287B2AF67CF200595FC7 /* OTDigitalTurbineSource.m */; };
 		4BC9648A2ADB98FD0019DCDD /* OTKSSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC964892ADB98FD0019DCDD /* OTKSSource.m */; };
 		4BD72FCF2A1E4C8500FA2CEE /* Base.framework/Base in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B2CA11829F3D409009C66B3 /* Base.framework/Base */; };
 		4BD72FD02A1E4C8500FA2CEE /* Base.framework/Base in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B2CA11829F3D409009C66B3 /* Base.framework/Base */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4BD72FD22A1E4C9200FA2CEE /* OneTenSDK.framework/OneTenSDK in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B0E040429A254DA00392BEE /* OneTenSDK.framework/OneTenSDK */; };
 		4BD72FD32A1E4C9200FA2CEE /* OneTenSDK.framework/OneTenSDK in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B0E040429A254DA00392BEE /* OneTenSDK.framework/OneTenSDK */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4BE43BCA2AEDFFF800373D46 /* OTBaiduSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE43BC92AEDFFF800373D46 /* OTBaiduSource.m */; };
+		4BE43BE52AEE448600373D46 /* OTMTGSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE43BE42AEE448600373D46 /* OTMTGSource.m */; };
+		4BE43BFF2AEE468F00373D46 /* OTVungleSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE43BFE2AEE468F00373D46 /* OTVungleSource.m */; };
+		4BE43C022AEE46FC00373D46 /* OTPangleSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE43C012AEE46FC00373D46 /* OTPangleSource.m */; };
 		FDFCB5069C6B11D53C677722 /* Pods_OneTenDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFA66410979C7A440551F35D /* Pods_OneTenDemo.framework */; };
 /* End PBXBuildFile section */
 
@@ -207,6 +222,12 @@
 
 /* Begin PBXFileReference section */
 		11E79EC1881684D69CF66811 /* Pods-OneTenDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneTenDemo.debug.xcconfig"; path = "Target Support Files/Pods-OneTenDemo/Pods-OneTenDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		4B01D2172AF6801D00244210 /* OTStartSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTStartSource.h; sourceTree = "<group>"; };
+		4B01D2182AF6801D00244210 /* OTStartSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTStartSource.m; sourceTree = "<group>"; };
+		4B01D2312AF7137E00244210 /* OTTopOnSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTTopOnSource.h; sourceTree = "<group>"; };
+		4B01D2322AF7137E00244210 /* OTTopOnSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTTopOnSource.m; sourceTree = "<group>"; };
+		4B01D2342AF71DFC00244210 /* OTMyTargetSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTMyTargetSource.h; sourceTree = "<group>"; };
+		4B01D2352AF71DFC00244210 /* OTMyTargetSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTMyTargetSource.m; sourceTree = "<group>"; };
 		4B0418212A637B0300342798 /* OTGDTSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTGDTSource.h; sourceTree = "<group>"; };
 		4B0418222A637B0300342798 /* OTGDTSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTGDTSource.m; sourceTree = "<group>"; };
 		4B0E03E029A248E600392BEE /* OneTenDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OneTenDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -240,9 +261,33 @@
 		4BA0DBC32A6E106500F970B8 /* OTDebugCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTDebugCell.m; sourceTree = "<group>"; };
 		4BB47CC829AAFC9D00BA2B27 /* OneTenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OneTenSDK.framework; path = ../../../common/output/iOS/Debug/OneTenSDK.framework; sourceTree = "<group>"; };
 		4BB47CCC29AB016B00BA2B27 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		4BC528342AF5F23600595FC7 /* OTAdmobSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAdmobSource.h; sourceTree = "<group>"; };
+		4BC528352AF5F23600595FC7 /* OTAdmobSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAdmobSource.m; sourceTree = "<group>"; };
+		4BC5284F2AF60A5600595FC7 /* OTIronSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTIronSource.h; sourceTree = "<group>"; };
+		4BC528502AF60A5600595FC7 /* OTIronSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTIronSource.m; sourceTree = "<group>"; };
+		4BC528692AF60A7800595FC7 /* OTApplovinSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTApplovinSource.h; sourceTree = "<group>"; };
+		4BC5286A2AF60A7800595FC7 /* OTApplovinSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTApplovinSource.m; sourceTree = "<group>"; };
+		4BC5286C2AF60AB200595FC7 /* OTYandexSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTYandexSource.h; sourceTree = "<group>"; };
+		4BC5286D2AF60AB200595FC7 /* OTYandexSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTYandexSource.m; sourceTree = "<group>"; };
+		4BC5286F2AF60ADF00595FC7 /* OTUnityAdsSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTUnityAdsSource.h; sourceTree = "<group>"; };
+		4BC528702AF60ADF00595FC7 /* OTUnityAdsSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTUnityAdsSource.m; sourceTree = "<group>"; };
+		4BC528722AF60B0B00595FC7 /* OTInmobiSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTInmobiSource.h; sourceTree = "<group>"; };
+		4BC528732AF60B0B00595FC7 /* OTInmobiSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTInmobiSource.m; sourceTree = "<group>"; };
+		4BC528752AF6671100595FC7 /* OTChartboostSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTChartboostSource.h; sourceTree = "<group>"; };
+		4BC528762AF6671100595FC7 /* OTChartboostSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTChartboostSource.m; sourceTree = "<group>"; };
+		4BC5287A2AF67CF200595FC7 /* OTDigitalTurbineSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTDigitalTurbineSource.h; sourceTree = "<group>"; };
+		4BC5287B2AF67CF200595FC7 /* OTDigitalTurbineSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTDigitalTurbineSource.m; sourceTree = "<group>"; };
 		4BC964882ADB98FD0019DCDD /* OTKSSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTKSSource.h; sourceTree = "<group>"; };
 		4BC964892ADB98FD0019DCDD /* OTKSSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTKSSource.m; sourceTree = "<group>"; };
 		4BD730522A35E20800FA2CEE /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		4BE43BC82AEDFFF800373D46 /* OTBaiduSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTBaiduSource.h; sourceTree = "<group>"; };
+		4BE43BC92AEDFFF800373D46 /* OTBaiduSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTBaiduSource.m; sourceTree = "<group>"; };
+		4BE43BE32AEE448600373D46 /* OTMTGSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTMTGSource.h; sourceTree = "<group>"; };
+		4BE43BE42AEE448600373D46 /* OTMTGSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTMTGSource.m; sourceTree = "<group>"; };
+		4BE43BFD2AEE468F00373D46 /* OTVungleSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTVungleSource.h; sourceTree = "<group>"; };
+		4BE43BFE2AEE468F00373D46 /* OTVungleSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTVungleSource.m; sourceTree = "<group>"; };
+		4BE43C002AEE46FC00373D46 /* OTPangleSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTPangleSource.h; sourceTree = "<group>"; };
+		4BE43C012AEE46FC00373D46 /* OTPangleSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTPangleSource.m; sourceTree = "<group>"; };
 		B62798A6E1BECA697224CD39 /* Pods-OneTenDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneTenDemo.release.xcconfig"; path = "Target Support Files/Pods-OneTenDemo/Pods-OneTenDemo.release.xcconfig"; sourceTree = "<group>"; };
 		FFA66410979C7A440551F35D /* Pods_OneTenDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OneTenDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -358,6 +403,36 @@
 				4B4FC4EA2ACFABE40060C369 /* OTCSJSource.m */,
 				4BC964882ADB98FD0019DCDD /* OTKSSource.h */,
 				4BC964892ADB98FD0019DCDD /* OTKSSource.m */,
+				4BE43BC82AEDFFF800373D46 /* OTBaiduSource.h */,
+				4BE43BC92AEDFFF800373D46 /* OTBaiduSource.m */,
+				4BE43BE32AEE448600373D46 /* OTMTGSource.h */,
+				4BE43BE42AEE448600373D46 /* OTMTGSource.m */,
+				4BE43BFD2AEE468F00373D46 /* OTVungleSource.h */,
+				4BE43BFE2AEE468F00373D46 /* OTVungleSource.m */,
+				4BE43C002AEE46FC00373D46 /* OTPangleSource.h */,
+				4BE43C012AEE46FC00373D46 /* OTPangleSource.m */,
+				4BC528342AF5F23600595FC7 /* OTAdmobSource.h */,
+				4BC528352AF5F23600595FC7 /* OTAdmobSource.m */,
+				4BC5284F2AF60A5600595FC7 /* OTIronSource.h */,
+				4BC528502AF60A5600595FC7 /* OTIronSource.m */,
+				4BC528692AF60A7800595FC7 /* OTApplovinSource.h */,
+				4BC5286A2AF60A7800595FC7 /* OTApplovinSource.m */,
+				4BC5286C2AF60AB200595FC7 /* OTYandexSource.h */,
+				4BC5286D2AF60AB200595FC7 /* OTYandexSource.m */,
+				4BC5286F2AF60ADF00595FC7 /* OTUnityAdsSource.h */,
+				4BC528702AF60ADF00595FC7 /* OTUnityAdsSource.m */,
+				4BC528722AF60B0B00595FC7 /* OTInmobiSource.h */,
+				4BC528732AF60B0B00595FC7 /* OTInmobiSource.m */,
+				4BC528752AF6671100595FC7 /* OTChartboostSource.h */,
+				4BC528762AF6671100595FC7 /* OTChartboostSource.m */,
+				4BC5287A2AF67CF200595FC7 /* OTDigitalTurbineSource.h */,
+				4BC5287B2AF67CF200595FC7 /* OTDigitalTurbineSource.m */,
+				4B01D2172AF6801D00244210 /* OTStartSource.h */,
+				4B01D2182AF6801D00244210 /* OTStartSource.m */,
+				4B01D2312AF7137E00244210 /* OTTopOnSource.h */,
+				4B01D2322AF7137E00244210 /* OTTopOnSource.m */,
+				4B01D2342AF71DFC00244210 /* OTMyTargetSource.h */,
+				4B01D2352AF71DFC00244210 /* OTMyTargetSource.m */,
 			);
 			path = AdSource;
 			sourceTree = "<group>";
@@ -676,18 +751,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BC528712AF60ADF00595FC7 /* OTUnityAdsSource.m in Sources */,
+				4BE43C022AEE46FC00373D46 /* OTPangleSource.m in Sources */,
 				4BA0DB8D2A6B86D700F970B8 /* OTAdTypeDetailCellCell.m in Sources */,
 				4B0E03EB29A248E600392BEE /* ViewController.m in Sources */,
+				4BE43BFF2AEE468F00373D46 /* OTVungleSource.m in Sources */,
+				4BC528772AF6671100595FC7 /* OTChartboostSource.m in Sources */,
+				4BC5287C2AF67CF200595FC7 /* OTDigitalTurbineSource.m in Sources */,
+				4B01D2362AF71DFC00244210 /* OTMyTargetSource.m in Sources */,
 				4B1552D029D1533B0068842B /* OTSigmobSource.m in Sources */,
+				4BC528512AF60A5600595FC7 /* OTIronSource.m in Sources */,
 				4BC9648A2ADB98FD0019DCDD /* OTKSSource.m in Sources */,
+				4BC5286E2AF60AB200595FC7 /* OTYandexSource.m in Sources */,
+				4BE43BE52AEE448600373D46 /* OTMTGSource.m in Sources */,
 				4B0E03E529A248E600392BEE /* AppDelegate.m in Sources */,
+				4BC528362AF5F23600595FC7 /* OTAdmobSource.m in Sources */,
 				4B4FC4EB2ACFABE40060C369 /* OTCSJSource.m in Sources */,
+				4B01D2192AF6801D00244210 /* OTStartSource.m in Sources */,
 				4BA0DB8A2A6B802200F970B8 /* OTAdTypeDetailViewController.m in Sources */,
 				4B0418232A637B0300342798 /* OTGDTSource.m in Sources */,
+				4B01D2332AF7137E00244210 /* OTTopOnSource.m in Sources */,
+				4BC5286B2AF60A7800595FC7 /* OTApplovinSource.m in Sources */,
 				4B0E03F629A248E800392BEE /* main.m in Sources */,
 				4BA0DBA82A6E09DC00F970B8 /* OTDebugView.m in Sources */,
 				4B0E03E829A248E600392BEE /* SceneDelegate.m in Sources */,
 				4BA0DBC12A6E0FE400F970B8 /* OTDebugViewController.m in Sources */,
+				4BE43BCA2AEDFFF800373D46 /* OTBaiduSource.m in Sources */,
+				4BC528742AF60B0B00595FC7 /* OTInmobiSource.m in Sources */,
 				4BA0DBC42A6E106500F970B8 /* OTDebugCell.m in Sources */,
 				4BA0DB872A6B7AB300F970B8 /* OTAdTypeTableViewCell.m in Sources */,
 			);

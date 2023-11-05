@@ -81,6 +81,8 @@ static const NSInteger kOTAdTypeDetailViewControllerTableViewAdnSection = 1;
             
             self.logTextView.text = [text stringByAppendingFormat:@"\n%@ %@: %@ have closed", self.selectedButton.name, self.selectedButton.adType, placementId];
         }
+        
+        [self logTextViewScrollToBottom];
     }];
 }
 
@@ -109,6 +111,11 @@ static const NSInteger kOTAdTypeDetailViewControllerTableViewAdnSection = 1;
     }
     
     [self.sectionTitles addObject:@{@"Ad": allRowAdTitles}];
+}
+
+- (void)logTextViewScrollToBottom {
+    NSRange bottom = NSMakeRange(self.logTextView.text.length - 1, 1);
+    [self.logTextView scrollRangeToVisible:bottom];
 }
 
 #pragma mark - Action
@@ -153,6 +160,8 @@ static const NSInteger kOTAdTypeDetailViewControllerTableViewAdnSection = 1;
         text = [text stringByAppendingFormat:@"\n%@ %@ %@ is ready", self.selectedPlacementId, self.selectedButton.name, self.selectedButton.adType];
     }
     self.logTextView.text = text;
+    
+    [self logTextViewScrollToBottom];
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource

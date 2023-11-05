@@ -1,15 +1,29 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, '9.0'
+platform :ios, '11.0'
 
 target 'OneTenDemo' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
   # Pods for OneTenDemo
-pod 'SigmobAd-iOS', '4.7.0'
+pod 'SigmobAd-iOS'
 pod 'GDTMobSDK'
 pod 'Ads-CN'
-#pod 'BaiduMobAdSDK'
+pod 'BaiduMobAdSDK'
 pod 'KSAdSDK'
+pod "VungleAds"
+pod 'Ads-Global'
+pod 'Google-Mobile-Ads-SDK'
+pod 'IronSourceSDK'
+pod 'ChartboostSDK'
+pod 'Fyber_Marketplace_SDK'
+pod 'StartAppSDK'
+pod 'myTargetSDK'
+pod 'AnyThinkiOS'
+
+pod 'MintegralAdSDK/BidNativeAd'
+pod 'MintegralAdSDK/BidRewardVideoAd'
+pod 'MintegralAdSDK/CNAddition'
+pod 'MintegralAdSDK/BidSplashAd'
 
 end

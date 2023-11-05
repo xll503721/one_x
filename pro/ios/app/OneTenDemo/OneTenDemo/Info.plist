@@ -11,7 +11,7 @@
 				<key>GDT</key>
 				<string>123456789</string>
 				<key>BAIDU</key>
-				<string></string>
+				<string>123456789</string>
 				<key>GM</key>
 				<string></string>
 				<key>KS</key>
@@ -59,6 +59,8 @@
 			<dict/>
 			<key>Common</key>
 			<dict>
+				<key>BAIDU</key>
+				<string>123456789</string>
 				<key>KS</key>
 				<string>123456789</string>
 				<key>CSJ</key>
