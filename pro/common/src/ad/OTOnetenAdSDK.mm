@@ -43,7 +43,7 @@
     if (!placementId) {
         if (self.stageCallBack) {
             NSError *error = [[NSError alloc] initWithDomain:@"placement id must be not nil" code:1000 userInfo:nil];
-            self.stageCallBack(OTOnetenAdSDKStageTypeLoadFailed, placementId, error, userInfo);
+            self.stageCallBack(OTOnetenAdSDKStageTypeLoadFail, placementId, error, userInfo);
         }
         return NO;
     }
@@ -58,7 +58,7 @@
     }
     
     if (self.stageCallBack) {
-        self.stageCallBack(OTOnetenAdSDKStageTypeLoad, placementId, nil, userInfo);
+//        self.stageCallBack(OTOnetenAdSDKStageTypeLoad, placementId, nil, userInfo);
     }
     
     ONETEN_AD::OnetenAdSDK::GetInstance().StartAdLoad(placementId.UTF8String, user_info, _sdk_delegate);
@@ -91,49 +91,23 @@ void AdSDKDelegate::SetOCPrt(void *prt) {
     oc_prt_ = prt;
 }
 
-void AdSDKDelegate::LoadSucceed() {
-    if (oc_prt_) {
-        OTOnetenAdSDK *ad_sdk = (__bridge OTOnetenAdSDK *)oc_prt_;
-        if (ad_sdk.stageCallBack) {
-            otlog_info << "call back to developer";
-            dispatch_async(dispatch_get_main_queue(), ^{
-                ad_sdk.stageCallBack(OTOnetenAdSDKStageTypeLoaded, @"", nil, nil);
-            });
-        }
-    }
-}
+#define MACRO(symbol) #symbol
 
-void AdSDKDelegate::ShowSucceed() {
+void AdSDKDelegate::ActionCompletion(ActionType type, const std::string& placement_id, std::shared_ptr<ONETEN::Error> error) {
     if (oc_prt_) {
         OTOnetenAdSDK *ad_sdk = (__bridge OTOnetenAdSDK *)oc_prt_;
         if (ad_sdk.stageCallBack) {
-            otlog_info << "call back to developer";
+            otlog_info << " call back to developer";
+            NSString *placementId = [NSString stringWithFormat:@"%s", placement_id.c_str()];
+            NSError *oc_error = nil;
+            unsigned long oc_type = static_cast<unsigned long>(type);
+            if (error) {
+                NSString *errorMsg = [NSString stringWithFormat:@"%s", error->GetMsg().c_str()];
+                oc_error = [NSError errorWithDomain:errorMsg code:error->GetCode() userInfo:nil];
+            }
+            
             dispatch_async(dispatch_get_main_queue(), ^{
-                ad_sdk.stageCallBack(OTOnetenAdSDKStageTypeShow, @"", nil, nil);
-            });
-        }
-    }
-}
-
-void AdSDKDelegate::CloseSucceed() {
-    if (oc_prt_) {
-        OTOnetenAdSDK *ad_sdk = (__bridge OTOnetenAdSDK *)oc_prt_;
-        if (ad_sdk.stageCallBack) {
-            otlog_info << "call back to developer";
-            dispatch_async(dispatch_get_main_queue(), ^{
-                ad_sdk.stageCallBack(OTOnetenAdSDKStageTypeClose, @"", nil, nil);
-            });
-        }
-    }
-}
-
-void AdSDKDelegate::ClickSucceed() {
-    if (oc_prt_) {
-        OTOnetenAdSDK *ad_sdk = (__bridge OTOnetenAdSDK *)oc_prt_;
-        if (ad_sdk.stageCallBack) {
-            otlog_info << "call back to developer";
-            dispatch_async(dispatch_get_main_queue(), ^{
-                ad_sdk.stageCallBack(OTOnetenAdSDKStageTypeClick, @"", nil, nil);
+                ad_sdk.stageCallBack((OTOnetenAdSDKStageType)oc_type, placementId, oc_error, nil);
             });
         }
     }

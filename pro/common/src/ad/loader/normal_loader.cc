@@ -20,6 +20,7 @@ NormalLoader::NormalLoader(std::shared_ptr<LoaderInterface> loader, std::shared_
     otlog_info << "";
     ad_source_service_ = std::make_shared<AdSourceService>();
     cache_service_ = std::make_shared<CacheService>();
+    placement_service_ = std::make_shared<PlacementService>();
 }
 
 void NormalLoader::Flow(std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<PlacementModel> placement_model) {
@@ -32,7 +33,8 @@ void NormalLoader::Flow(std::shared_ptr<AdSourceModel> ad_source_model, std::sha
     std::weak_ptr<PlacementModel> w_placement_model = placement_model;
     std::weak_ptr<AdSourceModel> w_ad_source_model = ad_source_model;
     
-    ad_source_service_->Load(ad_source_model, [=](int32_t categroy_type, ONETEN::Error* error) {
+    placement_service_->SetupLoading(ad_source_model);
+    ad_source_service_->Load(ad_source_model, [=](int32_t categroy_type, std::shared_ptr<ONETEN::Error> error) {
         if (auto s_run_loader = GetRunLoader().lock()) {
             auto run_loader_ptr = std::static_pointer_cast<RunLoader>(s_run_loader);
             run_loader_ptr->GetThreadPool().Schedule(BASE_THREAD::Thread::Type::kOther, [=](){
@@ -42,7 +44,10 @@ void NormalLoader::Flow(std::shared_ptr<AdSourceModel> ad_source_model, std::sha
                 std::map<std::string, std::shared_ptr<void>> map;
                 map["placement_model"] = s_placement_model;
                 map["ad_source_model"] = s_ad_source_model;
-                map["load_succeed"] = std::make_shared<bool>((error ? false : true));
+                
+                if (error) {
+                    map["error"] = error;
+                }
                 NextLoader(map);
             });
         }

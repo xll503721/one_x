@@ -18,11 +18,11 @@ BEGIN_NAMESPACE_ONETEN_AD
 class AdSourceDelegate {
     
 public:
-    virtual void RegisterCompletion(std::map<std::string, std::string> user_info, ONETEN::Error* error = nullptr) {};
-    virtual void LoadCompletion(int32_t categroy_type, ONETEN::Error* error = nullptr) {};
-    virtual void ShowCompletion(int32_t categroy_type, ONETEN::Error* error = nullptr) {};
-    virtual void CloseCompletion(int32_t categroy_type, ONETEN::Error* error = nullptr) {};
-    virtual void ClickCompletion(int32_t categroy_type, ONETEN::Error* error = nullptr) {};
+    virtual void RegisterCompletion(std::map<std::string, std::string> user_info, std::shared_ptr<ONETEN::Error> error = nullptr) {};
+    virtual void LoadCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) {};
+    virtual void ShowCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) {};
+    virtual void CloseCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) {};
+    virtual void ClickCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) {};
 };
 
 class AdSource: public EntityInterface<AdSource> {

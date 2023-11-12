@@ -12,6 +12,7 @@
 #include "run_loader.h"
 #include <ad/service/ad_srouce_service.h>
 #include <ad/service/cache_service.h>
+#include <ad/service/placement_service.h>
 
 BEGIN_NAMESPACE_ONETEN_AD
 
@@ -29,6 +30,7 @@ public:
 private:
     std::shared_ptr<AdSourceService> ad_source_service_;
     std::shared_ptr<CacheService> cache_service_;
+    std::shared_ptr<PlacementService> placement_service_;
 };
 
 END_NAMESPACE_ONETEN_AD

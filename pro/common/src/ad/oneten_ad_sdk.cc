@@ -47,8 +47,16 @@ void OnetenAdSDK::StartAdLoad(const std::string& placement_id, std::map<std::str
     }
     
     auto run_loader = std::make_shared<RunLoader>(placement_id, delegate, user_info);
-    run_loader->Run([=]() {
-        
+    run_loader->Run([=, s_delegate = &delegate]() {
+        if (s_delegate) {
+            AdSDKDelegate::ActionType type = IsAdReady(placement_id) ? AdSDKDelegate::ActionType::kLoadSuccess : AdSDKDelegate::ActionType::kLoadFail;
+            std::shared_ptr<ONETEN::Error> error = nullptr;
+            if (type == AdSDKDelegate::ActionType::kLoadFail) {
+                std::map<std::string, std::string> user_info;
+                error = std::make_shared<ONETEN::Error>(1000, "all ad source load fail", user_info);
+            }
+            s_delegate->ActionCompletion(type, placement_id, error);
+        }
     });
     
     run_id_and_run_loader_map_[run_loader->GetId()] = run_loader;

@@ -59,6 +59,7 @@ typedef NS_ENUM(NSUInteger, OTAdSourceCallbackType) {
 
 - (void)registerWithUserInfo:(NSDictionary<id, id> *)userInfo error:(NSError *)error;
 
+- (void)adSaveSourceObject:(id)adSourceObject;
 - (void)adWillLoadWithStyleType:(OTAdSourceStyleType)styleType adSourceObject:(id)adSourceObject;
 - (void)adDidLoadWithStyleType:(OTAdSourceStyleType)styleType error:(NSError *)error;
 - (void)nativeStyleDidLoadWithAds:(NSArray<id> *)ads error:(NSError *)error;;

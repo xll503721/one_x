@@ -26,7 +26,7 @@ void PlacementService::GetPlacementModel(const std::string& placement_id, Placem
                 break;
             }
             
-            std::string placement_json_string = "{\"id\": \"123456789\", \"ad_sources\": [{\"clazz_name\": \"OTCSJSource\", \"style\": 3, \"request_type\": 2, \"id\": \"123456789\"}]}";
+            std::string placement_json_string = "{\"id\": \"123456789\", \"ad_sources\": [{\"clazz_name\": \"OTTianmuAdapter\", \"style\": 3, \"request_type\": 2, \"id\": \"123456789\"}]}";
             placement_model = std::make_shared<PlacementModel>(placement_json_string);
             
         } while (false);
@@ -35,6 +35,10 @@ void PlacementService::GetPlacementModel(const std::string& placement_id, Placem
             callBack(placement_model);
         }
     });
+}
+
+void PlacementService::SetupLoading(std::shared_ptr<AdSourceModel> ad_source_model) {
+    loading_ad_source_model_.push_back(ad_source_model);
 }
 
 END_NAMESPACE_ONETEN_AD

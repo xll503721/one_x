@@ -60,27 +60,31 @@ static const NSInteger kOTAdTypeDetailViewControllerTableViewAdnSection = 1;
     [[OTOnetenSDK defalutSDK].adSDK setStageCallBack:^(OTOnetenAdSDKStageType stageType, NSString * _Nonnull placementId, NSError * _Nullable error, NSDictionary<NSString *,id> * _Nullable userInfo) {
         NSString *text = self.logTextView.text;
         
-        if (stageType == OTOnetenAdSDKStageTypeLoaded) {
-            NSString *text = self.logTextView.text;
-            self.logTextView.text = [text stringByAppendingFormat:@"\n%@ %@: %@ have been loaded", self.selectedButton.name, self.selectedButton.adType, placementId];
+        if (stageType == OTOnetenAdSDKStageTypeLoadSuccess) {
+            text = [text stringByAppendingFormat:@"\n%@ %@: %@ have been load success", self.selectedButton.name, self.selectedButton.adType, placementId];
+        }
+        if (stageType == OTOnetenAdSDKStageTypeLoadFail) {
+            text = [text stringByAppendingFormat:@"\n%@ %@: %@ have been load fail, error:%@", self.selectedButton.name, self.selectedButton.adType, placementId, error.domain];
         }
         
-        if (stageType == OTOnetenAdSDKStageTypeShow) {
-            self.logTextView.text = [text stringByAppendingFormat:@"\n%@ %@: %@ have shown", self.selectedButton.name, self.selectedButton.adType, placementId];
+        if (stageType == OTOnetenAdSDKStageTypeShowSuccess) {
+            text = [text stringByAppendingFormat:@"\n%@ %@: %@ have been shown", self.selectedButton.name, self.selectedButton.adType, placementId];
         }
         
-        if (stageType == OTOnetenAdSDKStageTypeClick) {
-            self.logTextView.text = [text stringByAppendingFormat:@"\n%@ %@: %@ have clicked", self.selectedButton.name, self.selectedButton.adType, placementId];
+        if (stageType == OTOnetenAdSDKStageTypeClickSuccess) {
+            text = [text stringByAppendingFormat:@"\n%@ %@: %@ have been clicked", self.selectedButton.name, self.selectedButton.adType, placementId];
         }
         
-        if (stageType == OTOnetenAdSDKStageTypeClose) {
+        if (stageType == OTOnetenAdSDKStageTypeCloseSuccess) {
             [self.adViewController.view removeFromSuperview];
             [self.adViewController removeFromParentViewController];
             [self.adViewController dismissViewControllerAnimated:NO completion:nil];
             self.adViewController = nil;
             
-            self.logTextView.text = [text stringByAppendingFormat:@"\n%@ %@: %@ have closed", self.selectedButton.name, self.selectedButton.adType, placementId];
+            text = [text stringByAppendingFormat:@"\n%@ %@: %@ have been closed", self.selectedButton.name, self.selectedButton.adType, placementId];
         }
+        
+        self.logTextView.text = text;
         
         [self logTextViewScrollToBottom];
     }];
@@ -131,22 +135,32 @@ static const NSInteger kOTAdTypeDetailViewControllerTableViewAdnSection = 1;
 }
 
 - (IBAction)showAd:(UIButton *)sender {
-    NSError *error;
-    self.adViewController = [[OTOnetenSDK defalutSDK].adSDK showWithPlacementId:self.selectedPlacementId error:&error];
-    if (error) {
-        return;
-    }
+    NSString *text = self.logTextView.text;
     
-    self.adViewController.view.frame = self.view.frame;
-    self.adViewController.frame = self.view.frame;
-    [self.view addSubview:self.adViewController.view];
-    [self addChildViewController:self.adViewController];
+    do {
+        NSError *error;
+        self.adViewController = [[OTOnetenSDK defalutSDK].adSDK showWithPlacementId:self.selectedPlacementId error:&error];
+        if (error) {
+            text = [text stringByAppendingFormat:@"\n%@ %@: %@ is not ready", self.selectedButton.name, self.selectedButton.adType, self.selectedPlacementId];
+            break;
+        }
+        
+        text = [text stringByAppendingFormat:@"\n%@ %@: %@ is ready", self.selectedButton.name, self.selectedButton.adType, self.selectedPlacementId];
+        
+        self.adViewController.view.frame = self.view.frame;
+        self.adViewController.frame = self.view.frame;
+        [self.view addSubview:self.adViewController.view];
+        [self addChildViewController:self.adViewController];
+        
+        OTAdView *view = (OTAdView *)self.adViewController.view;
+        view.backgroundColor = [UIColor clearColor];
+        view.titleLabel.frame = CGRectMake(0, 0, 100, 50);
+        
+        [view addSubview:view.titleLabel];
+    } while (false);
     
-    OTAdView *view = (OTAdView *)self.adViewController.view;
-    view.backgroundColor = [UIColor clearColor];
-    view.titleLabel.frame = CGRectMake(0, 0, 100, 50);
-    
-    [view addSubview:view.titleLabel];
+    self.logTextView.text = text;
+    [self logTextViewScrollToBottom];
 }
 
 - (IBAction)isReadyAd:(id)sender {

@@ -36,7 +36,7 @@ void AdSourceService::Click(std::shared_ptr<AdSourceModel> ad_source_model, Acti
 }
 
 #pragma mark - AdSourceDelegate
-void AdSourceService::LoadCompletion(int32_t categroy_type, ONETEN::Error* error) {
+void AdSourceService::LoadCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error) {
     std::map<std::string, std::string> event_properties;
     BASE_ANALYTICS::Tracker::DefaultTracker().Send("load", event_properties);
     
@@ -45,7 +45,7 @@ void AdSourceService::LoadCompletion(int32_t categroy_type, ONETEN::Error* error
     }
 }
 
-void AdSourceService::ShowCompletion(int32_t categroy_type, ONETEN::Error* error) {
+void AdSourceService::ShowCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error) {
     std::map<std::string, std::string> event_properties;
     BASE_ANALYTICS::Tracker::DefaultTracker().Send("show", event_properties);
     
@@ -54,7 +54,7 @@ void AdSourceService::ShowCompletion(int32_t categroy_type, ONETEN::Error* error
     }
 }
 
-void AdSourceService::CloseCompletion(int32_t categroy_type, ONETEN::Error* error) {
+void AdSourceService::CloseCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error) {
     std::map<std::string, std::string> event_properties;
     BASE_ANALYTICS::Tracker::DefaultTracker().Send("close", event_properties);
     
@@ -63,7 +63,7 @@ void AdSourceService::CloseCompletion(int32_t categroy_type, ONETEN::Error* erro
     }
 }
 
-void AdSourceService::ClickCompletion(int32_t categroy_type, ONETEN::Error* error) {
+void AdSourceService::ClickCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error) {
     std::map<std::string, std::string> event_properties;
     BASE_ANALYTICS::Tracker::DefaultTracker().Send("click", event_properties);
     

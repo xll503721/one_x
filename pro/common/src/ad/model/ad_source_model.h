@@ -37,11 +37,11 @@ public:
     
     void ConvertToCacheObject();
     
-    void RegisterCompletion(std::map<std::string, std::string> user_info, ONETEN::Error* error = nullptr) override;
-    void LoadCompletion(int32_t categroy_type, ONETEN::Error* error = nullptr) override;
-    void ShowCompletion(int32_t categroy_type, ONETEN::Error* error = nullptr) override;
-    void CloseCompletion(int32_t categroy_type, ONETEN::Error* error = nullptr) override;
-    void ClickCompletion(int32_t categroy_type, ONETEN::Error* error = nullptr) override;
+    void RegisterCompletion(std::map<std::string, std::string> user_info, std::shared_ptr<ONETEN::Error> error = nullptr) override;
+    void LoadCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) override;
+    void ShowCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) override;
+    void CloseCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) override;
+    void ClickCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) override;
     
     int32_t GetLevel() {
         return ad_source_->GetLevel();

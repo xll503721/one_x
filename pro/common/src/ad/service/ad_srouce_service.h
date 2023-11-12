@@ -17,7 +17,7 @@ class AdSourceService: public ONETEN::Object<AdSourceService>, public AdSourceDe
     
 public:
     ~AdSourceService();
-    using ActionCompletionInvoke = std::function<void(int32_t categroy_type, ONETEN::Error* error)>;
+    using ActionCompletionInvoke = std::function<void(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error)>;
     
     void Load(std::shared_ptr<AdSourceModel> ad_source_model, ActionCompletionInvoke load_complete);
     
@@ -26,10 +26,10 @@ public:
     void Click(std::shared_ptr<AdSourceModel> ad_source_model, ActionCompletionInvoke click_complete);
     
 private:
-    void LoadCompletion(int32_t categroy_type, ONETEN::Error* error = nullptr) override;
-    void ShowCompletion(int32_t categroy_type, ONETEN::Error* error = nullptr) override;
-    void CloseCompletion(int32_t categroy_type, ONETEN::Error* error = nullptr) override;
-    void ClickCompletion(int32_t categroy_type, ONETEN::Error* error = nullptr) override;
+    void LoadCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) override;
+    void ShowCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) override;
+    void CloseCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) override;
+    void ClickCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) override;
     
 private:
     void* ad_source_service_ios_;
