@@ -5,15 +5,26 @@
 //  Created by li zhixuan on 2022/11/6.
 //
 
-#ifndef ONETEN_AD_SDK_AD_SOURCE_SERVICE_MODEL_H
-#define ONETEN_AD_SDK_AD_SOURCE_SERVICE_MODEL_H
+#ifndef ONETEN_AD_SDK_WATERFALL_SERVICE_MODEL_H
+#define ONETEN_AD_SDK_WATERFALL_SERVICE_MODEL_H
+
+#include <ad/model/ad_source_model.h>
+#include <ad/model/placement_model.h>
 
 BEGIN_NAMESPACE_ONETEN_AD
 
-class AdSourceServiceModel {
+class WaterfallService {
     
 public:
-    AdSourceServiceModel(const std::string placement_id, void* delegate);
+    WaterfallService() = default;
+    
+    std::shared_ptr<AdSourceModel> LoadNextAdSource();
+    bool CheckWaterfallFinish(std::shared_ptr<PlacementModel> placement_model);
+    
+private:
+    int32_t loading_layer_index_;
+    std::vector<std::shared_ptr<AdSourceModel>> loading_ad_unit_model_vector_;
+    std::shared_ptr<PlacementModel> loading_placement_model_;
 };
 
 END_NAMESPACE_ONETEN_AD

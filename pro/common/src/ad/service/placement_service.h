@@ -22,11 +22,11 @@ public:
     using PlacementModelCallBack = std::function<void (std::shared_ptr<PlacementModel> placement_model)>;
     void GetPlacementModel(const std::string& placement_id, PlacementModelCallBack callBack);
     
-    void SetupLoading(std::shared_ptr<AdSourceModel> ad_source_model);
+    void SetPlacementModel(std::shared_ptr<PlacementModel> placement_model);
     
 private:
     BASE_HTTPS::HTTPsClient& https_client_;
-    std::vector<std::shared_ptr<AdSourceModel>> loading_ad_source_model_;
+    std::shared_ptr<PlacementModel> placement_model_;
 };
 
 END_NAMESPACE_ONETEN_AD

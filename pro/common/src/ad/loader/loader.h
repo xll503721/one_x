@@ -10,6 +10,7 @@
 
 #include <ad/model/ad_source_model.h>
 #include <ad/model/placement_model.h>
+#include <cross/platform.h>
 
 BEGIN_NAMESPACE_ONETEN_AD
 
@@ -22,12 +23,13 @@ public:
 class WaterfallLoaderInterface {
 public:
     virtual void Classify(std::shared_ptr<PlacementModel> placement) {};
-    virtual void StartFlow(int32_t level, std::shared_ptr<PlacementModel> placement) {};
+    virtual void StartFlow(std::shared_ptr<PlacementModel> placement) {};
 };
 
 class AdSourceLoaderInterface {
 public:
-    virtual void Flow(std::shared_ptr<AdSourceModel> ad_source, std::shared_ptr<PlacementModel> placement) {};
+    virtual void Flow(std::shared_ptr<AdSourceModel> normal_ad_source_vector,
+                      std::shared_ptr<PlacementModel> placement) {};
 };
 
 class CacheLoaderInterface {
@@ -37,7 +39,7 @@ public:
 
 class LoaderInterface:  public PlacementLoaderInterface, public WaterfallLoaderInterface, public AdSourceLoaderInterface, public CacheLoaderInterface {
 public:
-    using NextLoaderCallBack = std::function<void (std::map<std::string, std::shared_ptr<void>> parmas)>;
+    using NextLoaderCallBack = std::function<void (std::map<std::string, std::shared_ptr<void>> params)>;
 
     virtual void Start(const std::string& placement_id) = 0;
     virtual void End() = 0;

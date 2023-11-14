@@ -23,7 +23,7 @@ public:
 
     void Start(const std::string& placement_id) override;
     void Classify(std::shared_ptr<PlacementModel> placement_model) override;
-    void StartFlow(int32_t level, std::shared_ptr<PlacementModel> placement_model) override;
+    void StartFlow(std::shared_ptr<PlacementModel> placement_model) override;
     void Flow(std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<PlacementModel> placement_model) override;
     void End() override;
 
@@ -36,7 +36,7 @@ protected:
     std::weak_ptr<void> GetRunLoader();
 
 protected:
-    void NextLoader(std::map<std::string, std::shared_ptr<void>> parmas);
+    void NextLoader(std::map<std::string, std::shared_ptr<void>> params);
     std::weak_ptr<void> run_loader_;
     
 private:

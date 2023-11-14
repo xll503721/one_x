@@ -37,8 +37,8 @@ void PlacementService::GetPlacementModel(const std::string& placement_id, Placem
     });
 }
 
-void PlacementService::SetupLoading(std::shared_ptr<AdSourceModel> ad_source_model) {
-    loading_ad_source_model_.push_back(ad_source_model);
+void PlacementService::SetPlacementModel(std::shared_ptr<PlacementModel> placement_model) {
+    placement_model_ = placement_model;
 }
 
 END_NAMESPACE_ONETEN_AD
