@@ -24,10 +24,12 @@ public:
     
     void Classify(std::shared_ptr<PlacementModel> placement_model);
     void StartFlow(std::shared_ptr<PlacementModel> placement_model);
-    
     void End();
     
-private:
+    void SetWaterfallService(std::shared_ptr<WaterfallService> waterfall_service);
+    std::shared_ptr<WaterfallService> GetWaterfallService();
+    
+protected:
     std::shared_ptr<WaterfallService> waterfall_service_;
 };
 

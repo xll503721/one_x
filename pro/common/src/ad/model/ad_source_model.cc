@@ -14,10 +14,14 @@
 
 BEGIN_NAMESPACE_ONETEN_AD
 
-AdSourceModel::AdSourceModel(std::shared_ptr<AdSource> ad_source):ad_source_(ad_source) {
+AdSourceModel::AdSourceModel(std::shared_ptr<AdSource> ad_source):
+ad_source_(ad_source),
+status_(Status::kNormal) {
 }
 
-AdSourceModel::AdSourceModel(std::shared_ptr<AdSourceCache> ad_source_cache):ad_source_cache_(ad_source_cache) {
+AdSourceModel::AdSourceModel(std::shared_ptr<AdSourceCache> ad_source_cache):
+ad_source_cache_(ad_source_cache),
+status_(Status::kNormal) {
     
 }
 

@@ -23,10 +23,11 @@ public:
     
     void RequestPlacement(const std::string& placement_id) override;
     
+protected:
+    std::shared_ptr<PlacementService> placement_service_;
+    
 private:
     using super_class = MainLoader;
-    
-    std::shared_ptr<PlacementService> placement_service_;
 };
 
 END_NAMESPACE_ONETEN_AD

@@ -16,7 +16,12 @@ WaterfallLoader::~WaterfallLoader() {
 }
 
 WaterfallLoader::WaterfallLoader(std::shared_ptr<LoaderInterface> loader, std::shared_ptr<void> run_loader):MainLoader(loader, run_loader) {
-    waterfall_service_ = std::make_shared<WaterfallService>();
+    std::shared_ptr<WaterfallLoader> waterfallLoader = std::dynamic_pointer_cast<WaterfallLoader>(loader);
+    if (!waterfallLoader) {
+        waterfall_service_ = std::make_shared<WaterfallService>();
+    } else {
+        waterfall_service_ = waterfallLoader->GetWaterfallService();
+    }
 }
 
 void WaterfallLoader::Classify(std::shared_ptr<PlacementModel> placement) {

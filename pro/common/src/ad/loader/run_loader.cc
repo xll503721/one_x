@@ -91,7 +91,7 @@ void RunLoader::LoadAdapter() {
         std::shared_ptr<AdSourceModel> next_ad_source_model_ptr = std::static_pointer_cast<AdSourceModel>(next_ad_source_model);
         std::shared_ptr<PlacementModel> placement_model_ptr = std::static_pointer_cast<PlacementModel>(placement_model);
         if (is_waterfall_finish) {
-            EndAdLoad(placement_id_);
+            EndAdLoad();
             return;
         }
         
@@ -127,13 +127,13 @@ void RunLoader::SaveCache() {
     });
 }
 
-void RunLoader::EndAdLoad(const std::string& placement_id) {
+void RunLoader::EndAdLoad() {
     start_loader_->End();
     waterfall_loader_->End();
     request_loader_->End();
     cache_loader_->End();
     
-    otlog_info << "************end load placement id: "<< placement_id << "************";
+    otlog_info << "************end load placement id: "<< placement_id_ << "************";
     
     if (run_completion_) {
         run_completion_();

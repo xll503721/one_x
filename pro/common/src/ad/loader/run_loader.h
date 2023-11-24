@@ -36,7 +36,7 @@ public:
     void Run(RunCompletion run_completion);
     
 private:
-    void EndAdLoad(const std::string& placement_id);
+    void EndAdLoad();
     void RequestPlacement();
     void WaterfallFlow();
     void LoadAdapter();
