@@ -27,6 +27,8 @@ void PlacementLoader::Start(const std::string& placement_id) {
     
     placement_service_->GetPlacementModel("", [=](std::shared_ptr<PlacementModel> placement_model) {
         if (placement_model) {
+            placement_service_->SetPlacementModel(placement_model);
+            
             std::map<std::string, std::shared_ptr<void>> map;
             map["placement_model"] = std::static_pointer_cast<void>(placement_model);
             NextLoader(map);

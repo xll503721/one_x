@@ -30,9 +30,9 @@ void MainLoader::Classify(std::shared_ptr<PlacementModel> placement) {
     }
 }
 
-void MainLoader::StartFlow(int32_t level, std::shared_ptr<PlacementModel> placement) {
+void MainLoader::StartFlow(std::shared_ptr<PlacementModel> placement) {
     if (mainloader_) {
-        mainloader_->StartFlow(level, placement);
+        mainloader_->StartFlow(placement);
     }
 }
 
@@ -49,9 +49,9 @@ void MainLoader::End() {
     }
 }
 
-void MainLoader::NextLoader(std::map<std::string, std::shared_ptr<void>> parmas) {
+void MainLoader::NextLoader(std::map<std::string, std::shared_ptr<void>> params) {
     if (next_loader_call_back_) {
-        next_loader_call_back_(parmas);
+        next_loader_call_back_(params);
     }
 }
 

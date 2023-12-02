@@ -27,6 +27,12 @@ public:
     
     virtual ~AdSourceModel();
     
+    enum class Status {
+        kNormal,
+        kLoading,
+        kLoaded,
+    };
+    
     std::string Identifier() override;
     
     void AdnLoad();
@@ -56,6 +62,13 @@ public:
         return AdSource::Style::kBanner;
     }
     
+    inline Status GetStatus() {
+        return status_;
+    }
+    inline void SetStatus(Status status) {
+        status_ = status;
+    }
+    
 private:
     void Load();
     
@@ -67,6 +80,8 @@ private:
     inline ONETEN_AD::AdSource::RequestType GetRequestType() {
         return ad_source_->GetRequestType();
     }
+    
+    Status status_;
     
     std::weak_ptr<AdSourceDelegate> delegate_;
 };

@@ -73,72 +73,67 @@ void RunLoader::RequestPlacement() {
 }
 
 void RunLoader::WaterfallFlow() {
-    start_loader_->NextLoader([=](std::map<std::string, std::shared_ptr<void>> parmas) {
-        auto placement_model = parmas["placement_model"];
+    start_loader_->NextLoader([=](std::map<std::string, std::shared_ptr<void>> params) {
+        auto placement_model = params["placement_model"];
         std::shared_ptr<PlacementModel> placement_model_ptr = std::static_pointer_cast<PlacementModel>(placement_model);
         
         otlog_info << "========waterfall loader start flow========";
-        waterfall_loader_->StartFlow(0, placement_model_ptr);
+        waterfall_loader_->StartFlow(placement_model_ptr);
     });
 }
 
 void RunLoader::LoadAdapter() {
-    waterfall_loader_->NextLoader([=](std::map<std::string, std::shared_ptr<void>> parmas) {
-        auto placement_model = parmas["placement_model"];
-        int32_t level = *std::static_pointer_cast<int32_t>(parmas["level"]);
+    waterfall_loader_->NextLoader([=](std::map<std::string, std::shared_ptr<void>> params) {
+        auto placement_model = params["placement_model"];
+        auto next_ad_source_model = params["next_ad_source_model"];
+        bool is_waterfall_finish = *std::static_pointer_cast<bool>(params["is_waterfall_finish"]);
+        
+        std::shared_ptr<AdSourceModel> next_ad_source_model_ptr = std::static_pointer_cast<AdSourceModel>(next_ad_source_model);
         std::shared_ptr<PlacementModel> placement_model_ptr = std::static_pointer_cast<PlacementModel>(placement_model);
-        auto ad_source_models = placement_model_ptr->GetAdSourceModel();
-        if (!(ad_source_models.size() > level)) {
-            EndAdLoad(placement_id_);
+        if (is_waterfall_finish) {
+            EndAdLoad();
             return;
         }
         
-        auto ad_source_model_ptr = ad_source_models[level];
         otlog_info << "========request loader flow========";
-        request_loader_->Flow(ad_source_model_ptr, placement_model_ptr);
+        request_loader_->Flow(next_ad_source_model_ptr, placement_model_ptr);
     });
 }
 
 void RunLoader::NextAdapter() {
-    request_loader_->NextLoader([=](std::map<std::string, std::shared_ptr<void>> parmas) {
-        auto placement_model = parmas["placement_model"];
-        auto ad_source_model = parmas["ad_source_model"];
-        auto error = parmas["error"];
-        if (!error) {
+    request_loader_->NextLoader([=](std::map<std::string, std::shared_ptr<void>> params) {
+        thread_pool_.Schedule(BASE_THREAD::Thread::Type::kOther, [&]() {
+            auto placement_model = params["placement_model"];
+            auto ad_source_model = params["ad_source_model"];
+            auto error = params["error"];
+            if (!error) {
+                std::shared_ptr<PlacementModel> placement_model_ptr = std::static_pointer_cast<PlacementModel>(placement_model);
+                std::shared_ptr<AdSourceModel> ad_source_model_ptr = std::static_pointer_cast<AdSourceModel>(ad_source_model);
+                otlog_info << "========cache loader save========";
+                cache_loader_->Save(ad_source_model_ptr, placement_model_ptr);
+            }
+            
             std::shared_ptr<PlacementModel> placement_model_ptr = std::static_pointer_cast<PlacementModel>(placement_model);
             std::shared_ptr<AdSourceModel> ad_source_model_ptr = std::static_pointer_cast<AdSourceModel>(ad_source_model);
-            otlog_info << "========cache loader save========";
-            cache_loader_->Save(ad_source_model_ptr, placement_model_ptr);
-            return;
-        }
-        
-        std::shared_ptr<PlacementModel> placement_model_ptr = std::static_pointer_cast<PlacementModel>(placement_model);
-        std::shared_ptr<AdSourceModel> ad_source_model_ptr = std::static_pointer_cast<AdSourceModel>(ad_source_model);
-        
-        otlog_info << "========waterfall loader start flow========";
-        waterfall_loader_->StartFlow(ad_source_model_ptr->GetLevel() + 1, placement_model_ptr);
+            
+            otlog_info << "========waterfall loader start flow========";
+            waterfall_loader_->StartFlow(placement_model_ptr);
+        });
     });
 }
 
 void RunLoader::SaveCache() {
-    cache_loader_->NextLoader([=](std::map<std::string, std::shared_ptr<void>> parmas) {
-        otlog_info << "========cache loader save end========";
-        EndAdLoad(placement_id_);
+    cache_loader_->NextLoader([=](std::map<std::string, std::shared_ptr<void>> params) {
     });
 }
 
-void RunLoader::EndAdLoad(const std::string& placement_id) {
+void RunLoader::EndAdLoad() {
     start_loader_->End();
     waterfall_loader_->End();
     request_loader_->End();
     cache_loader_->End();
     
-    start_loader_.reset();
-    waterfall_loader_.reset();
-    request_loader_.reset();
-    cache_loader_.reset();
-    
-    otlog_info << "************end load placement id: "<< placement_id << "************";
+    otlog_info << "************end load placement id: "<< placement_id_ << "************";
     
     if (run_completion_) {
         run_completion_();

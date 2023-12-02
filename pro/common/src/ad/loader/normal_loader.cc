@@ -33,24 +33,22 @@ void NormalLoader::Flow(std::shared_ptr<AdSourceModel> ad_source_model, std::sha
     std::weak_ptr<PlacementModel> w_placement_model = placement_model;
     std::weak_ptr<AdSourceModel> w_ad_source_model = ad_source_model;
     
-    placement_service_->SetupLoading(ad_source_model);
     ad_source_service_->Load(ad_source_model, [=](int32_t categroy_type, std::shared_ptr<ONETEN::Error> error) {
-        if (auto s_run_loader = GetRunLoader().lock()) {
-            auto run_loader_ptr = std::static_pointer_cast<RunLoader>(s_run_loader);
-            run_loader_ptr->GetThreadPool().Schedule(BASE_THREAD::Thread::Type::kOther, [=](){
-                auto s_placement_model = w_placement_model.lock();
-                auto s_ad_source_model = w_ad_source_model.lock();
-                
-                std::map<std::string, std::shared_ptr<void>> map;
-                map["placement_model"] = s_placement_model;
-                map["ad_source_model"] = s_ad_source_model;
-                
-                if (error) {
-                    map["error"] = error;
-                }
-                NextLoader(map);
-            });
+        auto s_placement_model = w_placement_model.lock();
+        auto s_ad_source_model = w_ad_source_model.lock();
+        
+        std::map<std::string, std::shared_ptr<void>> map;
+        if (s_placement_model) {
+            map["placement_model"] = s_placement_model;
         }
+        if (s_ad_source_model) {        
+            map["ad_source_model"] = s_ad_source_model;
+        }
+        
+        if (error) {
+            map["error"] = error;
+        }
+        NextLoader(map);
     });
 }
 

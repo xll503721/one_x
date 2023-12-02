@@ -12,6 +12,7 @@
 #include <unordered_map>
 #include <log/log.h>
 #include <cross/platform.h>
+#include <any>
 
 #ifndef __FILE_NAME__
 #define __FILE_NAME__ __FILE__

@@ -9,6 +9,7 @@
 #define ONETEN_AD_SDK_WATERFALL_LOADER_H
 
 #include "main_loader.h"
+#include <ad/service/waterfall_service.h>
 
 BEGIN_NAMESPACE_ONETEN_AD
 
@@ -22,13 +23,14 @@ public:
     virtual ~WaterfallLoader();
     
     void Classify(std::shared_ptr<PlacementModel> placement_model);
-    void StartFlow(int32_t level, std::shared_ptr<PlacementModel> placement_model);
-    void InternalStartFlow(int32_t level, std::shared_ptr<PlacementModel> placement_model);
-    
+    void StartFlow(std::shared_ptr<PlacementModel> placement_model);
     void End();
     
-private:
-    std::shared_ptr<PlacementModel> placement_;
+    void SetWaterfallService(std::shared_ptr<WaterfallService> waterfall_service);
+    std::shared_ptr<WaterfallService> GetWaterfallService();
+    
+protected:
+    std::shared_ptr<WaterfallService> waterfall_service_;
 };
 
 END_NAMESPACE_ONETEN_AD

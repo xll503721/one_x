@@ -16,29 +16,36 @@ WaterfallLoader::~WaterfallLoader() {
 }
 
 WaterfallLoader::WaterfallLoader(std::shared_ptr<LoaderInterface> loader, std::shared_ptr<void> run_loader):MainLoader(loader, run_loader) {
-    otlog_info << "";
+    std::shared_ptr<WaterfallLoader> waterfallLoader = std::dynamic_pointer_cast<WaterfallLoader>(loader);
+    if (!waterfallLoader) {
+        waterfall_service_ = std::make_shared<WaterfallService>();
+    } else {
+        waterfall_service_ = waterfallLoader->GetWaterfallService();
+    }
 }
 
 void WaterfallLoader::Classify(std::shared_ptr<PlacementModel> placement) {
     super_class::Classify(placement);
     
-    StartFlow(0, placement);
+    StartFlow(placement);
 }
 
-void WaterfallLoader::StartFlow(int32_t level, std::shared_ptr<PlacementModel> placement) {
-    super_class::StartFlow(level, placement);
-    
-    placement_ = placement;
-    InternalStartFlow(level, placement);
-}
-
-void WaterfallLoader::InternalStartFlow(int32_t level, std::shared_ptr<PlacementModel> placement_model) {
-    otlog_info << "flow level:" << level;
-    std::shared_ptr<void> level_ptr = std::make_shared<int32_t>(level);
+void WaterfallLoader::StartFlow(std::shared_ptr<PlacementModel> placement) {
+    super_class::StartFlow(placement);
     
     std::map<std::string, std::shared_ptr<void>> map;
-    map["placement_model"] = std::static_pointer_cast<void>(placement_model);
-    map["level"] = level_ptr;
+    
+    bool is_waterfall_finish = waterfall_service_->CheckWaterfallFinish(placement);
+    if (!is_waterfall_finish) {
+        auto next_ad_source_model = waterfall_service_->LoadNextAdSource();
+        if (next_ad_source_model) {
+            map["next_ad_source_model"] = next_ad_source_model;
+        }
+    }
+    
+    std::shared_ptr<void> is_waterfall_finish_ptr = std::make_shared<bool>(is_waterfall_finish);
+    map["is_waterfall_finish"] = is_waterfall_finish_ptr;
+    map["placement_model"] = placement;
     NextLoader(map);
 }
 
