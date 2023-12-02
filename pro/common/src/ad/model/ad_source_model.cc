@@ -69,6 +69,7 @@ void AdSourceModel::Register() {
     std::vector<BASE_PLATFORM::Platform::Var> vector;
     BASE_PLATFORM::Platform::Var user_info = &map;
     
+    otlog_info << "register";
     PLATFORM_INVOKE(&user_info)
 }
 

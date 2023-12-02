@@ -63,19 +63,18 @@ void OnetenAdSDK::StartAdLoad(const std::string& placement_id, std::map<std::str
 }
 
 bool OnetenAdSDK::IsAdReady(const std::string& placement_id) {
-    bool isReady = (cache_repository_->GetAnyOne(placement_id) != nullptr);
+    auto ad_cache = cache_repository_->GetAnyOne(placement_id);
+    bool isReady = ad_cache->IsReady();
     otlog_info << "placement id:" << placement_id << " has ready:" << isReady;
     return isReady;
 }
 
 std::shared_ptr<AdSourceModel> OnetenAdSDK::ShowAd(const std::string& placement_id, AdSDKDelegate& delegate) {
-    auto ad_cache = cache_repository_->GetHighestPrice(placement_id);
-#ifdef DEBUG
     bool isReady = IsAdReady(placement_id);
+    std::shared_ptr<AdSourceModel> ad_cache = cache_repository_->GetHighestPrice(placement_id);
     if ((isReady && !ad_cache) || (ad_cache && !isReady)) {
         otlog_fault << "is ready not match get ad cache";
     }
-#endif
     
     return ad_cache;
 }

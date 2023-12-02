@@ -151,12 +151,13 @@ static const NSInteger kOTAdTypeDetailViewControllerTableViewAdnSection = 1;
         self.adViewController.frame = self.view.frame;
         [self.view addSubview:self.adViewController.view];
         [self addChildViewController:self.adViewController];
-        
+
         OTAdView *view = (OTAdView *)self.adViewController.view;
         view.backgroundColor = [UIColor clearColor];
         view.titleLabel.frame = CGRectMake(0, 0, 100, 50);
-        
+
         [view addSubview:view.titleLabel];
+        
     } while (false);
     
     self.logTextView.text = text;

@@ -8,7 +8,6 @@ target 'OneTenDemo' do
   # Pods for OneTenDemo
 pod 'SigmobAd-iOS'
 pod 'GDTMobSDK'
-pod 'Ads-CN'
 pod 'BaiduMobAdSDK'
 pod 'KSAdSDK'
 pod "VungleAds"
@@ -22,6 +21,10 @@ pod 'myTargetSDK'
 pod 'AnyThinkiOS'
 pod 'BigoADS'
 pod 'TianmuSDK'
+pod 'Ads-Fusion-CN-Beta', '5.1.7.0' , :subspecs => [
+    'Ads-CSJ',
+    'CSJMediation'
+  ]
 
 pod 'MintegralAdSDK/BidNativeAd'
 pod 'MintegralAdSDK/BidRewardVideoAd'

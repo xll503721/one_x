@@ -9,7 +9,8 @@
 #import <BUAdSDK/BUAdSDK.h>
 #import <OTAdViewController.h>
 
-@interface OTGroMoreSource ()<OTAdSourceProtocol, BUMNativeAdsManagerDelegate, BUMNativeAdDelegate>
+@interface OTGroMoreSource ()<OTAdSourceProtocol, BUMNativeAdsManagerDelegate, BUMNativeAdDelegate,
+                                                  BUSplashAdDelegate, BUSplashCardDelegate, BUSplashZoomOutDelegate>
 
 @property (nonatomic, strong) NSMutableArray<BUNativeAd *> *nativeAdDataArray;
 
@@ -21,22 +22,39 @@
 {
     self = [super init];
     if (self) {
-        static dispatch_once_t onceToken ;
-        dispatch_once(&onceToken, ^{
-            BUAdSDKConfiguration *configuration = [BUAdSDKConfiguration configuration];
-            configuration.appID = @"5135958";
-            configuration.useMediation = YES;
-            [BUAdSDKManager startWithSyncCompletionHandler:^(BOOL success, NSError *error) {
-                if (success) {
-                    NSLog(@"1111");
-                }
-            }];
-        });
     }
     return self;
 }
 
+- (void)registerWithUserInfo:(NSDictionary<id, id> *)userInfo {
+    BUAdSDKConfiguration *configuration = [BUAdSDKConfiguration configuration];
+    configuration.appID = @"5000546";
+    [BUAdSDKManager startWithAsyncCompletionHandler:^(BOOL success, NSError *error) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(registerWithUserInfo:error:)]) {
+            [self.delegate registerWithUserInfo:userInfo error:error];
+        }
+    }];
+}
+
 - (BOOL)isReadyWithStyle:(OTAdSourceStyleType)styleType {
+    switch (styleType) {
+        case OTAdSourceStyleTypeNative: {
+            
+        }
+            break;
+        case OTAdSourceStyleTypeRewardedVideo: {
+            
+        }
+            break;
+        case OTAdSourceStyleTypeSplash: {
+            if ([self.delegate.adSourceObject isKindOfClass:[BUSplashAd class]]) {
+                return self.delegate.adSourceObject;
+            }
+        }
+            break;
+        default:
+            break;
+    }
     return NO;
 }
 
@@ -57,6 +75,12 @@
             }
         }
             break;
+        case OTAdSourceStyleTypeSplash: {
+            if ([self.delegate.adSourceObject isKindOfClass:[BUSplashAd class]]) {
+                [(BUSplashAd *)self.delegate.adSourceObject showSplashViewInRootViewController:viewController];
+            }
+        }
+            break;
         default:
             break;
     }
@@ -68,15 +92,18 @@
             [self loadNativeWithType:type userInfo:userInfo];
         }
             break;
+        case OTAdSourceStyleTypeSplash: {
+            [self loadSplashWithType:type userInfo:userInfo];
+        }
+            break;
         default:
             break;
     }
     
 }
 
-#pragma mark - Native
+#pragma mark - Load
 - (void)loadNativeWithType:(OTAdSourceType)type userInfo:(NSDictionary *)userInfo {
-    NSLog(@"22222");
     BUAdSlot *slot1 = [[BUAdSlot alloc] init];
     BUSize *imgSize1 = [[BUSize alloc] init];
     imgSize1.width = 1080;
@@ -95,6 +122,28 @@
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(adWillLoadWithStyleType:adSourceObject:)]) {
         [self.delegate adWillLoadWithStyleType:OTAdSourceStyleTypeInterstitial adSourceObject:adManager];
+    }
+}
+
+/// start load splash ad
+/// @param type c2s s2s
+/// @param userInfo info
+- (void)loadSplashWithType:(OTAdSourceType)type userInfo:(NSDictionary<id, id> *)userInfo {
+    BUAdSlot *slot = [[BUAdSlot alloc]init];
+    slot.ID = @"800546851";
+
+    BUSplashAd *splashAd = [[BUSplashAd alloc] initWithSlot:slot adSize:[UIScreen mainScreen].bounds.size];
+    splashAd.delegate = self;
+    splashAd.cardDelegate = self;
+    splashAd.zoomOutDelegate = self;
+    
+    splashAd.supportCardView = YES;
+    splashAd.supportZoomOutView = YES;
+    splashAd.tolerateTimeout = 3.0;
+    [splashAd loadAdData];
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adWillLoadWithStyleType:adSourceObject:)]) {
+        [self.delegate adWillLoadWithStyleType:OTAdSourceStyleTypeInterstitial adSourceObject:splashAd];
     }
 }
 
@@ -231,6 +280,112 @@
  @Note :  Mediation dimension does not support this interface.
  */
 - (void)nativeAd:(BUNativeAd *_Nullable)nativeAd adContainerViewDidRemoved:(UIView *)adContainerView {
+    
+}
+
+#pragma mark - Splash
+
+/// This method is called when material load successful
+- (void)splashAdLoadSuccess:(BUSplashAd *)splashAd {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidLoadWithStyleType:error:)]) {
+        [self.delegate adDidLoadWithStyleType:OTAdSourceStyleTypeSplash error:nil];
+    }
+}
+
+/// This method is called when material load failed
+- (void)splashAdLoadFail:(BUSplashAd *)splashAd error:(BUAdError *_Nullable)error {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidLoadWithStyleType:error:)]) {
+        [self.delegate adDidLoadWithStyleType:OTAdSourceStyleTypeSplash error:error];
+    }
+}
+
+/// This method is called when splash view render successful
+/// @Note :  Mediation dimension does not support this callBack.
+- (void)splashAdRenderSuccess:(BUSplashAd *)splashAd {
+    
+}
+
+/// This method is called when splash view render failed
+/// @Note :  Mediation dimension does not support this callBack.
+- (void)splashAdRenderFail:(BUSplashAd *)splashAd error:(BUAdError *_Nullable)error {
+    
+}
+
+/// This method is called when splash view will show
+- (void)splashAdWillShow:(BUSplashAd *)splashAd {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adWillShowWithStyleType:error:)]) {
+        [self.delegate adWillShowWithStyleType:OTAdSourceStyleTypeSplash error:nil];
+    }
+}
+
+/// This method is called when splash view did show
+/// @Note :  Mediation dimension does not support this callBack.
+- (void)splashAdDidShow:(BUSplashAd *)splashAd {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidShowWithStyleType:error:)]) {
+        [self.delegate adDidShowWithStyleType:OTAdSourceStyleTypeSplash error:nil];
+    }
+}
+
+/// This method is called when splash view is clicked.
+- (void)splashAdDidClick:(BUSplashAd *)splashAd {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidClickWithStyleType:error:)]) {
+        [self.delegate adDidClickWithStyleType:OTAdSourceStyleTypeSplash error:nil];
+    }
+}
+
+/// This method is called when splash view is closed.
+- (void)splashAdDidClose:(BUSplashAd *)splashAd closeType:(BUSplashAdCloseType)closeType {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidCloseWithStyleType:error:)]) {
+        [self.delegate adDidCloseWithStyleType:OTAdSourceStyleTypeSplash error:nil];
+    }
+}
+
+/// This method is called when splash viewControllr is closed.
+/// @Note :  Mediation dimension does not support this callBack.
+- (void)splashAdViewControllerDidClose:(BUSplashAd *)splashAd {
+    
+}
+
+/**
+ This method is called when another controller has been closed.
+ @param interactionType : open appstore in app or open the webpage or view video ad details page.
+ */
+- (void)splashDidCloseOtherController:(BUSplashAd *)splashAd interactionType:(BUInteractionType)interactionType {
+    
+}
+
+/// This method is called when when video ad play completed or an error occurred.
+- (void)splashVideoAdDidPlayFinish:(BUSplashAd *)splashAd didFailWithError:(NSError *)error {
+    
+}
+
+/// This method is called when splash card is ready to show.
+- (void)splashCardReadyToShow:(BUSplashAd *)splashAd {
+    
+}
+
+/// This method is called when splash card is clicked.
+- (void)splashCardViewDidClick:(BUSplashAd *)splashAd {
+    
+}
+
+/// This method is called when splash card is closed.
+- (void)splashCardViewDidClose:(BUSplashAd *)splashAd {
+    
+}
+
+/// This method is called when splash zoomout is ready to show.
+- (void)splashZoomOutReadyToShow:(BUSplashAd *)splashAd {
+    
+}
+
+/// This method is called when splash zoomout is clicked.
+- (void)splashZoomOutViewDidClick:(BUSplashAd *)splashAd {
+    
+}
+
+/// This method is called when splash zoomout is closed.
+- (void)splashZoomOutViewDidClose:(BUSplashAd *)splashAd {
     
 }
 
