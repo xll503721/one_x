@@ -102,11 +102,10 @@ void RunLoader::LoadAdapter() {
 
 void RunLoader::NextAdapter() {
     request_loader_->NextLoader([=](std::map<std::string, std::shared_ptr<void>> params) {
-        thread_pool_.Schedule(BASE_THREAD::Thread::Type::kOther, [&]() {
-            auto placement_model = params["placement_model"];
-            auto ad_source_model = params["ad_source_model"];
-            auto error = params["error"];
-            if (!error) {
+        thread_pool_.Schedule(BASE_THREAD::Thread::Type::kOther, [&, copy_params = params]() {
+            auto placement_model = copy_params.at("placement_model");
+            auto ad_source_model = copy_params.at("ad_source_model");
+            if (copy_params.find("error") == copy_params.end()) {
                 std::shared_ptr<PlacementModel> placement_model_ptr = std::static_pointer_cast<PlacementModel>(placement_model);
                 std::shared_ptr<AdSourceModel> ad_source_model_ptr = std::static_pointer_cast<AdSourceModel>(ad_source_model);
                 otlog_info << "========cache loader save========";

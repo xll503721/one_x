@@ -54,4 +54,14 @@ void WaterfallLoader::End() {
     otlog_info << "";
 };
 
+#pragma mark - setter getter
+
+void WaterfallLoader::SetWaterfallService(std::shared_ptr<WaterfallService> waterfall_service) {
+    waterfall_service_ = waterfall_service;
+}
+
+std::shared_ptr<WaterfallService> WaterfallLoader::GetWaterfallService() {
+    return waterfall_service_;
+}
+
 END_NAMESPACE_ONETEN_AD

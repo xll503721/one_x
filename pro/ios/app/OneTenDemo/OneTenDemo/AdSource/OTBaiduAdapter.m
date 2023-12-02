@@ -27,7 +27,9 @@
         }
             break;
         case OTAdSourceStyleTypeSplash: {
-            
+            if ([self.delegate.adSourceObject isKindOfClass:[BaiduMobAdSplash class]]) {
+                return self.delegate.adSourceObject;
+            }
         }
             break;
         case OTAdSourceStyleTypeInterstitial: {

@@ -64,8 +64,11 @@ void OnetenAdSDK::StartAdLoad(const std::string& placement_id, std::map<std::str
 
 bool OnetenAdSDK::IsAdReady(const std::string& placement_id) {
     auto ad_cache = cache_repository_->GetAnyOne(placement_id);
+    if (!ad_cache) {
+        return false;
+    }
     bool isReady = ad_cache->IsReady();
-    otlog_info << "placement id:" << placement_id << " has ready:" << isReady;
+    otlog_info << "placement id:" << placement_id << " has ready:" << isReady << " ad:" << &ad_cache;
     return isReady;
 }
 
