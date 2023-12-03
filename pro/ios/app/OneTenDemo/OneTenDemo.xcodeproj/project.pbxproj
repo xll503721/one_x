@@ -314,6 +314,62 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		37E532112B1C2097000D661D /* Overseas */ = {
+			isa = PBXGroup;
+			children = (
+				37EB9C6E2B09889D00308C71 /* OTDigitalTurbineAdapter.h */,
+				37EB9C712B09889D00308C71 /* OTDigitalTurbineAdapter.m */,
+				37EB9C622B09889C00308C71 /* OTChartboostAdapter.h */,
+				37EB9C3F2B09889B00308C71 /* OTChartboostAdapter.m */,
+				37EB9C742B09889D00308C71 /* OTInmobiAdapter.h */,
+				37EB9C722B09889D00308C71 /* OTInmobiAdapter.m */,
+				37EB9C5E2B09889C00308C71 /* OTIronSourceAdapter.h */,
+				37EB9C6F2B09889D00308C71 /* OTIronSourceAdapter.m */,
+				37EB9C782B09889D00308C71 /* OTMaxAdapter.h */,
+				37EB9C632B09889C00308C71 /* OTMaxAdapter.m */,
+				37EB9C702B09889D00308C71 /* OTMyTargetAdapter.h */,
+				37EB9C662B09889C00308C71 /* OTMyTargetAdapter.m */,
+				37EB9C5F2B09889C00308C71 /* OTStartAdapter.h */,
+				37EB9C612B09889C00308C71 /* OTStartAdapter.m */,
+				37EB9C592B09889C00308C71 /* OTUnityAdsAdapter.h */,
+				37EB9C672B09889C00308C71 /* OTUnityAdsAdapter.m */,
+				37EB9C7C2B09889D00308C71 /* OTVungleAdapter.h */,
+				37EB9C5B2B09889C00308C71 /* OTVungleAdapter.m */,
+				37EB9C7D2B09889E00308C71 /* OTYandexAdapter.h */,
+				37EB9C682B09889C00308C71 /* OTYandexAdapter.m */,
+			);
+			path = Overseas;
+			sourceTree = "<group>";
+		};
+		37E532122B1C20A9000D661D /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				4BE43BC82AEDFFF800373D46 /* OTBaiduAdapter.h */,
+				4BE43BC92AEDFFF800373D46 /* OTBaiduAdapter.m */,
+				37EB9C572B09889C00308C71 /* OTBigoAdapter.h */,
+				37EB9C6D2B09889D00308C71 /* OTBigoAdapter.m */,
+				4B4FC4E92ACFABE40060C369 /* OTCSJAdapter.h */,
+				4B4FC4EA2ACFABE40060C369 /* OTCSJAdapter.m */,
+				37EB9C792B09889D00308C71 /* OTGDTAdapter.h */,
+				37EB9C7B2B09889D00308C71 /* OTGDTAdapter.m */,
+				37EB9C5A2B09889C00308C71 /* OTGroMoreSource.h */,
+				37EB9C652B09889C00308C71 /* OTGroMoreSource.m */,
+				37EB9C7A2B09889D00308C71 /* OTKSAdapter.h */,
+				37EB9C752B09889D00308C71 /* OTKSAdapter.m */,
+				37EB9C642B09889C00308C71 /* OTMTGAdapter.h */,
+				37EB9C762B09889D00308C71 /* OTMTGAdapter.m */,
+				37EB9C5D2B09889C00308C71 /* OTPangleAdpater.h */,
+				37EB9C602B09889C00308C71 /* OTPangleAdpater.m */,
+				37EB9C6C2B09889D00308C71 /* OTSigmobAdapter.h */,
+				37EB9C582B09889C00308C71 /* OTSigmobAdapter.m */,
+				37EB9C6B2B09889D00308C71 /* OTTianmuAdapter.h */,
+				37EB9C6A2B09889D00308C71 /* OTTianmuAdapter.m */,
+				37EB9C772B09889D00308C71 /* OTTopOnAdapter.h */,
+				37EB9C692B09889D00308C71 /* OTTopOnAdapter.m */,
+			);
+			path = Internal;
+			sourceTree = "<group>";
+		};
 		4B0E03D729A248E600392BEE = {
 			isa = PBXGroup;
 			children = (
@@ -337,7 +393,7 @@
 			isa = PBXGroup;
 			children = (
 				4BA0DBC52A6E106D00F970B8 /* Debug */,
-				4BA0DB6E2A6B7A5A00F970B8 /* AdSource */,
+				4BA0DB6E2A6B7A5A00F970B8 /* AdAdapter */,
 				4B0E03E329A248E600392BEE /* AppDelegate.h */,
 				4B0E03E429A248E600392BEE /* AppDelegate.m */,
 				4B0E03EF29A248E800392BEE /* Assets.xcassets */,
@@ -398,53 +454,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		4BA0DB6E2A6B7A5A00F970B8 /* AdSource */ = {
+		4BA0DB6E2A6B7A5A00F970B8 /* AdAdapter */ = {
 			isa = PBXGroup;
 			children = (
-				4BE43BC82AEDFFF800373D46 /* OTBaiduAdapter.h */,
-				4BE43BC92AEDFFF800373D46 /* OTBaiduAdapter.m */,
-				37EB9C572B09889C00308C71 /* OTBigoAdapter.h */,
-				37EB9C6D2B09889D00308C71 /* OTBigoAdapter.m */,
-				37EB9C622B09889C00308C71 /* OTChartboostAdapter.h */,
-				37EB9C3F2B09889B00308C71 /* OTChartboostAdapter.m */,
-				4B4FC4E92ACFABE40060C369 /* OTCSJAdapter.h */,
-				4B4FC4EA2ACFABE40060C369 /* OTCSJAdapter.m */,
-				37EB9C6E2B09889D00308C71 /* OTDigitalTurbineAdapter.h */,
-				37EB9C712B09889D00308C71 /* OTDigitalTurbineAdapter.m */,
-				37EB9C792B09889D00308C71 /* OTGDTAdapter.h */,
-				37EB9C7B2B09889D00308C71 /* OTGDTAdapter.m */,
-				37EB9C5A2B09889C00308C71 /* OTGroMoreSource.h */,
-				37EB9C652B09889C00308C71 /* OTGroMoreSource.m */,
-				37EB9C742B09889D00308C71 /* OTInmobiAdapter.h */,
-				37EB9C722B09889D00308C71 /* OTInmobiAdapter.m */,
-				37EB9C5E2B09889C00308C71 /* OTIronSourceAdapter.h */,
-				37EB9C6F2B09889D00308C71 /* OTIronSourceAdapter.m */,
-				37EB9C7A2B09889D00308C71 /* OTKSAdapter.h */,
-				37EB9C752B09889D00308C71 /* OTKSAdapter.m */,
-				37EB9C782B09889D00308C71 /* OTMaxAdapter.h */,
-				37EB9C632B09889C00308C71 /* OTMaxAdapter.m */,
-				37EB9C642B09889C00308C71 /* OTMTGAdapter.h */,
-				37EB9C762B09889D00308C71 /* OTMTGAdapter.m */,
-				37EB9C702B09889D00308C71 /* OTMyTargetAdapter.h */,
-				37EB9C662B09889C00308C71 /* OTMyTargetAdapter.m */,
-				37EB9C5D2B09889C00308C71 /* OTPangleAdpater.h */,
-				37EB9C602B09889C00308C71 /* OTPangleAdpater.m */,
-				37EB9C6C2B09889D00308C71 /* OTSigmobAdapter.h */,
-				37EB9C582B09889C00308C71 /* OTSigmobAdapter.m */,
-				37EB9C5F2B09889C00308C71 /* OTStartAdapter.h */,
-				37EB9C612B09889C00308C71 /* OTStartAdapter.m */,
-				37EB9C6B2B09889D00308C71 /* OTTianmuAdapter.h */,
-				37EB9C6A2B09889D00308C71 /* OTTianmuAdapter.m */,
-				37EB9C772B09889D00308C71 /* OTTopOnAdapter.h */,
-				37EB9C692B09889D00308C71 /* OTTopOnAdapter.m */,
-				37EB9C592B09889C00308C71 /* OTUnityAdsAdapter.h */,
-				37EB9C672B09889C00308C71 /* OTUnityAdsAdapter.m */,
-				37EB9C7C2B09889D00308C71 /* OTVungleAdapter.h */,
-				37EB9C5B2B09889C00308C71 /* OTVungleAdapter.m */,
-				37EB9C7D2B09889E00308C71 /* OTYandexAdapter.h */,
-				37EB9C682B09889C00308C71 /* OTYandexAdapter.m */,
+				37E532122B1C20A9000D661D /* Internal */,
+				37E532112B1C2097000D661D /* Overseas */,
 			);
-			path = AdSource;
+			path = AdAdapter;
 			sourceTree = "<group>";
 		};
 		4BA0DBC52A6E106D00F970B8 /* Debug */ = {

@@ -68,13 +68,13 @@
 - (OTAdViewController *)showWithPlacementId:(NSString *)placementId error:(NSError **)error {
     bool isReady = ONETEN_AD::OnetenAdSDK::GetInstance().IsAdReady(placementId.UTF8String);
     if (!isReady) {
-        *error = [NSError errorWithDomain:@"ad show" code:1000 userInfo:@{}];
+        *error = [NSError errorWithDomain:@"ad show" code:kADSDKAdnNotReady userInfo:@{}];
         return nil;
     }
     
     auto ad_source_model = ONETEN_AD::OnetenAdSDK::GetInstance().ShowAd(placementId.UTF8String, _sdk_delegate);
     if (!ad_source_model) {
-        *error = [NSError errorWithDomain:@"ad show" code:1000 userInfo:@{}];
+        *error = [NSError errorWithDomain:@"ad show" code:kADSDKAdnNotReady userInfo:@{}];
         return nil;
     }
     void* platformObj = ad_source_model->GetPlatformObj();

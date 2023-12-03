@@ -53,7 +53,7 @@ void OnetenAdSDK::StartAdLoad(const std::string& placement_id, std::map<std::str
             std::shared_ptr<ONETEN::Error> error = nullptr;
             if (type == AdSDKDelegate::ActionType::kLoadFail) {
                 std::map<std::string, std::string> user_info;
-                error = std::make_shared<ONETEN::Error>(1000, "all ad source load fail", user_info);
+                error = std::make_shared<ONETEN::Error>(kADSDKAllAdnLoadFailed, "all ad source load fail", user_info);
             }
             s_delegate->ActionCompletion(type, placement_id, error);
         }

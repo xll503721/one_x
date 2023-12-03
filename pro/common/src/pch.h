@@ -13,6 +13,7 @@
 #include <log/log.h>
 #include <cross/platform.h>
 #include <any>
+#include "error_code.h"
 
 #ifndef __FILE_NAME__
 #define __FILE_NAME__ __FILE__
