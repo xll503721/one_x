@@ -45,7 +45,7 @@
             break;
         case OTAdSourceStyleTypeSplash: {
             if ([self.delegate.adSourceObject isKindOfClass:[BUSplashAd class]]) {
-                return [[(BUSplashAd *)self.delegate.adSourceObject splashView] isAdValid];
+                return self.delegate.adSourceObject;
             }
         }
             break;
@@ -196,15 +196,13 @@
 
 /// This method is called when splash view is closed.
 - (void)splashAdDidClose:(BUSplashAd *)splashAd closeType:(BUSplashAdCloseType)closeType {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidCloseWithStyleType:error:)]) {
-        [self.delegate adDidCloseWithStyleType:OTAdSourceStyleTypeSplash error:nil];
-    }
+    
 }
 
 /// This method is called when splash viewControllr is closed.
 - (void)splashAdViewControllerDidClose:(BUSplashAd *)splashAd {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidDismissWithStyleType:error:)]) {
-        [self.delegate adDidDismissWithStyleType:OTAdSourceStyleTypeSplash error:nil];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidCloseWithStyleType:error:)]) {
+        [self.delegate adDidCloseWithStyleType:OTAdSourceStyleTypeSplash error:nil];
     }
 }
 

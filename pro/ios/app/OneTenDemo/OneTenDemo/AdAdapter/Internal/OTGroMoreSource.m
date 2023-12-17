@@ -29,6 +29,7 @@
 - (void)registerWithUserInfo:(NSDictionary<id, id> *)userInfo {
     BUAdSDKConfiguration *configuration = [BUAdSDKConfiguration configuration];
     configuration.appID = @"5000546";
+    configuration.useMediation = YES;
     [BUAdSDKManager startWithAsyncCompletionHandler:^(BOOL success, NSError *error) {
         if (self.delegate && [self.delegate respondsToSelector:@selector(registerWithUserInfo:error:)]) {
             [self.delegate registerWithUserInfo:userInfo error:error];

@@ -106,7 +106,6 @@
     reward.delegate = self;
     reward.AdUnitTag = @"5889473";
     reward.publisherId = @"ccb60059";
-    reward.useRewardCountdown = YES;
     reward.userID = @"user123456";
     reward.extraInfo = @"aa?=bb&cc?=dd";
     
