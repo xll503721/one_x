@@ -1,34 +1,35 @@
 # Uncomment the next line to define a global platform for your project
 platform :ios, '11.0'
 
+source 'https://github.com/CocoaPods/Specs.git'
+
 target 'OneTenDemo' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
+
   # Pods for OneTenDemo
-pod 'SigmobAd-iOS'
-pod 'GDTMobSDK'
-pod 'BaiduMobAdSDK'
-pod 'KSAdSDK'
-pod "VungleAds"
-pod 'Ads-Global'
+pod 'SigmobAd-iOS', '4.11.0'
+pod 'GDTMobSDK', '4.14.50'
+pod 'BaiduMobAdSDK', '5.331'
+pod 'KSAdSDK', '3.3.53'
+pod 'VungleAds', '7.2.0'
+pod 'Ads-Global', '5.6.0.9'
 #pod 'Google-Mobile-Ads-SDK'
 #pod 'IronSourceSDK'
-pod 'ChartboostSDK'
-pod 'Fyber_Marketplace_SDK'
-pod 'StartAppSDK'
+pod 'ChartboostSDK', '9.6.0'
+pod 'Fyber_Marketplace_SDK', '8.2.5'
+pod 'StartAppSDK', '4.10.2'
 pod 'myTargetSDK'
-pod 'AnyThinkiOS'
-pod 'BigoADS'
-pod 'TianmuSDK'
+pod 'AnyThinkiOS', '6.2.82'
+pod 'BigoADS', '4.0.4'
+pod 'TianmuSDK', '2.0.9.1'
+pod 'YandexMobileAds', '5.2.1'
 pod 'Ads-Fusion-CN-Beta', '5.1.7.0' , :subspecs => [
     'Ads-CSJ',
     'CSJMediation'
   ]
 
-pod 'MintegralAdSDK/BidNativeAd'
-pod 'MintegralAdSDK/BidRewardVideoAd'
-pod 'MintegralAdSDK/CNAddition'
-pod 'MintegralAdSDK/BidSplashAd'
+pod 'MintegralAdSDK/All','7.5.0'
 
 end

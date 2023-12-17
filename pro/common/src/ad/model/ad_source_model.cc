@@ -103,7 +103,10 @@ void AdSourceModel::RegisterCompletion(std::map<std::string, std::string> user_i
         }
         return;
     }
-    Load();
+    
+    BASE_THREAD::ThreadPool::DefaultPool().Schedule(BASE_THREAD::Thread::Type::kMain, [=](){
+        Load();
+    });
 }
 
 void AdSourceModel::LoadCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error) {
@@ -125,8 +128,6 @@ void AdSourceModel::ShowCompletion(int32_t categroy_type, std::shared_ptr<ONETEN
         otlog_info << "failed code:" << error->GetCode() << ", msg:" << error->GetMsg();
         return;
     }
-    std::map<std::string, std::string> event_properties;
-    BASE_ANALYTICS::Tracker::DefaultTracker().Send("show", event_properties);
     
     if (auto s_delegate = delegate_.lock()) {
         s_delegate->ShowCompletion(categroy_type);
