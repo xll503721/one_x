@@ -22,6 +22,7 @@ pod 'myTargetSDK'
 pod 'AnyThinkiOS'
 pod 'BigoADS'
 pod 'TianmuSDK'
+pod 'YandexMobileAds'
 
 pod 'MintegralAdSDK/BidNativeAd'
 pod 'MintegralAdSDK/BidRewardVideoAd'
