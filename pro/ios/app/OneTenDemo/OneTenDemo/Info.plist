@@ -83,6 +83,8 @@
 			</dict>
 			<key>Common</key>
 			<dict>
+				<key>BIGO</key>
+				<string>123456789</string>
 				<key>BAIDU</key>
 				<string>123456789</string>
 				<key>CSJ</key>
@@ -90,7 +92,7 @@
 				<key>GDT</key>
 				<string>123456789</string>
 				<key>GM</key>
-				<string></string>
+				<string>123456789</string>
 				<key>KS</key>
 				<string>123456789</string>
 				<key>SIGMOB</key>

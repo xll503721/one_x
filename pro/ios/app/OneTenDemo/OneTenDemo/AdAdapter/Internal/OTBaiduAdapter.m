@@ -27,7 +27,9 @@
         }
             break;
         case OTAdSourceStyleTypeSplash: {
-            
+            if ([self.delegate.adSourceObject isKindOfClass:[BaiduMobAdSplash class]]) {
+                return self.delegate.adSourceObject;
+            }
         }
             break;
         case OTAdSourceStyleTypeInterstitial: {
@@ -73,11 +75,14 @@
         }
             break;
         case OTAdSourceStyleTypeSplash: {
-            
+            if ([self.delegate.adSourceObject isKindOfClass:[BaiduMobAdSplash class]]) {
+                [(BaiduMobAdSplash *)self.delegate.adSourceObject showSplashViewInViewController:viewController];
+            }
         }
             break;
         case OTAdSourceStyleTypeRewardedVideo: {
             if ([self.delegate.adSourceObject isKindOfClass:[BaiduMobAdRewardVideo class]]) {
+                
                 [(BaiduMobAdRewardVideo *)self.delegate.adSourceObject showFromViewController:viewController];
             }
         }
@@ -105,6 +110,14 @@
     reward.userID = @"user123456";
     reward.extraInfo = @"aa?=bb&cc?=dd";
     
+    // 使用ext字段进行传参。
+    BaiduMobAdFeedRequestParameters *parameters = [[BaiduMobAdFeedRequestParameters alloc] init];
+    [parameters addCustExtParametersKey:@"baidu1" value:@"bd1234"];
+    NSTimeInterval date = [[NSDate date] timeIntervalSince1970];
+    NSString *md5String = [NSString stringWithFormat:@"cust_Value_这是时间戳 %f",date];
+    [parameters addCustExtParametersKey:@"cust_Key_这是key" value:md5String];
+    reward.requestParameters = parameters;
+    
     [reward load];
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(adWillLoadWithStyleType:adSourceObject:)]) {
@@ -119,6 +132,8 @@
     BaiduMobAdSplash *splash = [[BaiduMobAdSplash alloc] init];
     splash.delegate = self;
     splash.AdUnitTag = @"2058492";
+    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    splash.adSize = CGSizeMake(window.frame.size.width, window.frame.size.height);
     [splash load];
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(adWillLoadWithStyleType:adSourceObject:)]) {
@@ -252,7 +267,9 @@
  *  广告曝光成功
  */
 - (void)splashDidExposure:(BaiduMobAdSplash *)splash {
-    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidShowWithStyleType:error:)]) {
+        [self.delegate adDidShowWithStyleType:OTAdSourceStyleTypeSplash error:nil];
+    }
 }
 
 /**
@@ -266,21 +283,28 @@
  *  广告展示失败
  */
 - (void)splashlFailPresentScreen:(BaiduMobAdSplash *)splash withError:(BaiduMobFailReason) reason {
-    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidShowWithStyleType:error:)]) {
+        NSError *error = [NSError errorWithDomain:@"" code:reason userInfo:nil];
+        [self.delegate adDidShowWithStyleType:OTAdSourceStyleTypeSplash error:error];
+    }
 }
 
 /**
  *  广告被点击
  */
 - (void)splashDidClicked:(BaiduMobAdSplash *)splash {
-    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidClickWithStyleType:error:)]) {
+        [self.delegate adDidClickWithStyleType:OTAdSourceStyleTypeSplash error:nil];
+    }
 }
 
 /**
  *  广告展示结束
  */
 - (void)splashDidDismissScreen:(BaiduMobAdSplash *)splash {
-    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidCloseWithStyleType:error:)]) {
+        [self.delegate adDidCloseWithStyleType:OTAdSourceStyleTypeSplash error:nil];
+    }
 }
 
 /**

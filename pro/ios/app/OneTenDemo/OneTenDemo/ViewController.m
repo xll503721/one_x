@@ -8,7 +8,6 @@
 #import "ViewController.h"
 #import <OneTenSDK/OTOneTen.h>
 #import <OneTenSDK/OTOneTenAdSDK.h>
-#import <WindSDK/WindSDK.h>
 
 #import "OTAdTypeTableViewCell.h"
 #import "OTAdTypeDetailViewController.h"
@@ -17,7 +16,7 @@
 #define AppKey @"eccdcdbd9adbd4a7"//应用key
 #define FullScreenVideoAdPlacementId @"f21b862c1cd"//插屏广告位ID
 
-@interface ViewController ()<WindIntersititialAdDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface ViewController ()
 
 @property (nonatomic, strong) OTAdViewController *adViewController;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;

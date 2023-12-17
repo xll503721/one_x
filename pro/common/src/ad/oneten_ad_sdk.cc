@@ -53,7 +53,7 @@ void OnetenAdSDK::StartAdLoad(const std::string& placement_id, std::map<std::str
             std::shared_ptr<ONETEN::Error> error = nullptr;
             if (type == AdSDKDelegate::ActionType::kLoadFail) {
                 std::map<std::string, std::string> user_info;
-                error = std::make_shared<ONETEN::Error>(1000, "all ad source load fail", user_info);
+                error = std::make_shared<ONETEN::Error>(kADSDKAllAdnLoadFailed, "all ad source load fail", user_info);
             }
             s_delegate->ActionCompletion(type, placement_id, error);
         }
@@ -63,19 +63,21 @@ void OnetenAdSDK::StartAdLoad(const std::string& placement_id, std::map<std::str
 }
 
 bool OnetenAdSDK::IsAdReady(const std::string& placement_id) {
-    bool isReady = (cache_repository_->GetAnyOne(placement_id) != nullptr);
-    otlog_info << "placement id:" << placement_id << " has ready:" << isReady;
+    auto ad_cache = cache_repository_->GetAnyOne(placement_id);
+    if (!ad_cache) {
+        return false;
+    }
+    bool isReady = ad_cache->IsReady();
+    otlog_info << "placement id:" << placement_id << " has ready:" << isReady << " ad:" << &ad_cache;
     return isReady;
 }
 
 std::shared_ptr<AdSourceModel> OnetenAdSDK::ShowAd(const std::string& placement_id, AdSDKDelegate& delegate) {
-    auto ad_cache = cache_repository_->GetHighestPrice(placement_id);
-#ifdef DEBUG
     bool isReady = IsAdReady(placement_id);
+    std::shared_ptr<AdSourceModel> ad_cache = cache_repository_->GetHighestPrice(placement_id);
     if ((isReady && !ad_cache) || (ad_cache && !isReady)) {
         otlog_fault << "is ready not match get ad cache";
     }
-#endif
     
     return ad_cache;
 }

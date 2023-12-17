@@ -29,6 +29,7 @@ std::vector<std::shared_ptr<AdSourceModel>> CacheModel::GetSortAdSourceModelCach
 }
 
 bool CacheModel::Save(std::shared_ptr<AdSourceModel> ad_source_model) {
+    otlog_info << "save ad source";
     placement_model_->AddAdSourceModel(ad_source_model);
     STORAGE_SAVE(CacheModel, shared_from_this())
 }
