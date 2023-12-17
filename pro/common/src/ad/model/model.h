@@ -11,6 +11,7 @@
 #include <oneten_object.h>
 #include <storage/memory/storage_memory.h>
 #include <ad/entity/entity_interface.h>
+#include <storage/database/database.h>
 
 BEGIN_NAMESPACE_ONETEN_AD
 
@@ -35,6 +36,9 @@ public:
     bool Update(const std::shared_ptr<Model> objc);
     
     bool Remove(const std::string& key);
+    
+private:
+    std::shared_ptr<BASE_STORAGE_DATABASE::DataBase> data_base_;
 };
 
 END_NAMESPACE_ONETEN_AD

@@ -17,6 +17,7 @@ BEGIN_NAMESPACE_ONETEN_AD
 class Placement: public EntityInterface<Placement> {
     
 public:
+    Placement() = default;
     explicit Placement(const std::string& json_string);
     virtual ~Placement();
     

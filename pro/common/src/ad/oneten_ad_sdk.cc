@@ -33,6 +33,16 @@ OnetenAdSDK &OnetenAdSDK::GetInstance() {
 }
 
 OnetenAdSDK::OnetenAdSDK() {
+    Placement placement;
+    bool is = std::is_same<decltype(placement.Identifier()), std::string>::value;
+    otlog_info << is;
+//    auto db = BASE_STORAGE_DATABASE::DataBase(BASE_DEVICE::Device::DefaultInstance().GetFile()->GetCachesPath() + "/" + database_name);
+//    const char* sql_create_table =
+//            "CREATE TABLE IF NOT EXISTS Users ("
+//            "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+//            "name TEXT,"
+//            "age INTEGER);";
+//    db.CreateTable(sql_create_table);
 }
 
 OnetenAdSDK::~OnetenAdSDK() {
