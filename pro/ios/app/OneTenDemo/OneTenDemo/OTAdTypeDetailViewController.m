@@ -60,6 +60,10 @@ static const NSInteger kOTAdTypeDetailViewControllerTableViewAdnSection = 1;
     [[OTOnetenSDK defalutSDK].adSDK setStageCallBack:^(OTOnetenAdSDKStageType stageType, NSString * _Nonnull placementId, NSError * _Nullable error, NSDictionary<NSString *,id> * _Nullable userInfo) {
         NSString *text = self.logTextView.text;
         
+        if (stageType == OTOnetenAdSDKStageTypeRegisterSuccess) {
+            text = [text stringByAppendingFormat:@"register success"];
+        }
+        
         if (stageType == OTOnetenAdSDKStageTypeLoadSuccess) {
             text = [text stringByAppendingFormat:@"\n%@ %@: %@ have been load success", self.selectedButton.name, self.selectedButton.adType, placementId];
         }

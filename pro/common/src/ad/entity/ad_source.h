@@ -12,17 +12,16 @@
 #include <error.h>
 #include "entity_interface.h"
 #include <json/json.h>
+#include "adn_ids.h"
 
 BEGIN_NAMESPACE_ONETEN_AD
 
-class AdSourceDelegate {
-    
-public:
-    virtual void RegisterCompletion(std::map<std::string, std::string> user_info, std::shared_ptr<ONETEN::Error> error = nullptr) {};
-    virtual void LoadCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) {};
-    virtual void ShowCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) {};
-    virtual void CloseCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) {};
-    virtual void ClickCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) {};
+static const std::map<AdnId::All, std::string> id_class_map = {
+    {AdnId::All::kGDT, "OTGDTAdapter"},
+    {AdnId::All::kBaidu, "OTBaiduAdapter"},
+    {AdnId::All::kCSJ, "OTCSJAdapter"},
+    {AdnId::All::kGromore, "OTGroMoreSource"},
+    {AdnId::All::kKS, "OTKSAdapter"},
 };
 
 class AdSource: public EntityInterface<AdSource> {
@@ -64,14 +63,15 @@ public:
     
     READONLY_PROPERTY(RequestType, RequestType, request_type);
     READONLY_PROPERTY(Style, Style, style);
+    READONLY_PROPERTY(AdnId::All, AdnId, adn_id);
     
 private:
     int32_t level_;
     std::string clazz_name_;
-    std::shared_ptr<BASE_JSON::Json> json_;
+    double cpm_price_;
+    std::string placementId_;
     
-public:
-    std::weak_ptr<AdSourceDelegate> delegate_;
+    std::shared_ptr<BASE_JSON::Json> json_;
 };
 
 END_NAMESPACE_ONETEN_AD

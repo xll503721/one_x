@@ -13,6 +13,7 @@
 #include <ad/service/ad_srouce_service.h>
 #include <ad/service/cache_service.h>
 #include <ad/service/placement_service.h>
+#include <ad/service/app_service.h>
 
 BEGIN_NAMESPACE_ONETEN_AD
 
@@ -27,10 +28,13 @@ public:
     void Flow(std::shared_ptr<AdSourceModel> ad_source, std::shared_ptr<PlacementModel> placement);
     void End();
     
+    void Load(std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<PlacementModel> placement_model);
+    
 private:
     std::shared_ptr<AdSourceService> ad_source_service_;
     std::shared_ptr<CacheService> cache_service_;
     std::shared_ptr<PlacementService> placement_service_;
+    std::shared_ptr<AppService> app_service_;
 };
 
 END_NAMESPACE_ONETEN_AD

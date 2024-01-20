@@ -16,6 +16,7 @@
 #include <storage/memory/storage_memory.h>
 #include <ad/entity/cache.h>
 #include <ad/repository/cache_repository.h>
+#include <ad/loader/app_loader.h>
 
 BEGIN_NAMESPACE_ONETEN_AD
 
@@ -28,7 +29,7 @@ public:
     virtual ~OnetenAdSDK();
     
     static OnetenAdSDK &GetInstance();
-    void Register(const std::string& app_id);
+    void Register(const std::string& app_id, AdSDKDelegate& delegate);
     
     void StartAdLoad(const std::string& placement_id, std::map<std::string, std::string>& user_info, AdSDKDelegate& delegate);
     std::shared_ptr<AdSourceModel> ShowAd(const std::string& placement_id, AdSDKDelegate& delegate);
@@ -37,7 +38,10 @@ public:
 private:
     
     std::map<std::string, std::shared_ptr<RunLoader>> run_id_and_run_loader_map_;
+    std::shared_ptr<AppLoader> app_loader_;
     std::shared_ptr<CacheRepository> cache_repository_;
+    
+    bool have_registered_ = false;
 };
 
 END_NAMESPACE_ONETEN_AD

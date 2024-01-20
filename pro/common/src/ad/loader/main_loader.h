@@ -19,7 +19,7 @@ class MainLoader: public ONETEN::Object<MainLoader>, public LoaderInterface {
 public:
     MainLoader() = default;
     virtual ~MainLoader();
-    MainLoader(std::shared_ptr<LoaderInterface> loader = nullptr, std::shared_ptr<void> run_loader = nullptr);
+    MainLoader(std::shared_ptr<LoaderInterface> loader = nullptr, std::shared_ptr<void> app_loader = nullptr);
 
     void Start(const std::string& placement_id) override;
     void Classify(std::shared_ptr<PlacementModel> placement_model) override;
@@ -37,7 +37,7 @@ protected:
 
 protected:
     void NextLoader(std::map<std::string, std::shared_ptr<void>> params);
-    std::weak_ptr<void> run_loader_;
+    std::weak_ptr<void> app_loader_;
     
 private:
     std::shared_ptr<LoaderInterface> mainloader_;

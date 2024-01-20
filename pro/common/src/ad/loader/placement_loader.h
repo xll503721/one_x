@@ -17,7 +17,7 @@ class PlacementLoader: public MainLoader {
     
 public:
     ~PlacementLoader();
-    PlacementLoader(std::shared_ptr<LoaderInterface> loader, std::shared_ptr<void> run_loader);
+    PlacementLoader(std::shared_ptr<LoaderInterface> loader, std::shared_ptr<void> app_loader);
     void Start(const std::string& placement_id) override;
     void End() override;
     

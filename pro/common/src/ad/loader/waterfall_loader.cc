@@ -35,7 +35,13 @@ void WaterfallLoader::StartFlow(std::shared_ptr<PlacementModel> placement) {
     
     std::map<std::string, std::shared_ptr<void>> map;
     
-    bool is_waterfall_finish = waterfall_service_->CheckWaterfallFinish(placement);
+    std::string load_id;
+    if (auto s_run_loader = GetRunLoader().lock()) {
+        auto run_loader_ptr = std::static_pointer_cast<RunLoader>(s_run_loader);
+        load_id = run_loader_ptr->GetId();
+    }
+    
+    bool is_waterfall_finish = waterfall_service_->CheckWaterfallFinish(load_id, placement);
     if (!is_waterfall_finish) {
         auto next_ad_source_model = waterfall_service_->LoadNextAdSource();
         if (next_ad_source_model) {

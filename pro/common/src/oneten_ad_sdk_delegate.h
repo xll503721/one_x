@@ -16,18 +16,21 @@ class AdSDKDelegate {
     
 public:
     enum class ActionType {
-           kLoadSuccess,
-           kLoadFail,
-           
-           kShowSuccess,
-           kShowFail,
-           
-           kClickSuccess,
-           kClickFail,
-           
-           kCloseSuccess,
-           kCloseFail,
-        };
+        kRegisterSuccess,
+        kRegisterFail,
+        
+        kLoadSuccess,
+        kLoadFail,
+       
+        kShowSuccess,
+        kShowFail,
+       
+        kClickSuccess,
+        kClickFail,
+       
+        kCloseSuccess,
+        kCloseFail,
+    };
     
     void ActionCompletion(ActionType type, const std::string& placement_id, std::shared_ptr<ONETEN::Error> error = nullptr);
     void SetOCPrt(void* prt);

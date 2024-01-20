@@ -31,7 +31,7 @@ public:
     
     virtual bool Save();
     
-    std::shared_ptr<Model> Read(const std::string& key);
+    static std::shared_ptr<Model> Read(const std::string& key);
     
     bool Update(const std::shared_ptr<Model> objc);
     

@@ -43,9 +43,13 @@ std::string AdSource::GetClassName() {
 }
 
 void AdSource::Parse() {
-    BASE_JSON::Json clazz_name = json_->operator[]("clazz_name");
-    if (clazz_name.IsString()) {
-        clazz_name_ = clazz_name.AsString();
+    BASE_JSON::Json network_id_json = json_->operator[]("network_id");
+    if (network_id_json.IsInteger()) {
+        adn_id_ = static_cast<AdnId::All>(network_id_json.AsInteger());
+        auto it = id_class_map.find(adn_id_);
+        if (it != id_class_map.end()) {
+            clazz_name_ = it->second;
+        }
     }
     
     BASE_JSON::Json id = json_->operator[]("id");
@@ -56,6 +60,16 @@ void AdSource::Parse() {
     BASE_JSON::Json style = json_->operator[]("style");
     if (style.IsInteger()) {
         style_ = static_cast<Style>(style.AsInteger());
+    }
+    
+    BASE_JSON::Json placement_id_json = json_->operator[]("placement_id");
+    if (placement_id_json.IsString()) {
+        placementId_ = placement_id_json.AsString();
+    }
+    
+    BASE_JSON::Json ecpm_price_json = json_->operator[]("ecpm_price");
+    if (ecpm_price_json.IsReal()) {
+        cpm_price_ = ecpm_price_json.AsReal();
     }
     
     BASE_JSON::Json request_type = json_->operator[]("request_type");

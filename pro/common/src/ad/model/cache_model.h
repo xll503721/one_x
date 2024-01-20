@@ -28,6 +28,7 @@ public:
     static std::shared_ptr<CacheModel> Read(const std::string& placement_id);
     
     std::vector<std::shared_ptr<AdSourceModel>> GetSortAdSourceModelCache();
+    bool HasCache(const std::string load_id = "", const std::string ad_source_id = "");
     
 private:
     std::shared_ptr<PlacementModel> placement_model_;

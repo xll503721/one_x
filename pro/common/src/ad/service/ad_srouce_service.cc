@@ -14,28 +14,46 @@ AdSourceService::~AdSourceService() {
     ad_source_service_ios_ = nullptr;
 }
 
+void AdSourceService::Register(std::shared_ptr<AdSourceModel> ad_source_model, ActionCompletionInvoke register_complete) {
+    register_complete_ = register_complete;
+    
+    ad_source_model->SetDelegate(shared_from_this());
+    ad_source_model->Register();
+}
+
 void AdSourceService::Load(std::shared_ptr<AdSourceModel> ad_source_model, ActionCompletionInvoke load_complete) {
     load_complete_ = load_complete;
+    
     ad_source_model->SetDelegate(shared_from_this());
-    ad_source_model->AdnLoad();
+    ad_source_model->Load();
 }
 
 void AdSourceService::Show(std::shared_ptr<AdSourceModel> ad_source_model,ActionCompletionInvoke show_complete) {
-    ad_source_model->SetDelegate(shared_from_this());
     show_complete_ = show_complete;
+    ad_source_model->SetDelegate(shared_from_this());
 }
 
 void AdSourceService::Close(std::shared_ptr<AdSourceModel> ad_source_model, ActionCompletionInvoke close_complete) {
-    ad_source_model->SetDelegate(shared_from_this());
     close_complete_ = close_complete;
+    ad_source_model->SetDelegate(shared_from_this());
 }
 
 void AdSourceService::Click(std::shared_ptr<AdSourceModel> ad_source_model, ActionCompletionInvoke click_complete) {
-    ad_source_model->SetDelegate(shared_from_this());
     click_complete_ = click_complete;
+    ad_source_model->SetDelegate(shared_from_this());
 }
 
 #pragma mark - AdSourceDelegate
+
+void AdSourceService::RegisterCompletion(std::map<std::string, std::string> user_info, std::shared_ptr<ONETEN::Error> error) {
+    std::map<std::string, std::string> event_properties;
+    BASE_ANALYTICS::Tracker::DefaultTracker().Send("register", event_properties);
+    
+    if (register_complete_) {
+        register_complete_(0, error);
+    }
+}
+
 void AdSourceService::LoadCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error) {
     std::map<std::string, std::string> event_properties;
     BASE_ANALYTICS::Tracker::DefaultTracker().Send("load", event_properties);

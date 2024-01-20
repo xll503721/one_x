@@ -67,7 +67,7 @@ void RunLoader::Run(RunCompletion run_completion) {
 }
 
 void RunLoader::RequestPlacement() {
-    otlog_info << "************load placement id: "<< placement_id_ << "************";
+    otlog_info << "************load placement id:"<< placement_id_ << ", load id:" << loader_id_ << "************";
     otlog_info << "========placement loader start========";
     start_loader_->Start(placement_id_);
 }

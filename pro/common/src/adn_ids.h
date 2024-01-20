@@ -9,30 +9,55 @@
 #define ONETEN_AD_SDK_AD_SDK_ADN_IDS_H
 
 class AdnId {
-    enum class Internal {
-        kGDT,
-        kKS,
-        kBaidu,
-        kCSJ,
-        kGromore,
-        kMTG,
-        kPangle,
-        kSigmob,
-        kTianmu,
-        kTopOn,
-    };
+public:
+        enum class All {
+            kGDT,
+            kCSJ,
+            kKS,
+            kBaidu,
+            kGromore,
+            kMTG,
+            kPangle,
+            kSigmob,
+            kTianmu,
+            kTopOn,
+            
+            kMax,
+            kInmob,
+            kDigitalTurbine,
+            kChartboost,
+            kIronSource,
+            kStart,
+            kUnity,
+            kVungle,
+            kYandex
+        };
+//    enum class Internal: int32_t {
+//        kGDT,
+//        kKS,
+//        kBaidu,
+//        kCSJ,
+//        kGromore,
+//        kMTG,
+//        kPangle,
+//        kSigmob,
+//        kTianmu,
+//        kTopOn,
+//    };
+//    
+//    enum class Overseas: int32_t {
+//        kMax,
+//        kInmob,
+//        kDigitalTurbine,
+//        kChartboost,
+//        kIronSource,
+//        kStart,
+//        kUnity,
+//        kVungle,
+//        kYandex
+//    };
     
-    enum class Overseas {
-        kMax,
-        kInmob,
-        kDigitalTurbine,
-        kChartboost,
-        kIronSource,
-        kStart,
-        kUnity,
-        kVungle,
-        kYandex
-    };
+    
 };
 
 

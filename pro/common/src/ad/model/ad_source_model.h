@@ -17,9 +17,20 @@
 
 BEGIN_NAMESPACE_ONETEN_AD
 
+class AdSourceModel;
+class AdSourceModelDelegate {
+    
+public:
+    virtual void RegisterCompletion(std::map<std::string, std::string> user_info, std::shared_ptr<ONETEN::Error> error = nullptr) {};
+    virtual void LoadCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) {};
+    virtual void ShowCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) {};
+    virtual void CloseCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) {};
+    virtual void ClickCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) {};
+};
+
 class PlacementModel;
 
-class AdSourceModel: public Model, public AdSourceDelegate {
+class AdSourceModel: public Model, public AdSourceModelDelegate {
     
 public:
     AdSourceModel(std::shared_ptr<AdSource> ad_source);
@@ -35,11 +46,11 @@ public:
     
     std::string Identifier() override;
     
-    void AdnLoad();
+    void Load();
     void Register();
     bool IsReady();
     
-    void SetDelegate(std::shared_ptr<AdSourceDelegate> delegate);
+    void SetDelegate(std::shared_ptr<AdSourceModelDelegate> delegate);
     
     void ConvertToCacheObject();
     
@@ -51,6 +62,15 @@ public:
     
     int32_t GetLevel() {
         return ad_source_->GetLevel();
+    }
+    
+    AdnId::All GetAdnId() {
+        if (ad_source_) {
+            return ad_source_->GetAdnId();
+        } else if (ad_source_cache_) {
+            return ad_source_cache_->GetAdnId();
+        }
+        return ad_source_->GetAdnId();
     }
     
     AdSource::Style GetStyle() {
@@ -69,10 +89,16 @@ public:
         status_ = status;
     }
     
-private:
-    void Load();
+    inline void SetLoadId(const std::string& load_id) {
+        load_id_ = load_id;
+    }
+    
+    inline std::string GetLoadId() {
+        return load_id_;
+    }
     
 private:
+    std::string load_id_;
     std::shared_ptr<AdSource> ad_source_;
     std::shared_ptr<AdSourceCache> ad_source_cache_;
     PLATFORM_GENERATE()
@@ -83,7 +109,7 @@ private:
     
     Status status_;
     
-    std::weak_ptr<AdSourceDelegate> delegate_;
+    std::weak_ptr<AdSourceModelDelegate> delegate_;
 };
 
 END_NAMESPACE_ONETEN_AD

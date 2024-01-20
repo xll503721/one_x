@@ -30,6 +30,7 @@ public:
     READONLY_PROPERTY(std::string, ClassName, class_name)
     READONLY_PROPERTY(AdSource::Style, Style, style)
     READONLY_PROPERTY(AdSource::RequestType, RequestType, request_type)
+    READONLY_PROPERTY(AdnId::All, AdnId, adn_id)
     
 private:
     void Parse();
@@ -37,8 +38,6 @@ private:
 private:
     PLATFORM_GENERATE()
     std::shared_ptr<BASE_JSON::Json> json_;
-    
-    std::weak_ptr<AdSourceDelegate> delegate_;
 };
 
 END_NAMESPACE_ONETEN_AD

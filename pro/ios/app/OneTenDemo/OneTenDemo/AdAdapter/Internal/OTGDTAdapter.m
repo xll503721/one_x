@@ -179,7 +179,7 @@ static NSString *kGDTMobSDKAppId = @"1105344611";
  */
 - (void)splashAdFailToPresent:(GDTSplashAd *)splashAd withError:(NSError *)error {
     if (self.delegate && [self.delegate respondsToSelector:@selector(adDidShowWithStyleType:error:)]) {
-        [self.delegate adDidShowWithStyleType:OTAdSourceStyleTypeSplash error:error];
+        [self.delegate adDidLoadWithStyleType:OTAdSourceStyleTypeSplash error:error];
     }
 }
 

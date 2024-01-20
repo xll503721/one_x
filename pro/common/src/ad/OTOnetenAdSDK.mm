@@ -32,7 +32,7 @@
 
 - (void)startWithAppId:(NSString *)appId {
     _appId = appId;
-    ONETEN_AD::OnetenAdSDK::GetInstance().Register(appId.UTF8String);
+    ONETEN_AD::OnetenAdSDK::GetInstance().Register(appId.UTF8String, _sdk_delegate);
 }
 
 - (void)loadWithPlacementId:(NSString *)placementId {
@@ -107,7 +107,8 @@ void AdSDKDelegate::ActionCompletion(ActionType type, const std::string& placeme
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                ad_sdk.stageCallBack((OTOnetenAdSDKStageType)oc_type, placementId, oc_error, nil);
+                ad_sdk.stageType =(OTOnetenAdSDKStageType)oc_type;
+                ad_sdk.stageCallBack(ad_sdk.stageType, placementId, oc_error, nil);
             });
         }
     }

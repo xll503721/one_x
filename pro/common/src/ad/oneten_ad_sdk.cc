@@ -33,6 +33,8 @@ OnetenAdSDK &OnetenAdSDK::GetInstance() {
 }
 
 OnetenAdSDK::OnetenAdSDK() {
+    app_loader_ = std::make_shared<AppLoader>();
+    
     Placement placement;
     bool is = std::is_same<decltype(placement.Identifier()), std::string>::value;
     otlog_info << is;
@@ -48,25 +50,39 @@ OnetenAdSDK::OnetenAdSDK() {
 OnetenAdSDK::~OnetenAdSDK() {
 }
 
-void OnetenAdSDK::Register(const std::string& app_id) {
+void OnetenAdSDK::Register(const std::string& app_id, AdSDKDelegate& delegate) {
+    app_loader_->Register(app_id, [=, s_delegate = &delegate](bool succeed) {
+        have_registered_ = succeed;
+        
+        std::shared_ptr<ONETEN::Error> error = nullptr;
+        if (!succeed) {
+            std::map<std::string, std::string> user_info;
+            error = std::make_shared<ONETEN::Error>(kADSDKAllAdnLoadFailed, "Registration failure", user_info);
+        }
+        s_delegate->ActionCompletion(succeed ? AdSDKDelegate::ActionType::kRegisterSuccess : AdSDKDelegate::ActionType::kRegisterFail, "", error);
+    });
+    
+    if (!cache_repository_) {
+        cache_repository_ = std::make_shared<CacheRepository>(delegate);
+    }
 }
 
 void OnetenAdSDK::StartAdLoad(const std::string& placement_id, std::map<std::string, std::string>& user_info, AdSDKDelegate& delegate) {
-    if (!cache_repository_) {
-        cache_repository_ = std::make_shared<CacheRepository>(delegate);
+    if (!have_registered_) {
+        std::shared_ptr<ONETEN::Error> error = std::make_shared<ONETEN::Error>(kADSDKAllAdnLoadFailed, "Loading must be after registration", user_info);
+        delegate.ActionCompletion(AdSDKDelegate::ActionType::kLoadFail, placement_id, error);
+        return;
     }
     
     auto run_loader = std::make_shared<RunLoader>(placement_id, delegate, user_info);
     run_loader->Run([=, s_delegate = &delegate]() {
-        if (s_delegate) {
-            AdSDKDelegate::ActionType type = IsAdReady(placement_id) ? AdSDKDelegate::ActionType::kLoadSuccess : AdSDKDelegate::ActionType::kLoadFail;
-            std::shared_ptr<ONETEN::Error> error = nullptr;
-            if (type == AdSDKDelegate::ActionType::kLoadFail) {
-                std::map<std::string, std::string> user_info;
-                error = std::make_shared<ONETEN::Error>(kADSDKAllAdnLoadFailed, "all ad source load fail", user_info);
-            }
-            s_delegate->ActionCompletion(type, placement_id, error);
+        AdSDKDelegate::ActionType type = IsAdReady(placement_id) ? AdSDKDelegate::ActionType::kLoadSuccess : AdSDKDelegate::ActionType::kLoadFail;
+        std::shared_ptr<ONETEN::Error> error = nullptr;
+        if (type == AdSDKDelegate::ActionType::kLoadFail) {
+            std::map<std::string, std::string> user_info;
+            error = std::make_shared<ONETEN::Error>(kADSDKAllAdnLoadFailed, "All ad source load fail", user_info);
         }
+        s_delegate->ActionCompletion(type, placement_id, error);
     });
     
     run_id_and_run_loader_map_[run_loader->GetId()] = run_loader;

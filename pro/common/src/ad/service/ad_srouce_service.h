@@ -13,19 +13,20 @@
 
 BEGIN_NAMESPACE_ONETEN_AD
 
-class AdSourceService: public ONETEN::Object<AdSourceService>, public AdSourceDelegate {
+class AdSourceService: public ONETEN::Object<AdSourceService>, public AdSourceModelDelegate {
     
 public:
     ~AdSourceService();
     using ActionCompletionInvoke = std::function<void(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error)>;
     
+    void Register(std::shared_ptr<AdSourceModel> ad_source_model, ActionCompletionInvoke register_complete);
     void Load(std::shared_ptr<AdSourceModel> ad_source_model, ActionCompletionInvoke load_complete);
-    
     void Show(std::shared_ptr<AdSourceModel> ad_source_model, ActionCompletionInvoke show_complete);
     void Close(std::shared_ptr<AdSourceModel> ad_source_model, ActionCompletionInvoke close_complete);
     void Click(std::shared_ptr<AdSourceModel> ad_source_model, ActionCompletionInvoke click_complete);
     
 private:
+    void RegisterCompletion(std::map<std::string, std::string> user_info, std::shared_ptr<ONETEN::Error> error = nullptr) override;
     void LoadCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) override;
     void ShowCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) override;
     void CloseCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) override;
@@ -33,6 +34,8 @@ private:
     
 private:
     void* ad_source_service_ios_;
+    
+    ActionCompletionInvoke register_complete_;
     ActionCompletionInvoke load_complete_;
     ActionCompletionInvoke show_complete_;
     ActionCompletionInvoke close_complete_;

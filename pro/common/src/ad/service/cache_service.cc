@@ -23,6 +23,8 @@ void CacheService::Save(const std::string& loader_id, std::shared_ptr<AdSourceMo
     auto cache_model = CacheModel::Read(placement_model->Identifier());
     if (!cache_model) {
         auto placement_model_copy = placement_model->ConvertToCacheObject();
+        ad_source_model->SetLoadId(loader_id);
+        
         cache_model = std::make_shared<CacheModel>(loader_id, placement_model_copy);
     }
     ad_source_model->ConvertToCacheObject();
@@ -32,16 +34,16 @@ void CacheService::Save(const std::string& loader_id, std::shared_ptr<AdSourceMo
 void CacheService::Remove(const std::string& ad_source_id) {
     if (has_showed_ad_source_id_and_placement_id_map_.find(ad_source_id) != has_showed_ad_source_id_and_placement_id_map_.end()) {
         auto placement_id = has_showed_ad_source_id_and_placement_id_map_[ad_source_id];
-        auto model_cache = std::dynamic_pointer_cast<CacheModel>(STORAGE_READ(CacheModel, placement_id));
-        if (model_cache) {
-            model_cache->Remove(ad_source_id);
+        auto cache_model = CacheModel::Read(placement_id);
+        if (cache_model) {
+            cache_model->Remove(ad_source_id);
         }
     }
 }
 
 std::shared_ptr<AdSourceModel> CacheService::GetHighestPrice(const std::string& placement_id) {
-    auto model_cache = std::dynamic_pointer_cast<CacheModel>(STORAGE_READ(CacheModel, placement_id));
-    auto ad_source_model_caches = model_cache->GetSortAdSourceModelCache();
+    auto cache_model = CacheModel::Read(placement_id);
+    auto ad_source_model_caches = cache_model->GetSortAdSourceModelCache();
     if (ad_source_model_caches.size() <= 0) {
         return nullptr;
     }
@@ -56,8 +58,8 @@ void CacheService::Sort(std::shared_ptr<AdSourceCache> obj1, std::shared_ptr<AdS
 }
 
 std::shared_ptr<CacheModel> CacheService::GetAnyOne(const std::string& placement_id) {
-    auto model_cache = std::dynamic_pointer_cast<CacheModel>(STORAGE_READ(CacheModel, placement_id));
-    return model_cache;
+    auto cache_model = CacheModel::Read(placement_id);
+    return cache_model;
 }
 
 END_NAMESPACE_ONETEN_AD

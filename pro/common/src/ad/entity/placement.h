@@ -29,6 +29,7 @@ public:
 private:
     void Parse(const std::string& json_string);
     void ParseAdSource();
+    void ParseAdSource(AdSource::RequestType request_type, BASE_JSON::Json& ad_sources_json);
     
 private:
     std::vector<std::shared_ptr<AdSource>> requesting_ad_sources_;

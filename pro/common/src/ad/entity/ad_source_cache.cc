@@ -39,6 +39,12 @@ void AdSourceCache::Parse() {
     if (style.IsInteger()) {
         style_ = static_cast<AdSource::Style>(style.AsInteger());
     }
+    
+    BASE_JSON::Json network_id_json = json_->operator[]("network_id");
+    if (network_id_json.IsInteger()) {
+        adn_id_ = static_cast<AdnId::All>(network_id_json.AsInteger());
+    }
+    
     json_ = nullptr;
 }
 

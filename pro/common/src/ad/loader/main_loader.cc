@@ -13,9 +13,9 @@ MainLoader::~MainLoader() {
     
 }
 
-MainLoader::MainLoader(std::shared_ptr<LoaderInterface> loader, std::shared_ptr<void> run_loader):
+MainLoader::MainLoader(std::shared_ptr<LoaderInterface> loader, std::shared_ptr<void> app_loader):
 mainloader_(loader),
-run_loader_(run_loader) {
+app_loader_(app_loader) {
 }
 
 void MainLoader::Start(const std::string& placement_id) {
@@ -68,7 +68,7 @@ bool MainLoader::SetIsEndInvoke(bool is_end_invoke) {
 }
 
 std::weak_ptr<void> MainLoader::GetRunLoader() {
-    return run_loader_;
+    return app_loader_;
 }
 
 END_NAMESPACE_ONETEN_AD

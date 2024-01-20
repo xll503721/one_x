@@ -14,6 +14,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, OTOnetenAdSDKStageType) {
+    OTOnetenAdSDKStageTypeRegisterSuccess,
+    OTOnetenAdSDKStageTypeRegisterFail,
+    
     OTOnetenAdSDKStageTypeLoadSuccess,
     OTOnetenAdSDKStageTypeLoadFail,
     
@@ -37,6 +40,7 @@ typedef void (^StageCallBack) (OTOnetenAdSDKStageType stageType, NSString *place
 
 @property (nonatomic, readonly) NSString *appId;
 @property (nonatomic, strong) StageCallBack stageCallBack;
+@property (nonatomic, assign) OTOnetenAdSDKStageType stageType;
 
 - (BOOL)loadWithPlacementId:(NSString *)placementId userInfo:(nullable NSDictionary<NSString *, NSString *> *)userInfo;
 - (void)loadWithPlacementId:(NSString *)placementId;
