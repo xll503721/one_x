@@ -13,11 +13,11 @@
 #include <ad/entity/placement_cache.h>
 #include <ad/entity/entity_interface.h>
 
+#include "ad_source_model.h"
+
 #include "model.h"
 
 BEGIN_NAMESPACE_ONETEN_AD
-
-class AdSourceModel;
 
 class PlacementModel: public Model {
     
@@ -30,7 +30,8 @@ public:
     
     std::string Identifier() override;
     
-    std::vector<std::shared_ptr<AdSourceModel>> GetAdSourceModel();
+    std::vector<std::shared_ptr<AdSourceModel>> GetAdSourceModelStatus(AdSourceModel::Status status);
+    std::vector<std::shared_ptr<AdSourceModel>> GetAdSourceModel(AdSource::RequestType request_type);
     
     std::shared_ptr<PlacementModel> ConvertToCacheObject();
     void AddAdSourceModel(std::shared_ptr<AdSourceModel> ad_source_model);

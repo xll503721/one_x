@@ -30,9 +30,9 @@ void MainLoader::Classify(std::shared_ptr<PlacementModel> placement) {
     }
 }
 
-void MainLoader::StartFlow(std::shared_ptr<PlacementModel> placement) {
+void MainLoader::StartFlow(std::shared_ptr<PlacementModel> placement, std::shared_ptr<AdSourceModel> save_ad_source_model) {
     if (mainloader_) {
-        mainloader_->StartFlow(placement);
+        mainloader_->StartFlow(placement, save_ad_source_model);
     }
 }
 

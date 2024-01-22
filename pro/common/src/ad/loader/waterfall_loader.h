@@ -23,7 +23,7 @@ public:
     virtual ~WaterfallLoader();
     
     void Classify(std::shared_ptr<PlacementModel> placement_model);
-    void StartFlow(std::shared_ptr<PlacementModel> placement_model);
+    void StartFlow(std::shared_ptr<PlacementModel> placement, std::shared_ptr<AdSourceModel> save_ad_source_model = nullptr);
     void End();
     
     void SetWaterfallService(std::shared_ptr<WaterfallService> waterfall_service);

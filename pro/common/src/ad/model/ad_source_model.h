@@ -39,9 +39,12 @@ public:
     virtual ~AdSourceModel();
     
     enum class Status {
-        kNormal,
+        kReadyToLoad,
         kLoading,
         kLoaded,
+        kLoadFailed,
+        kShowed,
+        kShowing,
     };
     
     std::string Identifier() override;
@@ -104,6 +107,11 @@ private:
     PLATFORM_GENERATE()
     
     inline ONETEN_AD::AdSource::RequestType GetRequestType() {
+        if (ad_source_) {
+            return ad_source_->GetRequestType();
+        } else if (ad_source_cache_) {
+            return ad_source_cache_->GetRequestType();
+        }
         return ad_source_->GetRequestType();
     }
     

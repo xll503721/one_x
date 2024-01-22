@@ -23,7 +23,7 @@ public:
 
     void Start(const std::string& placement_id) override;
     void Classify(std::shared_ptr<PlacementModel> placement_model) override;
-    void StartFlow(std::shared_ptr<PlacementModel> placement_model) override;
+    void StartFlow(std::shared_ptr<PlacementModel> placement, std::shared_ptr<AdSourceModel> save_ad_source_model = nullptr) override;
     void Flow(std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<PlacementModel> placement_model) override;
     void End() override;
 

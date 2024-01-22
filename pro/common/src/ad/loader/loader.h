@@ -23,7 +23,7 @@ public:
 class WaterfallLoaderInterface {
 public:
     virtual void Classify(std::shared_ptr<PlacementModel> placement) {};
-    virtual void StartFlow(std::shared_ptr<PlacementModel> placement) {};
+    virtual void StartFlow(std::shared_ptr<PlacementModel> placement, std::shared_ptr<AdSourceModel> save_ad_source_model = nullptr) {};
 };
 
 class AdSourceLoaderInterface {

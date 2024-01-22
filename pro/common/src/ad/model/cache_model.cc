@@ -43,11 +43,9 @@ bool CacheModel::HasCache(std::string load_id, const std::string ad_source_id) {
         if (load_id.empty() || !is_equal_load_id) {
             continue;
         }
-        
         if (ad_source_id.empty()) {
             return true;
         }
-        
         if (!is_equal_ad_source_id) {
             continue;
         }
@@ -55,7 +53,7 @@ bool CacheModel::HasCache(std::string load_id, const std::string ad_source_id) {
         return true;
     }
 
-    return ad_source_model_cache_list.size() > 0;
+    return (ad_source_model_cache_list.size() > 0);
 }
 
 #pragma mark - Model

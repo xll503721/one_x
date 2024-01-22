@@ -30,10 +30,13 @@ void WaterfallLoader::Classify(std::shared_ptr<PlacementModel> placement) {
     StartFlow(placement);
 }
 
-void WaterfallLoader::StartFlow(std::shared_ptr<PlacementModel> placement) {
-    super_class::StartFlow(placement);
-    
-    std::map<std::string, std::shared_ptr<void>> map;
+void WaterfallLoader::StartFlow(std::shared_ptr<PlacementModel> placement, std::shared_ptr<AdSourceModel> save_ad_source_model) {
+    super_class::StartFlow(placement, save_ad_source_model);
+    if (save_ad_source_model && (save_ad_source_model->GetRequestType() == AdSource::RequestType::kC2S ||
+        save_ad_source_model->GetRequestType() == AdSource::RequestType::kS2S)) {
+        return;
+    }
+    waterfall_service_->MarkPreAdSourceFinish();
     
     std::string load_id;
     if (auto s_run_loader = GetRunLoader().lock()) {
@@ -42,12 +45,13 @@ void WaterfallLoader::StartFlow(std::shared_ptr<PlacementModel> placement) {
     }
     
     bool is_waterfall_finish = waterfall_service_->CheckWaterfallFinish(load_id, placement);
-    if (!is_waterfall_finish) {
-        auto next_ad_source_model = waterfall_service_->LoadNextAdSource();
-        if (next_ad_source_model) {
-            map["next_ad_source_model"] = next_ad_source_model;
-        }
+    auto next_ad_source_model = waterfall_service_->LoadNextAdSource();
+    if (!next_ad_source_model && !is_waterfall_finish) {
+        return;
     }
+    
+    std::map<std::string, std::shared_ptr<void>> map;
+    map["next_ad_source_model"] = next_ad_source_model;
     
     std::shared_ptr<void> is_waterfall_finish_ptr = std::make_shared<bool>(is_waterfall_finish);
     map["is_waterfall_finish"] = is_waterfall_finish_ptr;

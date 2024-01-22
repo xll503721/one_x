@@ -16,10 +16,6 @@ Placement::Placement(const std::string& json_string) {
     Parse(json_string);
 }
 
-std::vector<std::shared_ptr<AdSource>> Placement::GetRequestAdSources() {
-    return ad_sources_;
-}
-
 void Placement::Parse(const std::string& json_string) {
     otlog_info << "parse placement json string:" << json_string;
     
@@ -49,6 +45,7 @@ void Placement::ParseAdSource() {
 }
 
 void Placement::ParseAdSource(AdSource::RequestType request_type, BASE_JSON::Json& ad_sources_json) {
+    BASE_JSON::Json format_json = json_->operator[]("format");
     for (int i = 0; i < ad_sources_json.Size(); i++) {
         BASE_JSON::Json ad_source_json = ad_sources_json[i];
         BASE_JSON::Json network_id_json = ad_source_json["network_id"];
@@ -64,6 +61,8 @@ void Placement::ParseAdSource(AdSource::RequestType request_type, BASE_JSON::Jso
             
             BASE_JSON::Json request_type_json(static_cast<int32_t>(request_type));
             network_item.SetJsonObject("request_type", request_type_json);
+            
+            network_item.SetJsonObject("format", format_json);
             
             std::shared_ptr<BASE_JSON::Json> ad_source_ptr = std::make_shared<BASE_JSON::Json>(network_item);
             std::shared_ptr<AdSource> ad_source = std::make_shared<AdSource>(ad_source_ptr);

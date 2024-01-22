@@ -57,7 +57,7 @@ void AdSource::Parse() {
         identifier_ = id.AsString();
     }
     
-    BASE_JSON::Json style = json_->operator[]("style");
+    BASE_JSON::Json style = json_->operator[]("format");
     if (style.IsInteger()) {
         style_ = static_cast<Style>(style.AsInteger());
     }

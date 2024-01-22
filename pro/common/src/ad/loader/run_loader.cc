@@ -86,6 +86,7 @@ void RunLoader::LoadAdapter() {
     waterfall_loader_->NextLoader([=](std::map<std::string, std::shared_ptr<void>> params) {
         auto placement_model = params["placement_model"];
         auto next_ad_source_model = params["next_ad_source_model"];
+        
         bool is_waterfall_finish = *std::static_pointer_cast<bool>(params["is_waterfall_finish"]);
         
         std::shared_ptr<AdSourceModel> next_ad_source_model_ptr = std::static_pointer_cast<AdSourceModel>(next_ad_source_model);
@@ -116,7 +117,7 @@ void RunLoader::NextAdapter() {
             std::shared_ptr<AdSourceModel> ad_source_model_ptr = std::static_pointer_cast<AdSourceModel>(ad_source_model);
             
             otlog_info << "========waterfall loader start flow========";
-            waterfall_loader_->StartFlow(placement_model_ptr);
+            waterfall_loader_->StartFlow(placement_model_ptr, ad_source_model_ptr);
         });
     });
 }

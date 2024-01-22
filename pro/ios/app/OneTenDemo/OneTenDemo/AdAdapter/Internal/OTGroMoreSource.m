@@ -10,7 +10,8 @@
 #import <OTAdViewController.h>
 
 @interface OTGroMoreSource ()<OTAdSourceProtocol, BUMNativeAdsManagerDelegate, BUMNativeAdDelegate,
-                                                  BUSplashAdDelegate, BUSplashCardDelegate, BUSplashZoomOutDelegate>
+                                                  BUSplashAdDelegate, BUSplashCardDelegate, BUSplashZoomOutDelegate,
+                                                  BUNativeExpressRewardedVideoAdDelegate>
 
 @property (nonatomic, strong) NSMutableArray<BUNativeAd *> *nativeAdDataArray;
 
@@ -44,7 +45,9 @@
         }
             break;
         case OTAdSourceStyleTypeRewardedVideo: {
-            
+            if ([self.delegate.adSourceObject isKindOfClass:[BUNativeExpressRewardedVideoAd class]]) {
+                return [(BUNativeExpressRewardedVideoAd *)self.delegate.adSourceObject isAdValid];
+            }
         }
             break;
         case OTAdSourceStyleTypeSplash: {
@@ -82,6 +85,12 @@
             }
         }
             break;
+        case OTAdSourceStyleTypeRewardedVideo: {
+            if ([self.delegate.adSourceObject isKindOfClass:[BUNativeExpressRewardedVideoAd class]]) {
+                [(BUNativeExpressRewardedVideoAd *)self.delegate.adSourceObject showAdFromRootViewController:viewController];
+            }
+        }
+            break;
         default:
             break;
     }
@@ -95,6 +104,10 @@
             break;
         case OTAdSourceStyleTypeSplash: {
             [self loadSplashWithType:type userInfo:userInfo];
+        }
+            break;
+        case OTAdSourceStyleTypeRewardedVideo: {
+            [self loadRewardedVideoWithType:type userInfo:userInfo];
         }
             break;
         default:
@@ -141,11 +154,31 @@
     splashAd.supportCardView = YES;
     splashAd.supportZoomOutView = YES;
     splashAd.tolerateTimeout = 3.0;
-    [splashAd loadAdData];
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(adWillLoadWithStyleType:adSourceObject:)]) {
         [self.delegate adWillLoadWithStyleType:OTAdSourceStyleTypeInterstitial adSourceObject:splashAd];
     }
+    
+    [splashAd loadAdData];
+}
+
+/// start load rewarded video ad
+/// @param type c2s s2s
+/// @param userInfo info
+- (void)loadRewardedVideoWithType:(OTAdSourceType)type userInfo:(NSDictionary<id, id> *)userInfo {
+    BUAdSlot *slot = [[BUAdSlot alloc] init];
+    slot.ID = @"945113162";
+    slot.mediation.mutedIfCan = YES;
+    
+    BURewardedVideoModel *rewardedVideoModel = [[BURewardedVideoModel alloc] init];
+    BUNativeExpressRewardedVideoAd *rewardedVideoAd = [[BUNativeExpressRewardedVideoAd alloc] initWithSlot:slot rewardedVideoModel:rewardedVideoModel];
+    rewardedVideoAd.delegate = self;
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adWillLoadWithStyleType:adSourceObject:)]) {
+        [self.delegate adWillLoadWithStyleType:OTAdSourceStyleTypeRewardedVideo adSourceObject:rewardedVideoAd];
+    }
+    
+    [rewardedVideoAd loadAdData];
 }
 
 #pragma mark - Native
@@ -387,6 +420,150 @@
 
 /// This method is called when splash zoomout is closed.
 - (void)splashZoomOutViewDidClose:(BUSplashAd *)splashAd {
+    
+}
+
+#pragma mark - RewardedVideo
+
+/**
+ This method is called when video ad material loaded successfully.
+ */
+- (void)nativeExpressRewardedVideoAdDidLoad:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidLoadWithStyleType:error:)]) {
+        [self.delegate adDidLoadWithStyleType:OTAdSourceStyleTypeRewardedVideo   error:nil];
+    }
+}
+
+/**
+ This method is called when video ad materia failed to load.
+ @param error : the reason of error
+ */
+- (void)nativeExpressRewardedVideoAd:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *_Nullable)error {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidLoadWithStyleType:error:)]) {
+        [self.delegate adDidLoadWithStyleType:OTAdSourceStyleTypeRewardedVideo error:error];
+    }
+}
+/**
+  this methods is to tell delegate the type of native express rewarded video Ad
+  @Note :  Mediation dimension does not support this callBack.
+ */
+- (void)nativeExpressRewardedVideoAdCallback:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd withType:(BUNativeExpressRewardedVideoAdType)nativeExpressVideoType {
+    
+}
+
+/**
+ This method is called when cached successfully.
+ For a better user experience, it is recommended to display video ads at this time.
+ And you can call [BUNativeExpressRewardedVideoAd showAdFromRootViewController:].
+ */
+- (void)nativeExpressRewardedVideoAdDidDownLoadVideo:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
+    
+}
+
+/**
+ This method is called when rendering a nativeExpressAdView successed.
+ It will happen when ad is show.
+ @Note :  Mediation dimension does not support this callBack.
+ */
+- (void)nativeExpressRewardedVideoAdViewRenderSuccess:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
+    
+}
+
+/**
+ This method is called when a nativeExpressAdView failed to render.
+ @param error : the reason of error
+ @Note :  Mediation dimension does not support this callBack.
+ */
+- (void)nativeExpressRewardedVideoAdViewRenderFail:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd error:(NSError *_Nullable)error {
+    
+}
+
+/**
+ This method is called when video ad slot will be showing.
+ @Note :  Mediation dimension does not support this callBack.
+ */
+- (void)nativeExpressRewardedVideoAdWillVisible:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adWillShowWithStyleType:error:)]) {
+        [self.delegate adWillShowWithStyleType:OTAdSourceStyleTypeRewardedVideo error:nil];
+    }
+}
+
+/**
+ This method is called when video ad slot has been shown.
+ */
+- (void)nativeExpressRewardedVideoAdDidVisible:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidShowWithStyleType:error:)]) {
+        [self.delegate adDidShowWithStyleType:OTAdSourceStyleTypeRewardedVideo error:nil];
+    }
+}
+
+/**
+ This method is called when video ad is about to close.
+ @Note :  Mediation dimension does not support this callBack.
+ */
+- (void)nativeExpressRewardedVideoAdWillClose:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adWillCloseWithStyleType:error:)]) {
+        [self.delegate adWillCloseWithStyleType:OTAdSourceStyleTypeRewardedVideo error:nil];
+    }
+}
+
+/**
+ This method is called when video ad is closed.
+ */
+- (void)nativeExpressRewardedVideoAdDidClose:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidCloseWithStyleType:error:)]) {
+        [self.delegate adDidCloseWithStyleType:OTAdSourceStyleTypeRewardedVideo error:nil];
+    }
+}
+
+/**
+ This method is called when video ad is clicked.
+ */
+- (void)nativeExpressRewardedVideoAdDidClick:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adDidClickWithStyleType:error:)]) {
+        [self.delegate adDidClickWithStyleType:OTAdSourceStyleTypeRewardedVideo error:nil];
+    }
+}
+
+/**
+ This method is called when the user clicked skip button.
+ */
+- (void)nativeExpressRewardedVideoAdDidClickSkip:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
+    
+}
+
+/**
+ This method is called when video ad play completed or an error occurred.
+ @param error : the reason of error
+ */
+- (void)nativeExpressRewardedVideoAdDidPlayFinish:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *_Nullable)error {
+    
+}
+
+/**
+ Server verification which is requested asynchronously is succeeded. now include two v erify methods:
+      1. C2C need  server verify  2. S2S don't need server verify
+ @param verify :return YES when return value is 2000.
+ */
+- (void)nativeExpressRewardedVideoAdServerRewardDidSucceed:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd verify:(BOOL)verify {
+    
+}
+
+/**
+  Server verification which is requested asynchronously is failed.
+  @param rewardedVideoAd express rewardVideo Ad
+  @param error request error info
+ */
+- (void)nativeExpressRewardedVideoAdServerRewardDidFail:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd error:(NSError *_Nullable)error {
+    
+}
+
+/**
+ This method is called when another controller has been closed.
+ @param interactionType : open appstore in app or open the webpage or view video ad details page.
+ @Note :  Mediation dimension does not support this callBack.
+ */
+- (void)nativeExpressRewardedVideoAdDidCloseOtherController:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd interactionType:(BUInteractionType)interactionType {
     
 }
 

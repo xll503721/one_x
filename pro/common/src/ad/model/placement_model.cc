@@ -36,15 +36,54 @@ std::string PlacementModel::Identifier() {
     return identifier;
 }
 
-std::vector<std::shared_ptr<AdSourceModel>> PlacementModel::GetAdSourceModel() {
-    std::vector<std::shared_ptr<AdSource>> ad_sources = placement_->GetRequestAdSources();
+std::vector<std::shared_ptr<AdSourceModel>> PlacementModel::GetAdSourceModel(AdSource::RequestType request_type) {
+    std::vector<std::shared_ptr<AdSource>> ad_sources;
+    switch (request_type) {
+        case AdSource::RequestType::kNormal:
+            ad_sources = placement_->GetNormalAdSources();
+            break;
+        case AdSource::RequestType::kC2S:
+            ad_sources = placement_->GetC2SAdSources();
+            break;
+        case AdSource::RequestType::kS2S:
+            ad_sources = placement_->GetS2SAdSources();
+            break;
+            
+        default:
+            break;
+    }
 
-    ad_sources_model_vector_.clear();
+    std::vector<std::shared_ptr<AdSourceModel>> ad_sources_model_vector;
     for (std::shared_ptr<AdSource> ad_source: ad_sources) {
         std::shared_ptr<AdSourceModel> ad_source_model = std::make_shared<AdSourceModel>(ad_source);
-        ad_sources_model_vector_.push_back(ad_source_model);
+        ad_sources_model_vector.push_back(ad_source_model);
     }
-    return ad_sources_model_vector_;
+    return ad_sources_model_vector;
+}
+
+std::vector<std::shared_ptr<AdSourceModel>> PlacementModel::GetAdSourceModelStatus(AdSourceModel::Status status) {
+    std::vector<std::shared_ptr<AdSource>> ad_sources;
+    switch (status) {
+        case AdSourceModel::Status::kLoading:
+            ad_sources = placement_->GetRequestingAdSources();
+            break;
+        case AdSourceModel::Status::kLoaded:
+            ad_sources = placement_->GetLoadedAdSources();
+            break;
+        case AdSourceModel::Status::kReadyToLoad:
+            ad_sources = placement_->GetNormalAdSources();
+            break;
+            
+        default:
+            break;
+    }
+
+    std::vector<std::shared_ptr<AdSourceModel>> ad_sources_model_vector;
+    for (std::shared_ptr<AdSource> ad_source: ad_sources) {
+        std::shared_ptr<AdSourceModel> ad_source_model = std::make_shared<AdSourceModel>(ad_source);
+        ad_sources_model_vector.push_back(ad_source_model);
+    }
+    return ad_sources_model_vector;
 }
 
 std::shared_ptr<PlacementModel> PlacementModel::ConvertToCacheObject() {

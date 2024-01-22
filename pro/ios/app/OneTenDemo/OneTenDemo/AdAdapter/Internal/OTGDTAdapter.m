@@ -155,6 +155,23 @@ static NSString *kGDTMobSDKAppId = @"1105344611";
     }
 }
 
+#pragma mark - reward video
+- (void)loadRewardedVideoWithType:(OTAdSourceType)type userInfo:(NSDictionary<id, id> *)userInfo {
+    GDTRewardVideoAd *rewardVideoAd = [[GDTRewardVideoAd alloc] initWithPlacementId:@"1"];
+    rewardVideoAd.videoMuted = YES;
+    rewardVideoAd.delegate = self;
+    //如果设置了服务端验证，可以设置serverSideVerificationOptions属性
+    GDTServerSideVerificationOptions *ssv = [[GDTServerSideVerificationOptions alloc] init];
+    ssv.userIdentifier = @"APP's user id for server verify";
+    ssv.customRewardString = @"APP's custom data";
+    rewardVideoAd.serverSideVerificationOptions = ssv;
+    [rewardVideoAd loadAd];
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(adWillLoadWithStyleType:adSourceObject:)]) {
+        [self.delegate adWillLoadWithStyleType:OTAdSourceStyleTypeRewardedVideo adSourceObject:rewardVideoAd];
+    }
+}
+
 #pragma mark - GDTSplashAdDelegate
 /**
  *  开屏广告成功展示
@@ -267,23 +284,6 @@ static NSString *kGDTMobSDKAppId = @"1105344611";
  */
 - (void)splashAdDidRewardEffective:(GDTSplashAd *)splashAd info:(NSDictionary *)info {
     
-}
-
-#pragma mark - reward video
-- (void)loadRewardedVideoWithType:(OTAdSourceType)type userInfo:(NSDictionary<id, id> *)userInfo {
-    GDTRewardVideoAd *rewardVideoAd = [[GDTRewardVideoAd alloc] initWithPlacementId:@"8020744212936426"];
-    rewardVideoAd.videoMuted = YES;
-    rewardVideoAd.delegate = self;
-    //如果设置了服务端验证，可以设置serverSideVerificationOptions属性
-    GDTServerSideVerificationOptions *ssv = [[GDTServerSideVerificationOptions alloc] init];
-    ssv.userIdentifier = @"APP's user id for server verify";
-    ssv.customRewardString = @"APP's custom data";
-    rewardVideoAd.serverSideVerificationOptions = ssv;
-    [rewardVideoAd loadAd];
-    
-    if (self.delegate && [self.delegate respondsToSelector:@selector(adWillLoadWithStyleType:adSourceObject:)]) {
-        [self.delegate adWillLoadWithStyleType:OTAdSourceStyleTypeRewardedVideo adSourceObject:rewardVideoAd];
-    }
 }
 
 #pragma mark - GDTRewardedVideoAdDelegate

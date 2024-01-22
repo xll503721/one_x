@@ -16,12 +16,12 @@ BEGIN_NAMESPACE_ONETEN_AD
 
 AdSourceModel::AdSourceModel(std::shared_ptr<AdSource> ad_source):
 ad_source_(ad_source),
-status_(Status::kNormal) {
+status_(Status::kReadyToLoad) {
 }
 
 AdSourceModel::AdSourceModel(std::shared_ptr<AdSourceCache> ad_source_cache):
 ad_source_cache_(ad_source_cache),
-status_(Status::kNormal) {
+status_(Status::kReadyToLoad) {
 }
 
 AdSourceModel::~AdSourceModel() {
@@ -42,7 +42,8 @@ void AdSourceModel::Load() {
     if (!delegate_.lock()) {
         otlog_fault << "Set the delegate before load";
     }
-    
+
+    status_ = Status::kLoading;
     SET_PLATFORM_GENERATE_NAME(ad_source_->GetClassName());
     BASE_THREAD::ThreadPool::DefaultPool().Schedule(BASE_THREAD::Thread::Type::kMain, [=](){
         auto style_type = PLATFORM_VAR_GENERATE(static_cast<unsigned long>(ad_source_->GetStyle()));
@@ -110,10 +111,13 @@ void AdSourceModel::LoadCompletion(int32_t categroy_type, std::shared_ptr<ONETEN
     otlog_info << "class name:" << ad_source_->GetClassName().c_str() << ", type:"
     << static_cast<int32_t>(ad_source_->GetStyle()) << ", request type:" << 2;
     if (error) {
+        status_ = Status::kLoadFailed;
         otlog_info << "failed code:" << error->GetCode() << ", msg:" << error->GetMsg();
     } else {
         otlog_info << "success";
+        status_ = Status::kLoaded;
     }
+    
     
     if (auto s_delegate = delegate_.lock()) {
         s_delegate->LoadCompletion(categroy_type, error);

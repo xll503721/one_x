@@ -19,7 +19,10 @@ public:
     WaterfallService() = default;
     
     std::shared_ptr<AdSourceModel> LoadNextAdSource();
+    void MarkPreAdSourceFinish();
+    
     bool CheckWaterfallFinish(const std::string& load_id, std::shared_ptr<PlacementModel> placement_model);
+    bool CheckC2SFinish();
     
 private:
     int32_t loading_layer_index_;

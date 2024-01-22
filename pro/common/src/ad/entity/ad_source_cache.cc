@@ -35,7 +35,7 @@ void AdSourceCache::Parse() {
         identifier_ = id.AsString();
     }
     
-    BASE_JSON::Json style = json_->operator[]("style");
+    BASE_JSON::Json style = json_->operator[]("format");
     if (style.IsInteger()) {
         style_ = static_cast<AdSource::Style>(style.AsInteger());
     }
@@ -43,6 +43,11 @@ void AdSourceCache::Parse() {
     BASE_JSON::Json network_id_json = json_->operator[]("network_id");
     if (network_id_json.IsInteger()) {
         adn_id_ = static_cast<AdnId::All>(network_id_json.AsInteger());
+    }
+    
+    BASE_JSON::Json request_type = json_->operator[]("request_type");
+    if (request_type.IsInteger()) {
+        request_type_ = static_cast<AdSource::RequestType>(request_type.AsInteger());
     }
     
     json_ = nullptr;

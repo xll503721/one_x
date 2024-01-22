@@ -26,7 +26,7 @@ void PlacementService::GetPlacementModel(const std::string& placement_id, Placem
                 break;
             }
             
-            std::string placement_json_string = "{\"id\":\"123456789\",\"format\":0,\"c2s\":[],\"waterfall\":[{\"network_id\":0,\"list\":[{\"id\":\"111111\",\"placement_id\":\"123456789\",\"ecpm_price\":100.0,\"params\":{}},{\"id\":\"111111\",\"placement_id\":\"123456789\",\"ecpm_price\":100.0,\"params\":{}}]},{\"network_id\":1,\"list\":[{\"id\":\"111111\",\"placement_id\":\"123456789\",\"ecpm_price\":100.0,\"params\":{}},{\"id\":\"111111\",\"placement_id\":\"123456789\",\"ecpm_price\":100.0,\"params\":{}}]}]}";
+            std::string placement_json_string = "{\"id\":\"123456789\",\"format\":3,\"c2s\":[],\"waterfall\":[{\"network_id\":0,\"list\":[{\"id\":\"111111\",\"placement_id\":\"123456789\",\"ecpm_price\":100.0,\"params\":{}},{\"id\":\"111111\",\"placement_id\":\"123456789\",\"ecpm_price\":100.0,\"params\":{}}]},{\"network_id\":4,\"list\":[{\"id\":\"111111\",\"placement_id\":\"123456789\",\"ecpm_price\":100.0,\"params\":{}},{\"id\":\"111111\",\"placement_id\":\"123456789\",\"ecpm_price\":100.0,\"params\":{}}]}]}";
             placement_model = std::make_shared<PlacementModel>(placement_json_string);
             
         } while (false);
