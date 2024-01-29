@@ -26,7 +26,7 @@ void PlacementService::GetPlacementModel(const std::string& placement_id, Placem
                 break;
             }
             
-            std::string placement_json_string = "{\"id\":\"123456789\",\"format\":0,\"c2s\":[],\"waterfall\":[{\"network_id\":0,\"list\":[{\"id\":\"111111\",\"placement_id\":\"2023121674786777\",\"ecpm_price\":100.0,\"params\":{}},{\"id\":\"2222\",\"placement_id\":\"123456789\",\"ecpm_price\":100.0,\"params\":{}},{\"id\":\"3333\",\"placement_id\":\"123456\",\"ecpm_price\":100.0,\"params\":{}},{\"id\":\"44444\",\"placement_id\":\"123456789\",\"ecpm_price\":100.0,\"params\":{}}]}]}";
+            std::string placement_json_string = "{\"id\":\"123456789\",\"format\":0,\"c2s\":[],\"waterfall\":[{\"network_id\":0,\"list\":[{\"id\":\"111111\",\"placement_id\":\"123456\",\"ecpm_price\":100.0,\"params\":{}},{\"id\":\"2222\",\"placement_id\":\"123456789\",\"ecpm_price\":100.0,\"params\":{}},{\"id\":\"3333\",\"placement_id\":\"123456\",\"ecpm_price\":100.0,\"params\":{}},{\"id\":\"44444\",\"placement_id\":\"123456789\",\"ecpm_price\":100.0,\"params\":{}}]}]}";
             placement_model = std::make_shared<PlacementModel>(placement_json_string);
             for (auto normal_ad_source_model : placement_model->GetAdSourceModel(AdSource::RequestType::kNormal)) {
                 placement_model->AddAdSourceModel(normal_ad_source_model, AdSourceModel::Status::kReadyToLoad);

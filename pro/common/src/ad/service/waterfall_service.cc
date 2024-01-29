@@ -68,7 +68,7 @@ bool WaterfallService::CheckWaterfallFinish(const std::string& load_id, std::sha
     auto loaded_ad_source_model_list = loading_placement_model_->GetSortAdSourceModelStatus(AdSourceModel::Status::kLoaded);
     auto loading_ad_source_model_list = loading_placement_model_->GetSortAdSourceModelStatus(AdSourceModel::Status::kLoading);
     otlog_info << "adsource model array ready to load count:" << ready_to_load_ad_source_model_list.size() << ", loaded count:" << loaded_ad_source_model_list.size() << ", loading count:" << loading_ad_source_model_list.size();
-    bool is_waterfall_finish = (ready_to_load_ad_source_model_list.empty() && loading_ad_source_model_list.empty() && !loaded_ad_source_model_list.empty());
+    bool is_waterfall_finish = (ready_to_load_ad_source_model_list.empty() && loading_ad_source_model_list.empty());
     
     if (!is_waterfall_finish && loaded_ad_source_model_list.size() > 0) {
         auto loaded_ad_source_model = *loaded_ad_source_model_list.begin();
