@@ -141,7 +141,11 @@ static NSString *kGDTMobSDKAppId = @"1105344611";
 
 #pragma mark - Splash
 - (void)loadSplashWithType:(OTAdSourceType)type userInfo:(NSDictionary<id, id> *)userInfo {
-    GDTSplashAd *splashAd = [[GDTSplashAd alloc] initWithPlacementId:@"2023121674786777"];
+    NSString *placementId = userInfo[@"placement_id"];
+    if (!placementId) {
+        return;
+    }
+    GDTSplashAd *splashAd = [[GDTSplashAd alloc] initWithPlacementId:placementId];
     splashAd.delegate = self;
     splashAd.fetchDelay = 5;
     //如果设置了服务端验证，可以设置serverSideVerificationOptions属性
@@ -157,7 +161,7 @@ static NSString *kGDTMobSDKAppId = @"1105344611";
 
 #pragma mark - reward video
 - (void)loadRewardedVideoWithType:(OTAdSourceType)type userInfo:(NSDictionary<id, id> *)userInfo {
-    GDTRewardVideoAd *rewardVideoAd = [[GDTRewardVideoAd alloc] initWithPlacementId:@"1"];
+    GDTRewardVideoAd *rewardVideoAd = [[GDTRewardVideoAd alloc] initWithPlacementId:@"8020744212936426"];
     rewardVideoAd.videoMuted = YES;
     rewardVideoAd.delegate = self;
     //如果设置了服务端验证，可以设置serverSideVerificationOptions属性

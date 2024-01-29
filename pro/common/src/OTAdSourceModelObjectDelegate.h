@@ -11,9 +11,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+using CPlusPlusPrt = std::shared_ptr<void>;
+
 @interface OTAdSourceModelObjectDelegate : NSObject <OTPlatformObjectDelegate, OTAdSourceDelegate>
 
-@property (nonatomic, unsafe_unretained) void* cPlusPlusPrt;
+- (void)setCPlusPlusPrt:(std::shared_ptr<void>)cPlusPlusPrt;
 @property (nonatomic, readonly) id adSourceObject;
 
 @end

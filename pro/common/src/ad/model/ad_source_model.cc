@@ -47,16 +47,15 @@ void AdSourceModel::Load() {
     SET_PLATFORM_GENERATE_NAME(ad_source_->GetClassName());
     BASE_THREAD::ThreadPool::DefaultPool().Schedule(BASE_THREAD::Thread::Type::kMain, [=](){
         auto style_type = PLATFORM_VAR_GENERATE(static_cast<unsigned long>(ad_source_->GetStyle()));
-        auto ad_source_type = PLATFORM_VAR_GENERATE(2);
+        auto ad_source_type = PLATFORM_VAR_GENERATE(static_cast<unsigned long>(ad_source_->GetRequestType()));
         
         std::map<std::string, BASE_PLATFORM::Platform::Var> map;
-        map["1"] = PLATFORM_VAR_GENERATE(1);
+        map["placement_id"] = PLATFORM_VAR_GENERATE(ad_source_->GetplacementId());
         
         std::vector<BASE_PLATFORM::Platform::Var> vector;
         BASE_PLATFORM::Platform::Var user_info = &map;
         
-        otlog_info << "ad source load class name:" << ad_source_->GetClassName().c_str() << ", type:"
-        << static_cast<int32_t>(ad_source_->GetStyle()) << ", request type:" << 2;
+        otlog_info << "load ad source class name:" << ad_source_->GetClassName().c_str() << ", id:" << ad_source_->Identifier() << ", type:" << static_cast<int32_t>(ad_source_->GetStyle()) << ", request type:" << static_cast<int32_t>(ad_source_->GetRequestType());
         
         PLATFORM_INVOKE(&style_type, &ad_source_type, &user_info)
     });
@@ -65,16 +64,14 @@ void AdSourceModel::Load() {
 void AdSourceModel::Register() {
     SET_PLATFORM_GENERATE_NAME(ad_source_->GetClassName());
     
-    BASE_THREAD::ThreadPool::DefaultPool().Schedule(BASE_THREAD::Thread::Type::kMain, [=](){
-        std::map<std::string, BASE_PLATFORM::Platform::Var> map;
-        map["1"] = PLATFORM_VAR_GENERATE(1);
-        
-        std::vector<BASE_PLATFORM::Platform::Var> vector;
-        BASE_PLATFORM::Platform::Var user_info = &map;
-        
-        otlog_info << "register";
-        PLATFORM_INVOKE(&user_info)
-    });
+    std::map<std::string, BASE_PLATFORM::Platform::Var> map;
+    map["1"] = PLATFORM_VAR_GENERATE(1);
+    
+    std::vector<BASE_PLATFORM::Platform::Var> vector;
+    BASE_PLATFORM::Platform::Var user_info = &map;
+    
+    otlog_info << "register ad source class name:" << ad_source_->GetClassName().c_str() << ", id:" << ad_source_->Identifier() << ", type:" << static_cast<int32_t>(ad_source_->GetStyle()) << ", request type:" << 2;
+    PLATFORM_INVOKE(&user_info)
 }
 
 void AdSourceModel::ConvertToCacheObject() {
@@ -95,7 +92,7 @@ void AdSourceModel::SetDelegate(std::shared_ptr<AdSourceModelDelegate> delegate)
 
 #pragma mark - AdSourceDelegate
 
-void AdSourceModel::RegisterCompletion(std::map<std::string, std::string> user_info, std::shared_ptr<ONETEN::Error> error) {
+void AdSourceModel::RegisterCompletion(std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<ONETEN::Error> error) {
     if (error) {
         otlog_info << "failed code:" << error->GetCode() << ", msg:" << error->GetMsg();
     } else {
@@ -103,39 +100,39 @@ void AdSourceModel::RegisterCompletion(std::map<std::string, std::string> user_i
     }
     
     if (auto s_delegate = delegate_.lock()) {
-        s_delegate->RegisterCompletion(user_info, error);
+        s_delegate->RegisterCompletion(ad_source_model, error);
     }
 }
 
-void AdSourceModel::LoadCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error) {
-    otlog_info << "class name:" << ad_source_->GetClassName().c_str() << ", type:"
+void AdSourceModel::LoadCompletion(std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<ONETEN::Error> error) {
+    otlog_info << "class name:" << ad_source_->GetClassName().c_str() << ", id:" << ad_source_->Identifier() << ", type:"
     << static_cast<int32_t>(ad_source_->GetStyle()) << ", request type:" << 2;
     if (error) {
         status_ = Status::kLoadFailed;
         otlog_info << "failed code:" << error->GetCode() << ", msg:" << error->GetMsg();
     } else {
-        otlog_info << "success";
         status_ = Status::kLoaded;
+        otlog_info << "success";
     }
     
     
     if (auto s_delegate = delegate_.lock()) {
-        s_delegate->LoadCompletion(categroy_type, error);
+        s_delegate->LoadCompletion(ad_source_model, error);
     }
 }
 
-void AdSourceModel::ShowCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error) {
+void AdSourceModel::ShowCompletion(std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<ONETEN::Error> error) {
     if (error) {
         otlog_info << "failed code:" << error->GetCode() << ", msg:" << error->GetMsg();
         return;
     }
     
     if (auto s_delegate = delegate_.lock()) {
-        s_delegate->ShowCompletion(categroy_type);
+        s_delegate->ShowCompletion(ad_source_model);
     }
 }
 
-void AdSourceModel::CloseCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error) {
+void AdSourceModel::CloseCompletion(std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<ONETEN::Error> error) {
     otlog_info << "success" << ad_source_cache_->GetClassName().c_str() << ", type:"
     << static_cast<int32_t>(ad_source_cache_->GetStyle()) << ", request type:" << static_cast<int32_t>(ad_source_cache_->GetRequestType());
     
@@ -145,17 +142,17 @@ void AdSourceModel::CloseCompletion(int32_t categroy_type, std::shared_ptr<ONETE
     }
     
     if (auto s_delegate = delegate_.lock()) {
-        s_delegate->CloseCompletion(categroy_type);
+        s_delegate->CloseCompletion(ad_source_model);
     }
 }
 
-void AdSourceModel::ClickCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error) {
+void AdSourceModel::ClickCompletion(std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<ONETEN::Error> error) {
     if (error) {
         return;
     }
     
     if (auto s_delegate = delegate_.lock()) {
-        s_delegate->ClickCompletion(categroy_type);
+        s_delegate->ClickCompletion(ad_source_model);
     }
 }
 

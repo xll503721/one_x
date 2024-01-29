@@ -41,6 +41,7 @@ private:
     void WaterfallFlow();
     void LoadAdapter();
     void NextAdapter();
+    void NextAdapterSave(std::map<std::string, std::shared_ptr<void>> params);
     void SaveCache();
     
 private:
@@ -48,7 +49,8 @@ private:
     
     std::shared_ptr<LoaderInterface> start_loader_;
     std::shared_ptr<LoaderInterface> waterfall_loader_;
-    std::shared_ptr<LoaderInterface> request_loader_;
+    std::shared_ptr<LoaderInterface> header_bid_loader_;
+    std::shared_ptr<LoaderInterface> normal_loader_;
     std::shared_ptr<LoaderInterface> cache_loader_;
     
     BASE_THREAD::ThreadPool thread_pool_;

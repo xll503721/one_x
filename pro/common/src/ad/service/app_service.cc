@@ -26,7 +26,7 @@ void AppService::GetAppSettingsModel(const std::string& app_id, AppSettingsModel
             return;
         }
         
-        std::string app_settings_json_string = "{\"id\":\"123456789\",\"ad_sources\":[{\"network_id\":4,\"app_id\":\"11111\",\"app_key\":\"22222\"},{\"network_id\":1,\"app_id\":\"11111\",\"app_key\":\"22222\"}]}";
+        std::string app_settings_json_string = "{\"id\":\"123456789\",\"ad_sources\":[{\"network_id\":3,\"app_id\":\"11111\",\"app_key\":\"22222\"},{\"network_id\":0,\"app_id\":\"11111\",\"app_key\":\"22222\"}]}";
         app_settings_model_ = std::make_shared<AppSettingsModel>(app_settings_json_string);
         app_settings_model_->Save();
         

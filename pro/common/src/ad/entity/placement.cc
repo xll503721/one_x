@@ -20,7 +20,11 @@ void Placement::Parse(const std::string& json_string) {
     otlog_info << "parse placement json string:" << json_string;
     
     json_ = std::make_shared<BASE_JSON::Json>();
-    json_->Parse(json_string.c_str(), json_string.size());
+    auto result = json_->Parse(json_string.c_str(), json_string.size());
+    if (result == BASE_JSON::Json::Result::kError) {
+        otlog_fault << "placement json error";
+        return;
+    }
     BASE_JSON::Json id = json_->operator[]("id");
     if (id.IsString()) {
         identifier_ = id.AsString();
@@ -31,6 +35,7 @@ void Placement::Parse(const std::string& json_string) {
 void Placement::ParseAdSource() {
     BASE_JSON::Json waterfall_json = json_->operator[]("waterfall");
     if (!waterfall_json.IsArray()) {
+        otlog_fault << "placement waterfall json error";
         return;
     }
     
@@ -38,6 +43,7 @@ void Placement::ParseAdSource() {
     
     BASE_JSON::Json c2s_json = json_->operator[]("c2s");
     if (!c2s_json.IsArray()) {
+        otlog_fault << "placement c2s json error";
         return;
     }
     

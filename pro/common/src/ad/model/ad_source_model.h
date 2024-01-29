@@ -21,11 +21,11 @@ class AdSourceModel;
 class AdSourceModelDelegate {
     
 public:
-    virtual void RegisterCompletion(std::map<std::string, std::string> user_info, std::shared_ptr<ONETEN::Error> error = nullptr) {};
-    virtual void LoadCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) {};
-    virtual void ShowCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) {};
-    virtual void CloseCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) {};
-    virtual void ClickCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) {};
+    virtual void RegisterCompletion(std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<ONETEN::Error> error = nullptr) {};
+    virtual void LoadCompletion(std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<ONETEN::Error> error = nullptr) {};
+    virtual void ShowCompletion(std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<ONETEN::Error> error = nullptr) {};
+    virtual void CloseCompletion(std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<ONETEN::Error> error = nullptr) {};
+    virtual void ClickCompletion(std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<ONETEN::Error> error = nullptr) {};
 };
 
 class PlacementModel;
@@ -39,9 +39,12 @@ public:
     virtual ~AdSourceModel();
     
     enum class Status {
-        kReadyToLoad,
-        kLoading,
+        kReadyToLoad = 0,
+        kReadyToLoadC2S,
         kLoaded,
+        kLoading,
+        kLoadingC2S,
+        kLoadingS2S,
         kLoadFailed,
         kShowed,
         kShowing,
@@ -57,11 +60,11 @@ public:
     
     void ConvertToCacheObject();
     
-    void RegisterCompletion(std::map<std::string, std::string> user_info, std::shared_ptr<ONETEN::Error> error = nullptr) override;
-    void LoadCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) override;
-    void ShowCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) override;
-    void CloseCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) override;
-    void ClickCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) override;
+    void RegisterCompletion(std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<ONETEN::Error> error = nullptr) override;
+    void LoadCompletion(std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<ONETEN::Error> error = nullptr) override;
+    void ShowCompletion(std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<ONETEN::Error> error = nullptr) override;
+    void CloseCompletion(std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<ONETEN::Error> error = nullptr) override;
+    void ClickCompletion(std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<ONETEN::Error> error = nullptr) override;
     
     int32_t GetLevel() {
         return ad_source_->GetLevel();
@@ -83,6 +86,15 @@ public:
             return ad_source_cache_->GetStyle();
         }
         return AdSource::Style::kBanner;
+    }
+    
+    double GetPrice() {
+        if (ad_source_) {
+            return ad_source_->GetEcpmPrice();
+        } else if (ad_source_cache_) {
+            return ad_source_cache_->GetEcpmPrice();
+        }
+        return 0;
     }
     
     inline Status GetStatus() {

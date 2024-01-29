@@ -32,11 +32,8 @@ void WaterfallLoader::Classify(std::shared_ptr<PlacementModel> placement) {
 
 void WaterfallLoader::StartFlow(std::shared_ptr<PlacementModel> placement, std::shared_ptr<AdSourceModel> save_ad_source_model) {
     super_class::StartFlow(placement, save_ad_source_model);
-    if (save_ad_source_model && (save_ad_source_model->GetRequestType() == AdSource::RequestType::kC2S ||
-        save_ad_source_model->GetRequestType() == AdSource::RequestType::kS2S)) {
-        return;
-    }
-    waterfall_service_->MarkPreAdSourceFinish();
+    
+    waterfall_service_->MarkPreAdSourceFinish(save_ad_source_model);
     
     std::string load_id;
     if (auto s_run_loader = GetRunLoader().lock()) {
@@ -45,8 +42,17 @@ void WaterfallLoader::StartFlow(std::shared_ptr<PlacementModel> placement, std::
     }
     
     bool is_waterfall_finish = waterfall_service_->CheckWaterfallFinish(load_id, placement);
-    auto next_ad_source_model = waterfall_service_->LoadNextAdSource();
-    if (!next_ad_source_model && !is_waterfall_finish) {
+    bool is_c2s_finish = waterfall_service_->CheckC2SFinish();
+    std::shared_ptr<AdSourceModel> next_ad_source_model = nullptr;
+    if (!is_waterfall_finish) {
+        next_ad_source_model = waterfall_service_->LoadNextAdSource();
+        if (!next_ad_source_model) {
+            otlog_info << "pre ad source model not finish, waitting for pre ad source model";
+            return;
+        }
+    }
+    if (is_waterfall_finish && !is_c2s_finish) {
+        otlog_info << "waterfall finish, but c2s not finish, waitting for c2s";
         return;
     }
     

@@ -91,8 +91,6 @@ void AdSDKDelegate::SetOCPrt(void *prt) {
     oc_prt_ = prt;
 }
 
-#define MACRO(symbol) #symbol
-
 void AdSDKDelegate::ActionCompletion(ActionType type, const std::string& placement_id, std::shared_ptr<ONETEN::Error> error) {
     if (oc_prt_) {
         OTOnetenAdSDK *ad_sdk = (__bridge OTOnetenAdSDK *)oc_prt_;

@@ -35,7 +35,7 @@ void NormalLoader::Flow(std::shared_ptr<AdSourceModel> ad_source_model, std::sha
     std::weak_ptr<AdSourceModel> w_ad_source_model = ad_source_model;
     
     if (!app_service_->QueryWhetherRegister(ad_source_model->GetAdnId())) {
-        ad_source_service_->Register(ad_source_model, [=](int32_t categroy_type, std::shared_ptr<ONETEN::Error> error) {
+        ad_source_service_->Register(ad_source_model, [=](std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<ONETEN::Error> error) {
             app_service_->RegisterAdn(ad_source_model->GetAdnId());
             
             Load(ad_source_model, placement_model);
@@ -50,17 +50,14 @@ void NormalLoader::Load(std::shared_ptr<AdSourceModel> ad_source_model, std::sha
     std::weak_ptr<PlacementModel> w_placement_model = placement_model;
     std::weak_ptr<AdSourceModel> w_ad_source_model = ad_source_model;
     
-    ad_source_service_->Load(ad_source_model, [=](int32_t categroy_type, std::shared_ptr<ONETEN::Error> error) {
+    ad_source_service_->Load(placement_model, ad_source_model, [=](std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<ONETEN::Error> error) {
         auto s_placement_model = w_placement_model.lock();
-        auto s_ad_source_model = w_ad_source_model.lock();
         
         std::map<std::string, std::shared_ptr<void>> map;
         if (s_placement_model) {
             map["placement_model"] = s_placement_model;
         }
-        if (s_ad_source_model) {
-            map["ad_source_model"] = s_ad_source_model;
-        }
+        map["ad_source_model"] = ad_source_model;
         
         if (error) {
             map["error"] = error;

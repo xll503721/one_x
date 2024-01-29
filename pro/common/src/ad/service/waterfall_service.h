@@ -19,15 +19,22 @@ public:
     WaterfallService() = default;
     
     std::shared_ptr<AdSourceModel> LoadNextAdSource();
-    void MarkPreAdSourceFinish();
+    std::shared_ptr<AdSourceModel> FilterNextAdSource();
+    void MarkPreAdSourceFinish(std::shared_ptr<AdSourceModel> save_ad_source_model);
     
     bool CheckWaterfallFinish(const std::string& load_id, std::shared_ptr<PlacementModel> placement_model);
     bool CheckC2SFinish();
     
 private:
-    int32_t loading_layer_index_;
-    std::vector<std::shared_ptr<AdSourceModel>> loading_ad_unit_model_vector_;
+    bool WhetherLoadedAdSourceModelEcpmPriceHighest(std::shared_ptr<AdSourceModel> loaded_ad_source_model, AdSourceModel::Status status);
+    
+private:
+    std::unordered_set<std::shared_ptr<AdSourceModel>> loading_ad_unit_model_vector_;
     std::shared_ptr<PlacementModel> loading_placement_model_;
+    std::shared_ptr<AdSourceModel> pre_loading_ad_source_model_;
+    std::shared_ptr<AdSourceModel> loading_ad_source_model_;
+    
+    std::shared_ptr<AdSourceModel> finish_ad_source_model_;
 };
 
 END_NAMESPACE_ONETEN_AD

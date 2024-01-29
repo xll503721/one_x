@@ -25,7 +25,7 @@ void CacheService::Save(const std::string& loader_id, std::shared_ptr<AdSourceMo
         auto placement_model_copy = placement_model->ConvertToCacheObject();
         ad_source_model->SetLoadId(loader_id);
         
-        cache_model = std::make_shared<CacheModel>(loader_id, placement_model_copy);
+        cache_model = std::make_shared<CacheModel>(placement_model_copy);
     }
     ad_source_model->ConvertToCacheObject();
     cache_model->Save(ad_source_model);
@@ -48,7 +48,7 @@ std::shared_ptr<AdSourceModel> CacheService::GetHighestPrice(const std::string& 
         return nullptr;
     }
     
-    auto ret_ad_source_model = ad_source_model_caches[0];
+    auto ret_ad_source_model = *ad_source_model_caches.begin();
     has_showed_ad_source_id_and_placement_id_map_[ret_ad_source_model->Identifier()] = placement_id;
     return ret_ad_source_model;
 }

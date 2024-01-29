@@ -27,6 +27,7 @@ public:
     
     std::string Identifier() override;
     
+    READONLY_PROPERTY(double, EcpmPrice, ecpm_price)
     READONLY_PROPERTY(std::string, ClassName, class_name)
     READONLY_PROPERTY(AdSource::Style, Style, style)
     READONLY_PROPERTY(AdSource::RequestType, RequestType, request_type)

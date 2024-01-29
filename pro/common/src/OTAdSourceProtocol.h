@@ -8,8 +8,8 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSUInteger, OTAdSourceType) {
-    OTAdSourceTypeC2S,
     OTAdSourceTypeS2S,
+    OTAdSourceTypeC2S,
     OTAdSourceTypeNormal,
 };
 

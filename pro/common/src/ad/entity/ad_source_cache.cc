@@ -50,6 +50,11 @@ void AdSourceCache::Parse() {
         request_type_ = static_cast<AdSource::RequestType>(request_type.AsInteger());
     }
     
+    BASE_JSON::Json ecpm_price_json = json_->operator[]("ecpm_price");
+    if (ecpm_price_json.IsReal()) {
+        ecpm_price_ = ecpm_price_json.AsReal();
+    }
+    
     json_ = nullptr;
 }
 

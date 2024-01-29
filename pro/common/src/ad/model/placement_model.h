@@ -19,6 +19,16 @@
 
 BEGIN_NAMESPACE_ONETEN_AD
 
+// 定义一个比较函数
+struct AdSourceModelCompare {
+    bool operator()(const std::shared_ptr<AdSourceModel>& lhs, const std::shared_ptr<AdSourceModel>& rhs) const {
+        if (!lhs || !rhs) {
+            return false;
+        }
+        return lhs->GetPrice() > rhs->GetPrice();
+    }
+};
+
 class PlacementModel: public Model {
     
 public:
@@ -30,18 +40,26 @@ public:
     
     std::string Identifier() override;
     
-    std::vector<std::shared_ptr<AdSourceModel>> GetAdSourceModelStatus(AdSourceModel::Status status);
     std::vector<std::shared_ptr<AdSourceModel>> GetAdSourceModel(AdSource::RequestType request_type);
     
-    std::shared_ptr<PlacementModel> ConvertToCacheObject();
-    void AddAdSourceModel(std::shared_ptr<AdSourceModel> ad_source_model);
-    std::vector<std::shared_ptr<AdSourceModel>> GetAdSourceModelCache();
+    void AddAdSourceModel(std::shared_ptr<AdSourceModel> ad_source_model, AdSourceModel::Status status);
+    std::set<std::shared_ptr<AdSourceModel>> GetSortAdSourceModelStatus(AdSourceModel::Status status);
     bool RemoveAdSourceModel(const std::string& ad_source_id);
+    void RemoveAdSourceModel(std::shared_ptr<AdSourceModel> ad_source_model, AdSourceModel::Status status);
     
-public:
+    std::shared_ptr<PlacementModel> ConvertToCacheObject();
+private:
     std::shared_ptr<Placement> placement_;
     std::shared_ptr<PlacementCache> placement_cache_;
-    std::vector<std::shared_ptr<AdSourceModel>> ad_sources_model_vector_;
+    
+    std::set<std::shared_ptr<AdSourceModel>> ready_to_load_c2s_sources_model_vector_;
+    std::set<std::shared_ptr<AdSourceModel>> ready_to_load_sources_model_vector_;
+    std::set<std::shared_ptr<AdSourceModel>> loading_ad_sources_model_vector_;
+    std::set<std::shared_ptr<AdSourceModel>> loaded_ad_sources_model_vector_;
+    
+    std::vector<std::shared_ptr<AdSourceModel>> normal_sources_model_vector_;
+    std::vector<std::shared_ptr<AdSourceModel>> c2s_sources_model_vector_;
+    std::vector<std::shared_ptr<AdSourceModel>> s2s_sources_model_vector_;
 };
 
 END_NAMESPACE_ONETEN_AD

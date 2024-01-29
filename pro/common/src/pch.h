@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <map>
+#include <set>
+#include <unordered_set>
 #include <iostream>
 #include <queue>
 #include <vector>
@@ -18,6 +20,8 @@
 #ifndef __FILE_NAME__
 #define __FILE_NAME__ __FILE__
 #endif
+
+#define MACRO(symbol) #symbol
 
 #define REGISTER_MODEL(NAME) \
 std::shared_ptr<NAME> model_##NAME = std::make_shared<NAME>();\

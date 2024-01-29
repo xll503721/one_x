@@ -17,20 +17,20 @@ class AdSourceService: public ONETEN::Object<AdSourceService>, public AdSourceMo
     
 public:
     ~AdSourceService();
-    using ActionCompletionInvoke = std::function<void(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error)>;
+    using ActionCompletionInvoke = std::function<void(std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<ONETEN::Error> error)>;
     
     void Register(std::shared_ptr<AdSourceModel> ad_source_model, ActionCompletionInvoke register_complete);
-    void Load(std::shared_ptr<AdSourceModel> ad_source_model, ActionCompletionInvoke load_complete);
+    void Load(std::shared_ptr<PlacementModel> placement_model, std::shared_ptr<AdSourceModel> ad_source_model, ActionCompletionInvoke load_complete);
     void Show(std::shared_ptr<AdSourceModel> ad_source_model, ActionCompletionInvoke show_complete);
     void Close(std::shared_ptr<AdSourceModel> ad_source_model, ActionCompletionInvoke close_complete);
     void Click(std::shared_ptr<AdSourceModel> ad_source_model, ActionCompletionInvoke click_complete);
     
 private:
-    void RegisterCompletion(std::map<std::string, std::string> user_info, std::shared_ptr<ONETEN::Error> error = nullptr) override;
-    void LoadCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) override;
-    void ShowCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) override;
-    void CloseCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) override;
-    void ClickCompletion(int32_t categroy_type, std::shared_ptr<ONETEN::Error> error = nullptr) override;
+    void RegisterCompletion(std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<ONETEN::Error> error = nullptr) override;
+    void LoadCompletion(std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<ONETEN::Error> error = nullptr) override;
+    void ShowCompletion(std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<ONETEN::Error> error = nullptr) override;
+    void CloseCompletion(std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<ONETEN::Error> error = nullptr) override;
+    void ClickCompletion(std::shared_ptr<AdSourceModel> ad_source_model, std::shared_ptr<ONETEN::Error> error = nullptr) override;
     
 private:
     void* ad_source_service_ios_;

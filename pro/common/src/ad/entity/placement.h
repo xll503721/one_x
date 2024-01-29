@@ -21,12 +21,6 @@ public:
     explicit Placement(const std::string& json_string);
     virtual ~Placement();
     
-    inline std::vector<std::shared_ptr<AdSource>> GetRequestingAdSources() {
-        return requesting_ad_sources_;
-    }
-    inline std::vector<std::shared_ptr<AdSource>> GetLoadedAdSources() {
-        return completed_ad_sources_;
-    }
     inline std::vector<std::shared_ptr<AdSource>> GetAllAdSources() {
         return ad_sources_;
     }
@@ -49,8 +43,6 @@ private:
     void ParseAdSource(AdSource::RequestType request_type, BASE_JSON::Json& ad_sources_json);
     
 private:
-    std::vector<std::shared_ptr<AdSource>> requesting_ad_sources_;
-    std::vector<std::shared_ptr<AdSource>> completed_ad_sources_;
     std::vector<std::shared_ptr<AdSource>> ad_sources_;
     std::vector<std::shared_ptr<AdSource>> s2s_ad_sources_;
     std::vector<std::shared_ptr<AdSource>> c2s_ad_sources_;

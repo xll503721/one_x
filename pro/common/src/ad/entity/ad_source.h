@@ -61,15 +61,15 @@ public:
 
     std::string Identifier() override;
     
+    READONLY_PROPERTY(double, EcpmPrice, ecpm_price)
     READONLY_PROPERTY(RequestType, RequestType, request_type);
     READONLY_PROPERTY(Style, Style, style);
     READONLY_PROPERTY(AdnId::All, AdnId, adn_id);
+    READONLY_PROPERTY(std::string, placementId, placement_id);
     
 private:
     int32_t level_;
     std::string clazz_name_;
-    double cpm_price_;
-    std::string placementId_;
     
     std::shared_ptr<BASE_JSON::Json> json_;
 };

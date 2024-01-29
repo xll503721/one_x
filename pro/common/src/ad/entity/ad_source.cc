@@ -23,7 +23,7 @@ AdSource::~AdSource() {
 }
 
 std::string AdSource::Identifier() {
-    
+    return identifier_;
 }
 
 void AdSource::InitSDK() {
@@ -64,12 +64,12 @@ void AdSource::Parse() {
     
     BASE_JSON::Json placement_id_json = json_->operator[]("placement_id");
     if (placement_id_json.IsString()) {
-        placementId_ = placement_id_json.AsString();
+        placement_id_ = placement_id_json.AsString();
     }
     
     BASE_JSON::Json ecpm_price_json = json_->operator[]("ecpm_price");
     if (ecpm_price_json.IsReal()) {
-        cpm_price_ = ecpm_price_json.AsReal();
+        ecpm_price_ = ecpm_price_json.AsReal();
     }
     
     BASE_JSON::Json request_type = json_->operator[]("request_type");

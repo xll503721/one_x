@@ -10,16 +10,16 @@
 #include <ad/model/ad_source_model.h>
 #include <ad/entity/ad_source.h>
 
-@interface OTAdSourceModelObjectDelegate ()
+@interface OTAdSourceModelObjectDelegate () {
+    CPlusPlusPrt _cPlusPlusPrt;
+}
 
 @end
 
 @implementation OTAdSourceModelObjectDelegate
 
-@synthesize cPlusPlusPrt;
-
 - (void)dealloc {
-    
+    _cPlusPlusPrt.reset();
 }
 
 - (instancetype)init
@@ -30,16 +30,18 @@
     return self;
 }
 
+- (void)setCPlusPlusPrt:(std::shared_ptr<void>)cPlusPlusPrt {
+    _cPlusPlusPrt = cPlusPlusPrt;
+}
+
 - (void)registerWithUserInfo:(NSDictionary<id, id> *)userInfo error:(NSError *)error {
-    ONETEN_AD::AdSourceModel* ad_source_cache_model = static_cast<ONETEN_AD::AdSourceModel *>(self.cPlusPlusPrt);
-    if (ad_source_cache_model) {
-        std::map<std::string, std::string> user_info;
-        std::shared_ptr<ONETEN::Error> c_error = nullptr;
-        if (error) {
-            c_error = std::make_shared<ONETEN::Error>(static_cast<int32_t>(error.code), error.localizedDescription.UTF8String, user_info);
-        }
-        ad_source_cache_model->RegisterCompletion(user_info, c_error);
+    auto ad_source_model = std::static_pointer_cast<ONETEN_AD::AdSourceModel>(_cPlusPlusPrt);
+    std::map<std::string, std::string> user_info;
+    std::shared_ptr<ONETEN::Error> c_error = nullptr;
+    if (error) {
+        c_error = std::make_shared<ONETEN::Error>(static_cast<int32_t>(error.code), error.localizedDescription.UTF8String, user_info);
     }
+    ad_source_model->RegisterCompletion(ad_source_model, c_error);
 }
 
 - (void)adWillLoadWithStyleType:(OTAdSourceStyleType)styleType adSourceObject:(id)adSourceObject {
@@ -51,7 +53,7 @@
 }
 
 - (void)adDidLoadWithStyleType:(OTAdSourceStyleType)styleType error:(NSError *)error {
-    ONETEN_AD::AdSourceModel* ad_source_model = static_cast<ONETEN_AD::AdSourceModel *>(self.cPlusPlusPrt);
+    auto ad_source_model = std::static_pointer_cast<ONETEN_AD::AdSourceModel>(_cPlusPlusPrt);
     if (ad_source_model) {
         std::map<std::string, std::string> user_info;
         std::shared_ptr<ONETEN::Error> c_error = nullptr;
@@ -59,7 +61,7 @@
             c_error = std::make_shared<ONETEN::Error>(static_cast<int32_t>(error.code), error.localizedDescription.UTF8String, user_info);
         }
         
-        ad_source_model->LoadCompletion((int32_t)styleType, c_error);
+        ad_source_model->LoadCompletion(ad_source_model, c_error);
     }
 }
 
@@ -77,69 +79,69 @@
 }
 
 - (void)adDidShowWithStyleType:(OTAdSourceStyleType)styleType error:(NSError *)error {
-    ONETEN_AD::AdSourceModel* ad_source_cache_model = static_cast<ONETEN_AD::AdSourceModel *>(self.cPlusPlusPrt);
-    if (ad_source_cache_model) {
+    auto ad_source_model = std::static_pointer_cast<ONETEN_AD::AdSourceModel>(_cPlusPlusPrt);
+    if (ad_source_model) {
         std::map<std::string, std::string> user_info;
         std::shared_ptr<ONETEN::Error> c_error = nullptr;
         if (error) {
             c_error = std::make_shared<ONETEN::Error>(static_cast<int32_t>(error.code), error.localizedDescription.UTF8String, user_info);
         }
-        ad_source_cache_model->ShowCompletion((int32_t)styleType, c_error);
+        ad_source_model->ShowCompletion(ad_source_model, c_error);
     }
 }
 
 - (void)adWillDismissWithStyleType:(OTAdSourceStyleType)styleType error:(NSError *)error {
-    ONETEN_AD::AdSourceModel* ad_source_cache_model = static_cast<ONETEN_AD::AdSourceModel *>(self.cPlusPlusPrt);
-    if (ad_source_cache_model) {
+    auto ad_source_model = std::static_pointer_cast<ONETEN_AD::AdSourceModel>(_cPlusPlusPrt);
+    if (ad_source_model) {
         std::map<std::string, std::string> user_info;
         std::shared_ptr<ONETEN::Error> c_error = nullptr;
         if (error) {
             c_error = std::make_shared<ONETEN::Error>(static_cast<int32_t>(error.code), error.localizedDescription.UTF8String, user_info);
         }
-        ad_source_cache_model->CloseCompletion((int32_t)styleType, c_error);
+        ad_source_model->CloseCompletion(ad_source_model, c_error);
     }
 }
 
 - (void)adDidDismissWithStyleType:(OTAdSourceStyleType)styleType error:(NSError *)error {
-    ONETEN_AD::AdSourceModel* ad_source_cache_model = static_cast<ONETEN_AD::AdSourceModel *>(self.cPlusPlusPrt);
-    if (ad_source_cache_model) {
+    auto ad_source_model = std::static_pointer_cast<ONETEN_AD::AdSourceModel>(_cPlusPlusPrt);
+    if (ad_source_model) {
         std::map<std::string, std::string> user_info;
         std::shared_ptr<ONETEN::Error> c_error = nullptr;
         if (error) {
             c_error = std::make_shared<ONETEN::Error>(static_cast<int32_t>(error.code), error.localizedDescription.UTF8String, user_info);
         }
-        ad_source_cache_model->CloseCompletion((int32_t)styleType, c_error);
+        ad_source_model->CloseCompletion(ad_source_model, c_error);
     }
 }
 
 - (void)adWillCloseWithStyleType:(OTAdSourceStyleType)styleType error:(NSError *)error {
-    ONETEN_AD::AdSourceModel* ad_source_cache_model = static_cast<ONETEN_AD::AdSourceModel *>(self.cPlusPlusPrt);
-    if (ad_source_cache_model) {
+    auto ad_source_model = std::static_pointer_cast<ONETEN_AD::AdSourceModel>(_cPlusPlusPrt);
+    if (ad_source_model) {
         std::map<std::string, std::string> user_info;
         std::shared_ptr<ONETEN::Error> c_error = nullptr;
         if (error) {
             c_error = std::make_shared<ONETEN::Error>(static_cast<int32_t>(error.code), error.localizedDescription.UTF8String, user_info);
         }
-        ad_source_cache_model->CloseCompletion((int32_t)styleType, c_error);
+        ad_source_model->CloseCompletion(ad_source_model, c_error);
     }
 }
 
 - (void)adDidCloseWithStyleType:(OTAdSourceStyleType)styleType error:(NSError *)error {
-    ONETEN_AD::AdSourceModel* ad_source_cache_model = static_cast<ONETEN_AD::AdSourceModel *>(self.cPlusPlusPrt);
-    if (ad_source_cache_model) {
+    auto ad_source_model = std::static_pointer_cast<ONETEN_AD::AdSourceModel>(_cPlusPlusPrt);
+    if (ad_source_model) {
         std::map<std::string, std::string> user_info;
         std::shared_ptr<ONETEN::Error> c_error = nullptr;
         if (error) {
             c_error = std::make_shared<ONETEN::Error>(static_cast<int32_t>(error.code), error.localizedDescription.UTF8String, user_info);
         }
-        ad_source_cache_model->CloseCompletion((int32_t)styleType, c_error);
+        ad_source_model->CloseCompletion(ad_source_model, c_error);
     }
 }
 
 - (void)adDidClickWithStyleType:(OTAdSourceStyleType)styleType {
-    ONETEN_AD::AdSourceModel* ad_source_cache_model = static_cast<ONETEN_AD::AdSourceModel *>(self.cPlusPlusPrt);
-    if (ad_source_cache_model) {
-        ad_source_cache_model->ClickCompletion((int32_t)styleType);
+    auto ad_source_model = std::static_pointer_cast<ONETEN_AD::AdSourceModel>(_cPlusPlusPrt);
+    if (ad_source_model) {
+        ad_source_model->ClickCompletion(ad_source_model);
     }
 }
 
