@@ -10,7 +10,6 @@
 BEGIN_NAMESPACE_ONETEN_AD
 
 MainLoader::~MainLoader() {
-    
 }
 
 MainLoader::MainLoader(std::shared_ptr<LoaderInterface> loader, std::shared_ptr<void> app_loader):
@@ -21,24 +20,28 @@ app_loader_(app_loader) {
 void MainLoader::Start(const std::string& placement_id) {
     if (mainloader_) {
         mainloader_->Start(placement_id);
+        CastAndMergeParams();
     }
 }
 
 void MainLoader::Classify(std::shared_ptr<PlacementModel> placement) {
     if (mainloader_) {
         mainloader_->Classify(placement);
+        CastAndMergeParams();
     }
 }
 
 void MainLoader::StartFlow(std::shared_ptr<PlacementModel> placement, std::shared_ptr<AdSourceModel> save_ad_source_model) {
     if (mainloader_) {
         mainloader_->StartFlow(placement, save_ad_source_model);
+        CastAndMergeParams();
     }
 }
 
 void MainLoader::Flow(std::shared_ptr<AdSourceModel> ad_source, std::shared_ptr<PlacementModel> placement) {
     if (mainloader_) {
         mainloader_->Flow(ad_source, placement);
+        CastAndMergeParams();
     }
 }
 
@@ -69,6 +72,13 @@ bool MainLoader::SetIsEndInvoke(bool is_end_invoke) {
 
 std::weak_ptr<void> MainLoader::GetRunLoader() {
     return app_loader_;
+}
+
+void MainLoader::CastAndMergeParams() {
+    auto main_loader_prt = std::dynamic_pointer_cast<MainLoader>(mainloader_);
+    if (main_loader_prt) {
+        MergeParams(main_loader_prt->GetParams());
+    }
 }
 
 END_NAMESPACE_ONETEN_AD

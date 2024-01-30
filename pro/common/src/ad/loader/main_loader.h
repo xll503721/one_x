@@ -31,13 +31,23 @@ public:
     bool SetIsEndInvoke(bool is_end_invoke) override;
 
     void NextLoader(NextLoaderCallBack callBack) override;
-
+    
 protected:
     std::weak_ptr<void> GetRunLoader();
+    inline std::map<std::string, std::shared_ptr<void>> GetParams() {
+        return params_;
+    }
+    
+    inline void MergeParams(std::map<std::string, std::shared_ptr<void>> params) {
+        params_.merge(params);
+    }
+    
+    void CastAndMergeParams();
 
 protected:
     void NextLoader(std::map<std::string, std::shared_ptr<void>> params);
     std::weak_ptr<void> app_loader_;
+    std::map<std::string, std::shared_ptr<void>> params_;
     
 private:
     std::shared_ptr<LoaderInterface> mainloader_;
