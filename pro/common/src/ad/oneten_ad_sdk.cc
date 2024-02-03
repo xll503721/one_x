@@ -35,16 +35,40 @@ OnetenAdSDK &OnetenAdSDK::GetInstance() {
 OnetenAdSDK::OnetenAdSDK() {
     app_loader_ = std::make_shared<AppLoader>();
     
-//    Placement placement;
-//    bool is = std::is_same<decltype(placement.Identifier()), std::string>::value;
-//    otlog_info << is;
-//    auto db = BASE_STORAGE_DATABASE::DataBase(BASE_DEVICE::Device::DefaultInstance().GetFile()->GetCachesPath() + "/" + database_name);
-//    const char* sql_create_table =
-//            "CREATE TABLE IF NOT EXISTS Users ("
-//            "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-//            "name TEXT,"
-//            "age INTEGER);";
-//    db.CreateTable(sql_create_table);
+    Placement placement;
+    bool is = std::is_same<decltype(placement.Identifier()), std::string>::value;
+    otlog_info << is;
+    auto db = BASE_STORAGE_DATABASE::DataBase(BASE_DEVICE::Device::DefaultInstance().GetFile()->GetCachesPath() + "/" + database_name);
+    const char* sql_create_table =
+            "CREATE TABLE IF NOT EXISTS Users ("
+            "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+            "name TEXT,"
+            "age INTEGER);";
+    db.CreateTable(sql_create_table);
+
+    const char* sql_insert_data = "Users";
+    auto age = PLATFORM_VAR_GENERATE(1);
+    auto name = PLATFORM_VAR_GENERATE("Alice");
+    std::map<std::string, BASE_PLATFORM::Platform::Var> map;
+    map["name"] = name;
+    map["age"] = age;
+
+    BASE_PLATFORM::Platform::Var row_var = &map;
+    db.Insert(sql_insert_data, row_var);
+
+    auto select_age = PLATFORM_VAR_GENERATE(0);
+    auto select_name = PLATFORM_VAR_GENERATE("");
+    std::map<std::string, BASE_PLATFORM::Platform::Var> select_map;
+    select_map["name"] = select_name;
+    select_map["age"] = select_age;
+
+    BASE_PLATFORM::Platform::Var select_row_var = &select_map;
+    auto select_map_get = select_row_var.GetMap();
+
+    otlog_info << "map select_name:" << &(select_map["name"]) << ", select_name:" << &select_name << ", map:" << &select_map_get;
+
+//    db.Select(sql_insert_data, select_row_var);
+//    printf("");
 }
 
 OnetenAdSDK::~OnetenAdSDK() {

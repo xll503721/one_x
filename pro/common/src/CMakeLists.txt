@@ -5,7 +5,7 @@ string(CONCAT SDK_NAME ${SDK_NAME_UPPER_CASE} "SDK")
 project(${SDK_NAME})
 
 set(CMAKE_OSX_ARCHITECTURES "x86_64;arm64")
-set(CMAKE_OSX_SYSROOT "iphoneos")
+set(CMAKE_OSX_SYSROOT "iphonesimulator")
 
 set(AD_FRAMEWORK "")
 string(CONCAT AD_FRAMEWORK ${SDK_NAME_LOWER_CASE} "_ad_sdk")
