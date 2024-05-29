@@ -55,8 +55,6 @@ public:
     std::string GetClassName();
     void Parse();
     
-    void InitSDK();
-    
     std::shared_ptr<BASE_JSON::Json> GetJson();
 
     std::string Identifier() override;

@@ -25,8 +25,6 @@
 
 BEGIN_NAMESPACE_ONETEN_AD
 
-static const std::string database_name = "sdk_db";
-
 OnetenAdSDK &OnetenAdSDK::GetInstance() {
     static OnetenAdSDK ad_sdk;
     return ad_sdk;
@@ -38,7 +36,8 @@ OnetenAdSDK::OnetenAdSDK() {
     Placement placement;
     bool is = std::is_same<decltype(placement.Identifier()), std::string>::value;
     otlog_info << is;
-    auto db = BASE_STORAGE_DATABASE::DataBase(BASE_DEVICE::Device::DefaultInstance().GetFile()->GetCachesPath() + "/" + database_name);
+    
+    auto db = BASE_STORAGE_DATABASE::DataBase::DefaultInstance();
     const char* sql_create_table =
             "CREATE TABLE IF NOT EXISTS Users ("
             "id INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -67,7 +66,7 @@ OnetenAdSDK::OnetenAdSDK() {
 
     otlog_info << "map select_name:" << &(select_map["name"]) << ", select_name:" << &select_name << ", map:" << &select_map_get;
 
-//    db.Select(sql_insert_data, select_row_var);
+    db.Select(sql_insert_data, select_row_var, select_row_var);
 //    printf("");
 }
 

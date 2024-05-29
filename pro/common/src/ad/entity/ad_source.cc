@@ -26,10 +26,6 @@ std::string AdSource::Identifier() {
     return identifier_;
 }
 
-void AdSource::InitSDK() {
-    
-}
-
 void AdSource::SetLevel(int32_t level) {
     level_ = level;
 }
